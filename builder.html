@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Builder — PageCraft Club</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- BUILDER NAV -->
+  <div class="builder-nav">
+    <div class="builder-nav__left">
+      <a href="index.html" class="nav__logo" style="font-size:1rem">
+        <span class="logo-mark">⬡</span> PageCraft
+      </a>
+      <span class="builder-nav__title">Untitled page</span>
+    </div>
+    <div class="builder-nav__center">
+      <div class="bn-tabs">
+        <button class="bn-tab active" data-view="desktop">🖥 Desktop</button>
+        <button class="bn-tab" data-view="tablet">⬜ Tablet</button>
+        <button class="bn-tab" data-view="mobile">📱 Mobile</button>
+      </div>
+    </div>
+    <div class="builder-nav__right">
+      <button class="bn-icon-btn" title="Undo" id="undoBtn">↩</button>
+      <button class="bn-icon-btn" title="Redo" id="redoBtn">↪</button>
+      <button class="bn-icon-btn" title="Preview" id="previewBtn">👁</button>
+      <button class="btn btn--ghost" style="padding:6px 14px;font-size:.82rem" id="saveDraftBtn">Save draft</button>
+      <button class="btn btn--primary" style="padding:6px 16px;font-size:.82rem" id="publishBtn">Publish →</button>
+    </div>
+  </div>
+
+  <!-- BUILDER LAYOUT -->
+  <div class="builder-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="builder-sidebar">
+      <div class="sidebar-tabs">
+        <div class="sidebar-tab active" data-tab="elements">Elements</div>
+        <div class="sidebar-tab" data-tab="sections">Sections</div>
+        <div class="sidebar-tab" data-tab="pages">Pages</div>
+      </div>
+
+      <!-- ELEMENTS TAB -->
+      <div class="sidebar-tab-content active" id="tabElements">
+        <div class="sidebar-search">
+          <input type="text" placeholder="Search elements…" id="elemSearch" />
+        </div>
+        <div class="sidebar-content">
+          <div class="sidebar-section-label">Layout</div>
+          <div class="element-grid">
+            <div class="element-block" draggable="true" data-type="section">
+              <div class="icon">▭</div><span>Section</span>
+            </div>
+            <div class="element-block" draggable="true" data-type="columns">
+              <div class="icon">⊟</div><span>Columns</span>
+            </div>
+            <div class="element-block" draggable="true" data-type="divider">
+              <div class="icon">—</div><span>Divider</span>
+            </div>
+            <div class="element-block" draggable="true" data-type="spacer">
+              <div class="icon">↕</div><span>Spacer</span>
+            </div>
+          </div>
+          <div class="sidebar-section-label">Typography</div>
+          <div class="element-grid">
+            <div class="element-block" draggable="true" data-type="headline">
+              <div class="icon">H</div><span>Headline</span>
+            </div>
+            <div class="element-block" draggable="true" data-type="text">
+              <div class="icon">¶</div><span>Paragraph</span>
+            </div>
+            <div class="element-block" draggable="true" data-type="list">
+              <div class="icon">≡</div><span>List</span>
+            </div>
+            <div class="element-block" draggable="true" data-type="quote">
+              <div class="icon">"</div><span>Quote</span>
+            </div>
+          </div>
+          <div class="sidebar-section-label">Media</div>
+          <div class="element-grid">
+            <div class="element-block" draggable="true" data-type="image">
+              <div class="icon">🖼</div><span>Image</span>
+            </div>
+            <div class="element-block" draggable="true" data-type="video">
+              <div class="icon">▶</div><span>Video</span>
+            </div>
+            <div class="element-block" draggable="true" data-type="icon">
+              <div class="icon">⭐</div><span>Icon</span>
+            </div>
+            <div class="element-block" draggable="true" data-type="logo">
+              <div class="icon">◈</div><span>Logo</span>
+            </div>
+          </div>
+          <div class="sidebar-section-label">Interactive</div>
+          <div class="element-grid">
+            <div class="element-block" draggable="true" data-type="button">
+              <div class="icon">🔘</div><span>Button</span>
+            </div>
+            <div class="element-block" draggable="true" data-type="form">
+              <div class="icon">📋</div><span>Form</span>
+            </div>
+            <div class="element-block" draggable="true" data-type="countdown">
+              <div class="icon">⏱</div><span>Countdown</span>
+            </div>
+            <div class="element-block" draggable="true" data-type="popup">
+              <div class="icon">💬</div><span>Popup</span>
+            </div>
+          </div>
+          <div class="sidebar-section-label">Conversion</div>
+          <div class="element-grid">
+            <div class="element-block" draggable="true" data-type="testimonial">
+              <div class="icon">⭐</div><span>Testimonial</span>
+            </div>
+            <div class="element-block" draggable="true" data-type="pricing">
+              <div class="icon">💲</div><span>Pricing</span>
+            </div>
+            <div class="element-block" draggable="true" data-type="faq">
+              <div class="icon">❓</div><span>FAQ</span>
+            </div>
+            <div class="element-block" draggable="true" data-type="social">
+              <div class="icon">👥</div><span>Social</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTIONS TAB -->
+      <div class="sidebar-tab-content" id="tabSections" style="display:none">
+        <div class="sidebar-content">
+          <div class="sidebar-section-label">Page Sections</div>
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <div class="element-block" style="flex-direction:row;gap:8px" data-section-type="hero">
+              <span>🦸</span> Hero
+            </div>
+            <div class="element-block" style="flex-direction:row;gap:8px" data-section-type="features">
+              <span>✨</span> Features
+            </div>
+            <div class="element-block" style="flex-direction:row;gap:8px" data-section-type="testimonial">
+              <span>⭐</span> Testimonials
+            </div>
+            <div class="element-block" style="flex-direction:row;gap:8px" data-section-type="pricing">
+              <span>💲</span> Pricing
+            </div>
+            <div class="element-block" style="flex-direction:row;gap:8px" data-section-type="cta">
+              <span>📣</span> Call to action
+            </div>
+            <div class="element-block" style="flex-direction:row;gap:8px" data-section-type="faq">
+              <span>❓</span> FAQ
+            </div>
+            <div class="element-block" style="flex-direction:row;gap:8px" data-section-type="footer">
+              <span>🔻</span> Footer
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PAGES TAB -->
+      <div class="sidebar-tab-content" id="tabPages" style="display:none">
+        <div class="sidebar-content">
+          <div class="sidebar-section-label">Pages</div>
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <div class="element-block" style="flex-direction:row;gap:8px;border-color:var(--primary);background:rgba(124,58,237,.1)">
+              <span style="color:var(--primary-l)">📄</span>
+              <span style="color:var(--primary-l)">Home (editing)</span>
+            </div>
+            <div class="element-block" style="flex-direction:row;gap:8px">
+              <span>📄</span> Thank you
+            </div>
+          </div>
+          <div style="margin-top:16px">
+            <button class="btn btn--ghost" style="width:100%;font-size:.8rem;padding:8px" id="addPageBtn">+ Add page</button>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- CANVAS -->
+    <main class="builder-canvas" id="builderCanvas">
+      <div class="canvas-inner" id="canvasInner">
+
+        <!-- HERO SECTION -->
+        <div class="canvas-section selected" data-section="hero" id="section-hero">
+          <div class="canvas-section__handle">Hero</div>
+          <div class="canvas-section__actions">
+            <div class="cs-action" title="Move up" data-action="up">↑</div>
+            <div class="cs-action" title="Move down" data-action="down">↓</div>
+            <div class="cs-action" title="Duplicate" data-action="dupe">⎘</div>
+            <div class="cs-action" title="Delete" data-action="delete">✕</div>
+          </div>
+          <div class="cs-hero">
+            <h1 id="hero-headline" contenteditable="true" spellcheck="false">Build landing pages that actually convert</h1>
+            <p id="hero-subheadline" contenteditable="true" spellcheck="false">The all-in-one platform for marketers, founders, and creators who take conversion seriously.</p>
+            <div class="cs-hero-btns">
+              <button class="cs-btn-primary">Start for free →</button>
+              <button class="cs-btn-ghost">See how it works</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- FEATURES SECTION -->
+        <div class="canvas-section" data-section="features" id="section-features">
+          <div class="canvas-section__handle">Features</div>
+          <div class="canvas-section__actions">
+            <div class="cs-action" title="Move up" data-action="up">↑</div>
+            <div class="cs-action" title="Move down" data-action="down">↓</div>
+            <div class="cs-action" title="Duplicate" data-action="dupe">⎘</div>
+            <div class="cs-action" title="Delete" data-action="delete">✕</div>
+          </div>
+          <div class="cs-features">
+            <h2 contenteditable="true" spellcheck="false">Everything you need to grow</h2>
+            <div class="cs-features-grid">
+              <div class="cs-feature-card">
+                <div class="icon">⚡</div>
+                <h3 contenteditable="true" spellcheck="false">Lightning fast</h3>
+                <p contenteditable="true" spellcheck="false">Pages load in under 1 second on every device.</p>
+              </div>
+              <div class="cs-feature-card">
+                <div class="icon">🎨</div>
+                <h3 contenteditable="true" spellcheck="false">Beautiful design</h3>
+                <p contenteditable="true" spellcheck="false">200+ templates crafted by professional designers.</p>
+              </div>
+              <div class="cs-feature-card">
+                <div class="icon">📊</div>
+                <h3 contenteditable="true" spellcheck="false">Built-in analytics</h3>
+                <p contenteditable="true" spellcheck="false">Track every click, scroll, and conversion in real time.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CTA SECTION -->
+        <div class="canvas-section" data-section="cta" id="section-cta">
+          <div class="canvas-section__handle">Call to action</div>
+          <div class="canvas-section__actions">
+            <div class="cs-action" title="Move up" data-action="up">↑</div>
+            <div class="cs-action" title="Move down" data-action="down">↓</div>
+            <div class="cs-action" title="Duplicate" data-action="dupe">⎘</div>
+            <div class="cs-action" title="Delete" data-action="delete">✕</div>
+          </div>
+          <div class="cs-cta">
+            <h2 contenteditable="true" spellcheck="false">Ready to start building?</h2>
+            <p contenteditable="true" spellcheck="false">Join 2,400+ marketers who ship better pages with PageCraft.</p>
+            <button class="cs-btn-primary" style="background:#fff;color:#7c3aed;font-weight:700">Join for free →</button>
+          </div>
+        </div>
+
+        <!-- ADD SECTION -->
+        <div class="add-section-btn" id="addSectionBtn">
+          <span style="font-size:1.1rem">+</span> Add section
+        </div>
+
+      </div>
+    </main>
+
+    <!-- PROPERTIES PANEL -->
+    <aside class="builder-props" id="propsPanel">
+      <div class="props-header" id="propsTitle">Hero — Properties</div>
+      <div class="props-content" id="propsContent">
+
+        <div class="props-section">
+          <div class="props-section__title">Content</div>
+          <div class="prop-row">
+            <label>Headline</label>
+            <input type="text" class="prop-input" id="propHeadline" value="Build landing pages that actually convert" />
+          </div>
+          <div class="prop-row">
+            <label>Subheadline</label>
+            <input type="text" class="prop-input" id="propSub" value="The all-in-one platform for marketers, founders, and creators who take conversion seriously." />
+          </div>
+        </div>
+
+        <div class="props-section">
+          <div class="props-section__title">Background</div>
+          <div class="prop-row">
+            <label>Color</label>
+            <div class="prop-color-row">
+              <div class="prop-color-swatch" id="bgSwatch" style="background:linear-gradient(135deg,#1e0a3c,#0a1628)"></div>
+              <input type="text" class="prop-input" value="#1e0a3c" id="propBgColor" />
+            </div>
+          </div>
+        </div>
+
+        <div class="props-section">
+          <div class="props-section__title">Typography</div>
+          <div class="prop-row">
+            <label>Headline size</label>
+            <input type="text" class="prop-input" value="2.4rem" id="propFontSize" />
+          </div>
+          <div class="prop-row">
+            <label>Text align</label>
+            <div class="prop-align-row">
+              <button class="prop-align-btn active" data-align="left">⬅</button>
+              <button class="prop-align-btn" data-align="center">≡</button>
+              <button class="prop-align-btn" data-align="right">➡</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="props-section">
+          <div class="props-section__title">Spacing</div>
+          <div class="prop-row">
+            <label>Padding top</label>
+            <input type="text" class="prop-input" value="80px" />
+          </div>
+          <div class="prop-row">
+            <label>Padding bottom</label>
+            <input type="text" class="prop-input" value="80px" />
+          </div>
+        </div>
+
+        <div class="props-section">
+          <div class="props-section__title">AI Copywriting</div>
+          <div class="prop-row">
+            <label>Describe your product</label>
+            <input type="text" class="prop-input" placeholder="e.g. SaaS for remote teams…" id="aiPromptInput" />
+          </div>
+          <button class="btn btn--primary" style="width:100%;padding:8px;font-size:.82rem;justify-content:center" id="aiGenerateBtn">
+            ✨ Generate copy
+          </button>
+        </div>
+
+      </div>
+    </aside>
+  </div>
+
+  <!-- PUBLISH MODAL -->
+  <div class="template-gallery" id="publishModal">
+    <div class="tg-modal" style="max-width:520px">
+      <div class="tg-header">
+        <h3>🚀 Publish your page</h3>
+        <div class="tg-close" id="closePublish">✕</div>
+      </div>
+      <div style="padding:28px;display:flex;flex-direction:column;gap:20px">
+        <div class="prop-row">
+          <label style="font-size:.85rem;color:var(--muted);display:block;margin-bottom:6px">Page URL</label>
+          <div style="display:flex;gap:8px;align-items:center">
+            <span style="font-size:.85rem;color:var(--muted);white-space:nowrap">pagecraft.club/p/</span>
+            <input type="text" class="prop-input" value="my-awesome-page" style="flex:1" />
+          </div>
+        </div>
+        <div class="prop-row">
+          <label style="font-size:.85rem;color:var(--muted);display:block;margin-bottom:6px">Custom domain (Pro)</label>
+          <input type="text" class="prop-input" placeholder="yourdomain.com" />
+        </div>
+        <div style="background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.2);border-radius:10px;padding:16px;font-size:.85rem;color:#10b981">
+          ✓ SSL certificate · CDN enabled · Mobile optimised
+        </div>
+        <button class="btn btn--primary btn--full" style="justify-content:center;padding:14px" id="doPublishBtn">
+          🚀 Publish now
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SAVE TOAST -->
+  <div id="toast" style="
+    position:fixed;bottom:24px;right:24px;z-index:999;
+    background:#10b981;color:#fff;
+    padding:12px 20px;border-radius:10px;
+    font-size:.88rem;font-weight:600;
+    transform:translateY(80px);opacity:0;
+    transition:all .3s;pointer-events:none;
+  ">
+    ✓ Draft saved
+  </div>
+
+  <script src="js/builder.js"></script>
+</body>
+</html>

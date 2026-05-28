@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PageCraft Club — Build Landing Pages That Convert</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <header class="nav" id="nav">
+    <div class="container nav__inner">
+      <a href="/" class="nav__logo">
+        <span class="logo-mark">⬡</span> PageCraft <span class="logo-badge">Club</span>
+      </a>
+      <nav class="nav__links">
+        <a href="#features">Features</a>
+        <a href="#how">How it works</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <div class="nav__cta">
+        <a href="builder.html" class="btn btn--ghost">Open Builder</a>
+        <a href="#pricing" class="btn btn--primary">Join the Club</a>
+      </div>
+      <button class="nav__burger" id="burger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#features">Features</a>
+    <a href="#how">How it works</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#faq">FAQ</a>
+    <a href="builder.html" class="btn btn--ghost" style="text-align:center">Open Builder</a>
+    <a href="#pricing" class="btn btn--primary" style="text-align:center">Join the Club</a>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero__glow hero__glow--1"></div>
+    <div class="hero__glow hero__glow--2"></div>
+    <div class="container hero__inner">
+      <div class="hero__badge">
+        <span class="pulse-dot"></span> 2,400+ builders already inside
+      </div>
+      <h1 class="hero__headline">
+        The <em>fastest way</em> to build landing pages that actually convert
+      </h1>
+      <p class="hero__sub">
+        PageCraft Club gives you a drag-and-drop builder, 200+ conversion-optimised templates, and a community of 2,400 marketers — all in one membership.
+      </p>
+      <div class="hero__actions">
+        <a href="builder.html" class="btn btn--primary btn--lg">
+          Start building free <span class="arrow">→</span>
+        </a>
+        <a href="#how" class="btn btn--ghost btn--lg">See how it works</a>
+      </div>
+      <p class="hero__disclaimer">No credit card required · Cancel anytime · Free plan included</p>
+
+      <!-- BUILDER PREVIEW -->
+      <div class="hero__preview">
+        <div class="preview-chrome">
+          <div class="preview-chrome__dots">
+            <span></span><span></span><span></span>
+          </div>
+          <div class="preview-chrome__url">pagecraft.club/builder</div>
+        </div>
+        <div class="preview-canvas">
+          <div class="preview-sidebar">
+            <div class="ps-label">Elements</div>
+            <div class="ps-block ps-block--active"><span>⬛</span> Headline</div>
+            <div class="ps-block"><span>📝</span> Text</div>
+            <div class="ps-block"><span>🖼</span> Image</div>
+            <div class="ps-block"><span>🔘</span> Button</div>
+            <div class="ps-block"><span>📋</span> Form</div>
+            <div class="ps-block"><span>⭐</span> Testimonial</div>
+            <div class="ps-block"><span>💲</span> Pricing</div>
+            <div class="ps-block"><span>❓</span> FAQ</div>
+          </div>
+          <div class="preview-page">
+            <div class="pp-hero">
+              <div class="pp-headline-bar"></div>
+              <div class="pp-sub-bar"></div>
+              <div class="pp-sub-bar pp-sub-bar--short"></div>
+              <div class="pp-btn-row">
+                <div class="pp-btn pp-btn--primary"></div>
+                <div class="pp-btn"></div>
+              </div>
+            </div>
+            <div class="pp-section">
+              <div class="pp-cards">
+                <div class="pp-card"></div>
+                <div class="pp-card pp-card--active">
+                  <div class="pp-card__select">✓</div>
+                </div>
+                <div class="pp-card"></div>
+              </div>
+            </div>
+          </div>
+          <div class="preview-props">
+            <div class="pp-label">Properties</div>
+            <div class="pp-prop">
+              <div class="pp-prop__lbl">Font size</div>
+              <div class="pp-prop__val">48px</div>
+            </div>
+            <div class="pp-prop">
+              <div class="pp-prop__lbl">Color</div>
+              <div class="pp-prop__swatch"></div>
+            </div>
+            <div class="pp-prop">
+              <div class="pp-prop__lbl">Weight</div>
+              <div class="pp-prop__val">Bold</div>
+            </div>
+            <div class="pp-prop">
+              <div class="pp-prop__lbl">Align</div>
+              <div class="pp-prop__icons">
+                <span class="pp-icon pp-icon--active">≡</span>
+                <span class="pp-icon">≡</span>
+                <span class="pp-icon">≡</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOCIAL PROOF BAR -->
+  <div class="proof-bar">
+    <div class="container proof-bar__inner">
+      <div class="proof-stat">
+        <strong>2,400+</strong>
+        <span>Active builders</span>
+      </div>
+      <div class="proof-divider"></div>
+      <div class="proof-stat">
+        <strong>200+</strong>
+        <span>Templates</span>
+      </div>
+      <div class="proof-divider"></div>
+      <div class="proof-stat">
+        <strong>4.8 / 5</strong>
+        <span>Average rating</span>
+      </div>
+      <div class="proof-divider"></div>
+      <div class="proof-stat">
+        <strong>12M+</strong>
+        <span>Pages published</span>
+      </div>
+      <div class="proof-divider"></div>
+      <div class="proof-stat">
+        <strong>98%</strong>
+        <span>Would recommend</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- FEATURES -->
+  <section class="features" id="features">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-chip">Everything you need</div>
+        <h2>One club. <em>Unlimited</em> pages.</h2>
+        <p>Every tool, template, and resource a serious marketer needs — no duct tape, no plugin hunting.</p>
+      </div>
+      <div class="features__grid">
+
+        <div class="feature-card feature-card--wide">
+          <div class="feature-card__icon">⚡</div>
+          <h3>Drag-and-drop builder</h3>
+          <p>Build pixel-perfect pages visually. No code required. Everything snaps into place with smart guides and live preview.</p>
+          <a href="builder.html" class="feature-link">Try the builder →</a>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-card__icon">🎨</div>
+          <h3>200+ templates</h3>
+          <p>Every niche, every goal. Product launches, webinars, courses, agencies — pick and customise in seconds.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-card__icon">📊</div>
+          <h3>Built-in analytics</h3>
+          <p>Track visits, conversions, and revenue. A/B test headlines in one click. No external tools needed.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-card__icon">🔗</div>
+          <h3>Connect everything</h3>
+          <p>Native integrations with Mailchimp, ConvertKit, Stripe, Zapier, and 50+ more tools you already use.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-card__icon">📱</div>
+          <h3>Mobile-first responsive</h3>
+          <p>Every page looks flawless on phone, tablet, and desktop — automatically. Preview and edit any breakpoint.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-card__icon">🚀</div>
+          <h3>Publish in seconds</h3>
+          <p>Deploy to your custom domain, a subdomain, or export clean HTML. Lightning-fast CDN included.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-card__icon">👥</div>
+          <h3>Private community</h3>
+          <p>Get feedback, share wins, and learn from 2,400+ fellow builders. Weekly live calls with experts.</p>
+        </div>
+
+        <div class="feature-card feature-card--wide">
+          <div class="feature-card__icon">🤖</div>
+          <h3>AI copywriting built in</h3>
+          <p>Generate headlines, CTAs, and full page copy from a prompt. Trained on 10,000+ high-converting pages so every suggestion is grounded in real data.</p>
+          <div class="ai-demo">
+            <div class="ai-demo__prompt">"SaaS tool for remote teams"</div>
+            <div class="ai-demo__arrow">→</div>
+            <div class="ai-demo__output">"The hub your remote team actually uses. Ship faster, align instantly, zero chaos."</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="how" id="how">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-chip">Super simple</div>
+        <h2>From idea to live page <em>in minutes</em></h2>
+        <p>We've stripped out every unnecessary step. Here's all it takes.</p>
+      </div>
+      <div class="how__steps">
+        <div class="how-step">
+          <div class="how-step__num">01</div>
+          <div class="how-step__body">
+            <h3>Pick a template or start blank</h3>
+            <p>Browse 200+ templates organised by industry and goal, or start from a blank canvas. Every template is conversion-tested.</p>
+          </div>
+        </div>
+        <div class="how-step__connector"></div>
+        <div class="how-step">
+          <div class="how-step__num">02</div>
+          <div class="how-step__body">
+            <h3>Drag, drop, and customise</h3>
+            <p>Click any element to edit it inline. Add sections from the sidebar. Change colours, fonts, and layouts without touching code.</p>
+          </div>
+        </div>
+        <div class="how-step__connector"></div>
+        <div class="how-step">
+          <div class="how-step__num">03</div>
+          <div class="how-step__body">
+            <h3>Connect your tools</h3>
+            <p>Wire up your email list, payment processor, or CRM in one click. Your leads flow straight into your existing stack.</p>
+          </div>
+        </div>
+        <div class="how-step__connector"></div>
+        <div class="how-step">
+          <div class="how-step__num">04</div>
+          <div class="how-step__body">
+            <h3>Publish and grow</h3>
+            <p>Hit publish. Share your page. Watch the analytics dashboard fill up. Run A/B tests to squeeze out every last conversion.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEMPLATES GALLERY -->
+  <section class="templates">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-chip">200+ Templates</div>
+        <h2>Start with something <em>beautiful</em></h2>
+        <p>Every template is fully editable and optimised for conversions out of the box.</p>
+      </div>
+      <div class="template-filters">
+        <button class="tf-btn tf-btn--active" data-filter="all">All</button>
+        <button class="tf-btn" data-filter="saas">SaaS</button>
+        <button class="tf-btn" data-filter="ecommerce">E-commerce</button>
+        <button class="tf-btn" data-filter="course">Courses</button>
+        <button class="tf-btn" data-filter="agency">Agency</button>
+        <button class="tf-btn" data-filter="event">Events</button>
+      </div>
+      <div class="templates__grid" id="templatesGrid">
+        <!-- cards injected by JS -->
+      </div>
+      <div class="templates__cta">
+        <a href="builder.html" class="btn btn--primary btn--lg">Browse all 200+ templates →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-chip">Social proof</div>
+        <h2>Builders <em>love</em> PageCraft Club</h2>
+        <p>Real results from real members across every industry.</p>
+      </div>
+      <div class="testimonials__grid">
+
+        <div class="testi-card testi-card--featured">
+          <div class="testi-stars">★★★★★</div>
+          <blockquote>"We replaced three separate tools with PageCraft Club and cut our monthly SaaS bill by $320. The builder is miles ahead of anything else I've tried — and the community alone is worth the price."</blockquote>
+          <div class="testi-author">
+            <div class="testi-avatar" style="background:#7c3aed">SR</div>
+            <div>
+              <strong>Sarah R.</strong>
+              <span>Head of Growth, Flowbase</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <blockquote>"I launched a course landing page in 40 minutes using a template. Made $18k in the first week. The A/B testing feature is gold."</blockquote>
+          <div class="testi-author">
+            <div class="testi-avatar" style="background:#0ea5e9">MK</div>
+            <div>
+              <strong>Marcus K.</strong>
+              <span>Course creator</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <blockquote>"My agency builds 15–20 pages a month for clients. PageCraft cut our production time in half. The white-label export is a killer feature."</blockquote>
+          <div class="testi-author">
+            <div class="testi-avatar" style="background:#10b981">JP</div>
+            <div>
+              <strong>Jess P.</strong>
+              <span>Agency owner, Pixel & Co.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <blockquote>"The AI copy tool wrote a better headline than I did after 2 hours of trying. I use it on every single project now."</blockquote>
+          <div class="testi-author">
+            <div class="testi-avatar" style="background:#f59e0b">DL</div>
+            <div>
+              <strong>Dan L.</strong>
+              <span>Freelance copywriter</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <blockquote>"Switched from Unbounce. Same results, a third of the price, and the community feedback loop has made me a smarter marketer."</blockquote>
+          <div class="testi-author">
+            <div class="testi-avatar" style="background:#ef4444">AM</div>
+            <div>
+              <strong>Alex M.</strong>
+              <span>Performance marketer</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="pricing" id="pricing">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-chip">Simple pricing</div>
+        <h2>Pick your <em>membership</em></h2>
+        <p>All plans include the builder, analytics, and community. Upgrade anytime.</p>
+      </div>
+      <div class="pricing__toggle">
+        <span class="pt-label">Monthly</span>
+        <label class="pt-switch">
+          <input type="checkbox" id="billingToggle" />
+          <span class="pt-slider"></span>
+        </label>
+        <span class="pt-label">Annual <span class="pt-save">Save 40%</span></span>
+      </div>
+      <div class="pricing__grid">
+
+        <div class="price-card">
+          <div class="price-card__tier">Starter</div>
+          <div class="price-card__price">
+            <span class="price-amount" data-monthly="0" data-annual="0">$0</span>
+            <span class="price-period">/month</span>
+          </div>
+          <p class="price-card__desc">Perfect for getting started and learning the builder.</p>
+          <ul class="price-card__features">
+            <li>✓ Drag-and-drop builder</li>
+            <li>✓ 10 templates</li>
+            <li>✓ 3 published pages</li>
+            <li>✓ 1,000 visits/month</li>
+            <li>✓ Basic analytics</li>
+            <li class="muted">✗ Custom domain</li>
+            <li class="muted">✗ A/B testing</li>
+            <li class="muted">✗ AI copywriting</li>
+          </ul>
+          <a href="#" class="btn btn--ghost btn--full">Get started free</a>
+        </div>
+
+        <div class="price-card price-card--featured">
+          <div class="price-card__badge">Most popular</div>
+          <div class="price-card__tier">Pro</div>
+          <div class="price-card__price">
+            <span class="price-amount" data-monthly="49" data-annual="29">$49</span>
+            <span class="price-period">/month</span>
+          </div>
+          <p class="price-card__desc">For serious marketers who need unlimited power.</p>
+          <ul class="price-card__features">
+            <li>✓ Everything in Starter</li>
+            <li>✓ All 200+ templates</li>
+            <li>✓ Unlimited pages</li>
+            <li>✓ 100k visits/month</li>
+            <li>✓ Advanced analytics</li>
+            <li>✓ Custom domain</li>
+            <li>✓ A/B testing</li>
+            <li>✓ AI copywriting (100 credits/mo)</li>
+          </ul>
+          <a href="#" class="btn btn--primary btn--full">Join as Pro →</a>
+        </div>
+
+        <div class="price-card">
+          <div class="price-card__tier">Agency</div>
+          <div class="price-card__price">
+            <span class="price-amount" data-monthly="149" data-annual="89">$149</span>
+            <span class="price-period">/month</span>
+          </div>
+          <p class="price-card__desc">Built for agencies and teams shipping at scale.</p>
+          <ul class="price-card__features">
+            <li>✓ Everything in Pro</li>
+            <li>✓ 10 team seats</li>
+            <li>✓ Unlimited visits</li>
+            <li>✓ White-label export</li>
+            <li>✓ Client management</li>
+            <li>✓ Priority support</li>
+            <li>✓ AI credits unlimited</li>
+            <li>✓ Early access to features</li>
+          </ul>
+          <a href="#" class="btn btn--ghost btn--full">Talk to us</a>
+        </div>
+
+      </div>
+      <p class="pricing__guarantee">
+        🛡️ 30-day money-back guarantee · No questions asked · Cancel anytime
+      </p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq" id="faq">
+    <div class="container faq__inner">
+      <div class="section-header">
+        <div class="section-chip">FAQ</div>
+        <h2>Questions? <em>We've got answers.</em></h2>
+      </div>
+      <div class="faq__list" id="faqList">
+
+        <div class="faq-item">
+          <button class="faq-item__q">
+            Do I need to know how to code?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-item__a">
+            <p>Not at all. PageCraft Club is built for marketers and creators, not developers. Everything is visual and drag-and-drop. If you can use a word processor, you can use PageCraft.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-item__q">
+            Can I use my own domain name?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-item__a">
+            <p>Yes. Pro and Agency plans support custom domains. Just point your DNS records to our servers and you're live on your own domain within minutes.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-item__q">
+            How does the free plan work?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-item__a">
+            <p>The free Starter plan gives you access to the builder, 10 templates, and up to 3 published pages with 1,000 monthly visits. There's no time limit — it's free forever. Upgrade when you need more.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-item__q">
+            What integrations do you support?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-item__a">
+            <p>We have native integrations with Mailchimp, ConvertKit, ActiveCampaign, Stripe, PayPal, Google Analytics, Facebook Pixel, Zapier, and 50+ more. The Zapier integration connects you to 5,000+ apps.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-item__q">
+            Can I export my pages?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-item__a">
+            <p>Agency plan members can export clean, semantic HTML/CSS to host anywhere they like. Pro plan members can host on our platform with a custom domain.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-item__q">
+            What is the community like?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-item__a">
+            <p>PageCraft Club has a private community of 2,400+ marketers, founders, and agency owners. We host weekly live Q&A calls, monthly template drops, and a #critique channel where members review each other's pages.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-item__q">
+            Is there a money-back guarantee?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-item__a">
+            <p>Absolutely. Every paid plan comes with a 30-day, no-questions-asked money-back guarantee. If you're not happy for any reason, just email us and we'll refund you the same day.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final-cta">
+    <div class="final-cta__glow"></div>
+    <div class="container final-cta__inner">
+      <h2>Ready to build pages that <em>actually convert?</em></h2>
+      <p>Join 2,400+ marketers who ship better landing pages, faster — with PageCraft Club.</p>
+      <div class="final-cta__actions">
+        <a href="builder.html" class="btn btn--primary btn--lg btn--glow">
+          Start building for free <span class="arrow">→</span>
+        </a>
+        <a href="#pricing" class="btn btn--ghost btn--lg">View pricing</a>
+      </div>
+      <p class="final-cta__disclaimer">No credit card · 3 free pages forever · Takes 2 minutes</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <a href="/" class="nav__logo">
+          <span class="logo-mark">⬡</span> PageCraft <span class="logo-badge">Club</span>
+        </a>
+        <p>The landing page builder for people who take conversions seriously.</p>
+        <div class="footer__social">
+          <a href="#" aria-label="Twitter">𝕏</a>
+          <a href="#" aria-label="LinkedIn">in</a>
+          <a href="#" aria-label="YouTube">▶</a>
+        </div>
+      </div>
+      <div class="footer__col">
+        <h4>Product</h4>
+        <a href="builder.html">Builder</a>
+        <a href="#features">Features</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#">Templates</a>
+        <a href="#">Integrations</a>
+      </div>
+      <div class="footer__col">
+        <h4>Resources</h4>
+        <a href="#">Documentation</a>
+        <a href="#">Blog</a>
+        <a href="#">Community</a>
+        <a href="#">Changelog</a>
+        <a href="#">Status</a>
+      </div>
+      <div class="footer__col">
+        <h4>Company</h4>
+        <a href="#">About</a>
+        <a href="#">Careers</a>
+        <a href="#">Affiliate program</a>
+        <a href="#">Press</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <div class="container">
+        <span>© 2026 PageCraft Club. All rights reserved.</span>
+        <span>
+          <a href="#">Privacy</a> · <a href="#">Terms</a> · <a href="#">Cookies</a>
+        </span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
