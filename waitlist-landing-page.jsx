@@ -262,18 +262,6 @@ function WaitlistLandingPage() {
         </div>
       </header>
 
-      {/* 90% stat banner */}
-      <div className="wrap wllp-stat-wrap">
-        <div className="launch-stat-bar wllp-stat-bar">
-          <span className="launch-stat-num">90%</span>
-          <span className="launch-stat-text">
-            of people who build an app on every other platform <strong>never launch it.</strong>
-            <span className="wllp-stat-aside"> We figured out why.</span>
-          </span>
-          <span className="launch-stat-cta wllp-stat-cta">Coming soon</span>
-        </div>
-      </div>
-
       {/* V2 hero, dropped into the landing as-is */}
       <div className="wllp-hero-host">
         <WaitlistV2/>
@@ -318,6 +306,17 @@ function WaitlistLandingPage() {
               <p>Plain-English edits, applied live. You'll never look at code unless you want to.</p>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* 90% stat statement — moved down, stacks cleanly on mobile */}
+      <section className="wllp-statband" data-screen-label="waitlist-stat">
+        <div className="wrap-tight wllp-statband-inner">
+          <span className="wllp-statband-num">90%</span>
+          <p className="wllp-statband-text">
+            of people who build an app on every other platform
+            <strong> never launch it.</strong> We figured out why.
+          </p>
         </div>
       </section>
 

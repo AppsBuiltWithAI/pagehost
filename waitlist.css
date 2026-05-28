@@ -695,6 +695,13 @@
 }
 .wlv-float-row { display: flex; }
 .wlv-float-row .wlv-form { max-width: none; }
+/* The float sits on a white card here, so the default white capsule would
+   vanish. Give it the cream surface + a border so the input reads clearly. */
+.wllp-hero-host .wlv-float-row .wlv-form-coral {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  box-shadow: 0 10px 24px -16px rgba(0,0,0,.25);
+}
 .wlv-float-foot {
   display: flex;
   align-items: center;
@@ -966,7 +973,7 @@
 
 /* Logo bar at the very top */
 .wllp-topbar {
-  padding: 28px 0 4px;
+  padding: 32px 0 8px;
 }
 .wllp-topbar-inner {
   display: flex;
@@ -974,6 +981,7 @@
   justify-content: space-between;
   gap: 16px;
 }
+.wllp-topbar .logo-lockup { height: 46px; }
 .wllp-topbar-tag {
   display: inline-flex;
   align-items: center;
@@ -987,29 +995,57 @@
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--ink-2);
+  white-space: nowrap;
 }
 @media (max-width: 540px) {
   .wllp-topbar-tag { display: none; }
 }
 
-/* ---------- 90% stat bar ---------- */
-.wllp-stat-wrap { margin: 20px auto 0; }
-.wllp-stat-bar {
-  font-family: var(--f-sans);
-  font-size: 15.5px;
-  letter-spacing: -0.003em;
+/* ---------- 90% stat statement (moved down the page) ---------- */
+.wllp-statband {
+  padding: 12px 0 28px;
 }
-.wllp-stat-bar .launch-stat-num {
+.wllp-statband-inner {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  text-align: left;
+}
+.wllp-statband-num {
   font-family: var(--f-head);
   font-weight: 500;
   font-style: italic;
   font-variation-settings: "opsz" 144;
-  font-size: 38px;
+  font-size: clamp(72px, 13vw, 132px);
+  line-height: 0.9;
+  letter-spacing: 0.02em;
+  padding-right: 0.08em;
+  background: linear-gradient(120deg, var(--coral, #FF5C4D), #9C3597);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  flex-shrink: 0;
 }
-.wllp-stat-bar .wllp-stat-aside { opacity: .85; }
-.wllp-stat-cta {
-  font-family: var(--f-mono);
-  pointer-events: none;
+.wllp-statband-text {
+  font-family: var(--f-sans);
+  font-size: clamp(19px, 2.4vw, 27px);
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  color: var(--ink-1, #181818);
+  margin: 0;
+  text-wrap: balance;
+  max-width: 30ch;
+}
+.wllp-statband-text strong { font-weight: 700; }
+@media (max-width: 640px) {
+  .wllp-statband { padding: 8px 0 22px; }
+  .wllp-statband-inner {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+  }
+  .wllp-statband-text { font-size: 20px; max-width: 26ch; }
 }
 
 /* Tune V2 when it's living on a real page, not a canvas artboard */
@@ -1075,6 +1111,7 @@
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--ink-2);
+  white-space: nowrap;
   margin-bottom: 28px;
 }
 .wllp-kicker-dot {
@@ -1601,8 +1638,8 @@
 /* =========================================================
    FINAL CTA — overrides on .final
    ========================================================= */
-.wllp-final { padding: 112px 0 96px; }
-.wllp-final .wllp-kicker { margin-bottom: 22px; }
+.wllp-final { padding: 84px 0 92px; }
+.wllp-final .wllp-kicker { margin-bottom: 14px; }
 .wllp-final-watermark {
   position: absolute;
   width: 480px;
@@ -1714,6 +1751,7 @@
   /* topbar tighter */
   .wllp-topbar { padding: 16px 0 0; }
   .wllp-topbar-inner { gap: 10px; }
+  .wllp-topbar .logo-lockup { height: 38px; }
 
   /* 90% stat bar: stack the parts so the giant 90% doesn't squeeze */
   .wllp-stat-wrap { margin-top: 14px; padding-left: 16px; padding-right: 16px; }
