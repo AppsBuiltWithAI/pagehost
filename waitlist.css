@@ -1774,16 +1774,16 @@
 
   /* hero */
   .wllp-hero-host .wlv-shell { padding: 12px 0 24px !important; }
-  .wllp-hero-host .hero-card { min-height: 460px; border-radius: 24px; }
-  .wllp-hero-host .hero-content { padding: 28px 22px; }
+  .wllp-hero-host .hero-card { min-height: 360px; border-radius: 24px; }
+  .wllp-hero-host .hero-content { padding: 28px 22px 34px; }
   .wllp-hero-host .hero-h { font-size: clamp(38px, 10vw, 56px) !important; }
   .wllp-hero-host .hero-sub { font-size: 15px; }
   .wllp-hero-host .bubble-user,
   .wllp-hero-host .bubble-ai { display: none; }
 
-  /* hero floating form: stack input + button */
+  /* hero floating form: sits BELOW the card (no overlap with the copy) */
   .wlv-float {
-    margin: -28px 16px 0;
+    margin: 14px 16px 0;
     padding: 22px 18px 18px;
     border-radius: 22px;
   }
