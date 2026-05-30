@@ -254,7 +254,9 @@ function WaitlistLandingPage() {
       {/* Logo bar */}
       <header className="wllp-topbar">
         <div className="wrap wllp-topbar-inner">
-          <Logo/>
+          <a className="logo" href="waitlist-landing.html">
+            <img src="assets/logo-primary.png" alt="AppsBuiltWithAI" className="logo-lockup"/>
+          </a>
           <span className="wllp-topbar-tag">
             <span className="wllp-kicker-dot"></span>
             Coming soon
