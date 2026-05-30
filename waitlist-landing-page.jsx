@@ -249,6 +249,11 @@ function WaitlistLandingPage() {
   const [t, setTweak] = useTweaks(WAITLIST_TWEAK_DEFAULTS);
   const tweakVars = applyWaitlistTweaks(t);
 
+  React.useEffect(() => {
+    const footerLogo = document.querySelector('.footer-brand .logo');
+    if (footerLogo) footerLogo.href = 'waitlist-landing.html';
+  }, []);
+
   return (
     <div className="wllp-root" style={tweakVars}>
       {/* Logo bar */}
