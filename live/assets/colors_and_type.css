@@ -1,0 +1,172 @@
+/* ============================================================
+   AppsBuiltWithAI — Colors & Type
+   ============================================================
+   Palette is anchored to the logo's purple (rgb(92,46,184))
+   and a warm gold used as CTA accent (gold-rush theme).
+   Type uses Inter (UI) + Anton (posters/big-stat headlines)
+   as near-matches for the marketing site aesthetic.
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Anton&family=JetBrains+Mono:wght@400;600&display=swap');
+
+:root {
+  /* -------- Brand purples (anchor: logo = #5C2EB8) -------- */
+  --purple-50:  #F3EEFB;
+  --purple-100: #E4D9F6;
+  --purple-200: #C8B2EC;
+  --purple-300: #A687DF;
+  --purple-400: #825FD1;
+  --purple-500: #5C2EB8;   /* ← primary / logo */
+  --purple-600: #4C24A0;
+  --purple-700: #3B1C82;
+  --purple-800: #2A1362;
+  --purple-900: #190A3D;
+
+  /* -------- Brand gradient stops (from the knot mark) -------- */
+  --grad-1: #FB8453;   /* coral / orange — top of knot */
+  --grad-2: #E97966;   /* salmon */
+  --grad-3: #CF5F7A;   /* pink-rose */
+  --grad-4: #A8458E;   /* magenta */
+  --grad-5: #5C2EB8;   /* brand purple (wordmark) */
+
+  /* -------- CTA gold (direct-response / gold-rush) -------- */
+  --gold-50:  #FFF8E1;
+  --gold-100: #FFEEB0;
+  --gold-300: #FFD454;
+  --gold-500: #F4B22A;   /* ← accent / CTA background */
+  --gold-600: #D89612;
+  --gold-700: #9A6A08;
+
+  /* -------- Neutrals (warm-cool, tuned to purple) -------- */
+  --ink-0:    #FFFFFF;
+  --ink-50:   #F7F6FB;
+  --ink-100:  #EFEDF4;
+  --ink-200:  #DCD9E5;
+  --ink-300:  #BAB5C8;
+  --ink-400:  #847E97;
+  --ink-500:  #56506A;
+  --ink-600:  #3A344C;
+  --ink-700:  #251F35;
+  --ink-800:  #171124;
+  --ink-900:  #0B0715;
+
+  /* -------- Semantic -------- */
+  --success: #12B76A;
+  --danger:  #E53E3E;
+  --warning: #F4B22A;
+  --info:    #6B5AED;
+
+  /* -------- Foreground / Background (light default) -------- */
+  --bg:       var(--ink-0);
+  --bg-soft:  var(--ink-50);
+  --bg-dark:  var(--purple-900);
+  --fg1:      var(--ink-900);   /* primary text */
+  --fg2:      var(--ink-600);   /* secondary */
+  --fg3:      var(--ink-400);   /* tertiary / meta */
+  --fg-on-dark:  var(--ink-0);
+  --fg-on-gold:  var(--ink-900);
+  --fg-on-purple:var(--ink-0);
+
+  /* -------- Borders / surfaces -------- */
+  --border:       var(--ink-200);
+  --border-soft:  var(--ink-100);
+  --border-strong:var(--ink-300);
+
+  /* -------- Elevation -------- */
+  --shadow-xs: 0 1px 2px rgba(23,17,36,.06);
+  --shadow-sm: 0 2px 6px rgba(23,17,36,.08);
+  --shadow-md: 0 8px 20px rgba(23,17,36,.10);
+  --shadow-lg: 0 20px 40px rgba(23,17,36,.14);
+  --shadow-gold: 0 10px 30px rgba(244,178,42,.40);
+  --shadow-purple: 0 14px 34px rgba(92,46,184,.32);
+
+  /* -------- Radii -------- */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 28px;
+  --radius-pill: 999px;
+
+  /* -------- Spacing scale (4-based) -------- */
+  --s-1:  4px;
+  --s-2:  8px;
+  --s-3:  12px;
+  --s-4:  16px;
+  --s-5:  24px;
+  --s-6:  32px;
+  --s-7:  48px;
+  --s-8:  64px;
+  --s-9:  96px;
+  --s-10: 128px;
+
+  /* -------- Type families -------- */
+  --font-sans:    'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  --font-display: 'Anton', 'Inter', sans-serif;   /* giant caps headlines */
+  --font-mono:    'JetBrains Mono', ui-monospace, Menlo, monospace;
+
+  /* -------- Gradients / motifs -------- */
+  --grad-brand:  linear-gradient(140deg, #FB8453 0%, #E97966 30%, #CF5F7A 60%, #A8458E 85%, #5C2EB8 100%);
+  --grad-purple: linear-gradient(135deg, #5C2EB8 0%, #3B1C82 100%);
+  --grad-gold:   linear-gradient(180deg, #FFD454 0%, #F4B22A 100%);
+  --grad-hero:   radial-gradient(1200px 600px at 20% 0%, #4C24A0 0%, #190A3D 60%, #0B0715 100%);
+}
+
+/* ---------- Type scale (marketing-page flavored) ---------- */
+.h-display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(48px, 7vw, 96px);
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+h1, .h1 {
+  font-family: var(--font-sans);
+  font-weight: 900;
+  font-size: clamp(36px, 4.5vw, 60px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+h2, .h2 {
+  font-family: var(--font-sans);
+  font-weight: 800;
+  font-size: clamp(28px, 3vw, 42px);
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+}
+h3, .h3 {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+h4, .h4 {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.3;
+}
+p, .body {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--fg2);
+}
+.lead {
+  font-size: 20px;
+  line-height: 1.5;
+  color: var(--fg2);
+}
+.eyebrow {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--purple-500);
+}
+.small { font-size: 14px; color: var(--fg3); }
+code, .mono { font-family: var(--font-mono); font-size: 14px; }
