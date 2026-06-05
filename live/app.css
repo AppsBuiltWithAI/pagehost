@@ -430,13 +430,22 @@ a { color: inherit; text-decoration: none; }
     border-radius: 0;
     border: none;
     box-shadow: none;
+    /* scale up the background gradients for wide screens */
+    background:
+      radial-gradient(1200px 600px at 18% -6%, #3a1c82 0%, rgba(58,28,130,0) 52%),
+      radial-gradient(900px 700px at 85% 8%, rgba(251,132,83,.14) 0%, rgba(251,132,83,0) 50%),
+      linear-gradient(180deg, #190a3d 0%, #11082a 38%, #0b0715 100%);
   }
 
   /* --- Content width: cap for readability --- */
-  .pad { max-width: 720px; margin: 0 auto; }
+  .pad { max-width: 720px; margin-left: auto; margin-right: auto; }
 
-  /* --- Topbar: constrain inner content, keep full-bleed bg --- */
-  .topbar { max-width: 760px; margin: 0 auto; }
+  /* --- Topbar: full-bleed bg, centered inner content ---
+       Wrap content via padding so the gradient bg stays edge-to-edge */
+  .topbar {
+    padding-left: max(20px, calc((100% - 720px) / 2));
+    padding-right: max(20px, calc((100% - 720px) / 2));
+  }
 
   /* --- Speaker grid: 3 columns --- */
   .spk-grid { grid-template-columns: 1fr 1fr 1fr; }
@@ -449,12 +458,19 @@ a { color: inherit; text-decoration: none; }
   .cd-unit { padding: 14px 8px; }
   .cd-unit .v { font-size: 28px; }
 
-  /* --- Tab bar: constrain width --- */
-  .tabbar { max-width: 600px; margin: 0 auto; left: 50%; right: auto; transform: translateX(-50%); border-radius: 20px 20px 0 0; }
+  /* --- Tab bar: constrain width, centered ---
+       Absolutely positioned, so use left/right + margin auto */
+  .tabbar {
+    left: 0; right: 0;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 20px 20px 0 0;
+  }
 
   /* --- Bottom sheet: constrain width --- */
-  .sheet { max-width: 560px; margin: 0 auto; left: 0; right: 0; }
+  .sheet { max-width: 560px; left: 0; right: 0; margin-left: auto; margin-right: auto; }
 
   /* --- Install banner: constrain width --- */
-  .install-banner { max-width: 560px; left: 50%; right: auto; transform: translateX(-50%); }
+  .install-banner { max-width: 560px; left: 0; right: 0; margin-left: auto; margin-right: auto; }
 }
