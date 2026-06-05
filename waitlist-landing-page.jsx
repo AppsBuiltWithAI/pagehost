@@ -4,6 +4,7 @@ const { Footer } = window.PoofPart3;
 const { Agents } = window.PoofAgents;
 const WaitlistV2 = window.WaitlistV2;
 const EmailRow = window.WaitlistEmailRow;
+const { useTweaks, TweaksPanel, TweakSection, TweakSelect, TweakSlider, TweakRadio, TweakColor } = window;
 
 /* ============= 3-STEP FLOW (lovable-inspired, brand colors) ============= */
 
