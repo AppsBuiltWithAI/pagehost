@@ -55,7 +55,7 @@ function HomeScreen({ go, openSpeaker, openMore }) {
       {/* Top brand bar */}
       <div className="topbar">
         <img className="mark" src="assets/logo-mark.png" alt="" />
-        <div className="wm">Built With AI Live<small>THE FUTURE IS NOW</small></div>
+        <div className="wm">Apps Built With AI Live<small>THE FUTURE IS NOW</small></div>
         <div className="spacer" />
         <div className="live"><span className="dot" />{cd.done ? "Live" : "Soon"}</div>
       </div>
