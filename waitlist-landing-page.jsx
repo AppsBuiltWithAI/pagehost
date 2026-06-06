@@ -54,7 +54,7 @@ function WaitlistFlow() {
           </p>
         </div>
 
-        <div className="voomly-embed" data-id="izmAOWnQARTHBVRB2OvRXNnDhUCHcvhbrwVRKP8NbQqSKhFdG" data-ratio="1.777778" data-type="v" data-skin-color="#008EFF" data-shadow="" style={{width:'100%',aspectRatio:'1.77778 / 1',background:'linear-gradient(45deg, rgb(142, 150, 164) 0%, rgb(201, 208, 222) 100%)',borderRadius:'10px',marginTop:'32px'}} />
+        <div className="voomly-embed" data-id="izmAOWnQARTHBVRB2OvRXNnDhUCHcvhbrwVRKP8NbQqSKhFdG" data-ratio="1.777778" data-type="v" data-skin-color="#008EFF" data-shadow="" style={{width:'100%',aspectRatio:'1.77778 / 1',background:'linear-gradient(45deg, rgb(142, 150, 164) 0%, rgb(201, 208, 222) 100%)',borderRadius:'10px',marginTop:'32px',marginBottom:'32px'}} />
 
         <div className="wllp-flow-grid">
 
