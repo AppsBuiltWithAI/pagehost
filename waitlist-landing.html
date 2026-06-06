@@ -33,7 +33,7 @@
   <div id="root"></div>
   <pre id="__err" style="display:none;position:fixed;left:16px;right:16px;top:16px;z-index:9999;background:#1F1A2E;color:#FAF5EA;border-radius:12px;padding:16px 18px;font:13px/1.5 ui-monospace,monospace;white-space:pre-wrap;"></pre>
   <script>
-    window.addEventListener("error",(e)=>{var b=document.getElementById("__err");if(b){b.style.display="block";b.textContent="Error: "+(e.error&&e.error.stack?e.error.stack:e.message);}});
+    window.addEventListener("error",(e)=>{if(e.filename&&!e.filename.startsWith(location.origin))return;var b=document.getElementById("__err");if(b){b.style.display="block";b.textContent="Error: "+(e.error&&e.error.stack?e.error.stack:e.message);}});
     window.addEventListener("unhandledrejection",(e)=>{var b=document.getElementById("__err");if(b){b.style.display="block";b.textContent="Unhandled: "+(e.reason&&e.reason.stack?e.reason.stack:String(e.reason));}});
   </script>
 
