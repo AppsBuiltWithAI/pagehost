@@ -54,6 +54,8 @@ function WaitlistFlow() {
           </p>
         </div>
 
+        <div className="voomly-embed" data-id="izmAOWnQARTHBVRB2OvRXNnDhUCHcvhbrwVRKP8NbQqSKhFdG" data-ratio="1.777778" data-type="v" data-skin-color="#008EFF" data-shadow="" style={{width:'100%',aspectRatio:'1.77778 / 1',background:'linear-gradient(45deg, rgb(142, 150, 164) 0%, rgb(201, 208, 222) 100%)',borderRadius:'10px',marginTop:'32px'}} />
+
         <div className="wllp-flow-grid">
 
           {/* 01 — Describe */}
@@ -253,6 +255,13 @@ function WaitlistLandingPage() {
   React.useEffect(() => {
     const footerLogo = document.querySelector('.footer-brand .logo');
     if (footerLogo) footerLogo.href = 'waitlist-landing.html';
+
+    // Load Voomly embed script
+    if (!document.querySelector('script[src*="voomly.com"]')) {
+      const s = document.createElement('script');
+      s.src = 'https://embed.voomly.com/embed/embed-build.js';
+      document.body.appendChild(s);
+    }
   }, []);
 
   return (
