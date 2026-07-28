@@ -203,6 +203,111 @@ function WaitlistFinalCta() {
   );
 }
 
+/* ============= EXIT-INTENT POPUP ============= */
+
+function ExitPopup() {
+  const [open, setOpen] = React.useState(false);
+  const [email, setEmail] = React.useState("");
+  const [done, setDone] = React.useState(false);
+  const shown = React.useRef(false);
+
+  React.useEffect(() => {
+    try { if (localStorage.getItem("abwai_exit_seen") === "1") shown.current = true; } catch (e) {}
+    const fire = () => {
+      if (shown.current) return;
+      shown.current = true;
+      try { localStorage.setItem("abwai_exit_seen", "1"); } catch (e) {}
+      setOpen(true);
+    };
+    const onLeave = (e) => { if (e.clientY <= 0) fire(); };
+    const t = setTimeout(() => document.addEventListener("mouseout", onLeave), 30000);
+    return () => { clearTimeout(t); document.removeEventListener("mouseout", onLeave); };
+  }, []);
+
+  React.useEffect(() => {
+    const onKey = (e) => { if (e.key === "Escape") setOpen(false); };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, []);
+
+  if (!open) return null;
+  const valid = /\S+@\S+\.\S+/.test(email);
+
+  const submit = (e) => {
+    e.preventDefault();
+    if (!valid) return;
+    const em = email.trim().toLowerCase();
+    const position = 1200 + Math.floor(Math.random() * 7800);
+    const refLink = "appsbuiltwithai.com/join/" + (em.split("@")[0].replace(/[^a-z0-9]/g, "") || "you");
+    const cio = (fn, ...args) => {
+      if (typeof window !== "undefined" && window._cio && typeof window._cio[fn] === "function") {
+        window._cio[fn](...args);
+      }
+    };
+    try {
+      cio("identify", {
+        id: em,
+        email: em,
+        created_at: Math.floor(Date.now() / 1000),
+        source: "exit_intent",
+        credit_bonus: 100,
+        waitlist_position: position,
+        referral_link: refLink,
+      });
+      cio("track", "joined_waitlist", {
+        email: em,
+        position: position,
+        source: "exit_intent",
+      });
+    } catch (err) {}
+    setDone(true);
+  };
+
+  return (
+    <div className="wllp-exit-scrim" onClick={() => setOpen(false)}>
+      <div className="wllp-exit" onClick={(e) => e.stopPropagation()} role="dialog" aria-label="Claim 100 free credits">
+        <button className="wllp-exit-x" onClick={() => setOpen(false)} aria-label="Close">&times;</button>
+
+        <aside className="wllp-exit-art" aria-hidden="true">
+          <div className="wllp-exit-orb wllp-exit-orb-a"></div>
+          <div className="wllp-exit-orb wllp-exit-orb-b"></div>
+          <div className="wllp-exit-coin">
+            <span className="wllp-exit-coin-num">100</span>
+            <span className="wllp-exit-coin-lbl">CREDITS</span>
+          </div>
+          <div className="wllp-exit-chip wllp-exit-chip-1">&asymp; 1 full app</div>
+          <div className="wllp-exit-chip wllp-exit-chip-2">&#10022; Launch day</div>
+          <div className="wllp-exit-chip wllp-exit-chip-3">$0 to start</div>
+        </aside>
+
+        <div className="wllp-exit-body">
+          {done ? (
+            <div className="wllp-exit-done">
+              <div className="wllp-exit-check">&#10003;</div>
+              <h3>Credits locked in.</h3>
+              <p>Your invite will land with <strong>100 credits</strong> already in the account — about one full app, on us.</p>
+              <button className="btn btn-coral btn-lg" onClick={() => setOpen(false)}>Back to the page</button>
+            </div>
+          ) : (
+            <React.Fragment>
+              <div className="wllp-exit-badge">&#9889; Launch-day gift</div>
+              <h3>Before you go —<br/><em>100 credits</em> are yours.</h3>
+              <p>Join the waitlist now and we'll drop them in the day we launch. Enough to build and publish a whole app, free.</p>
+              <form className="wllp-exit-form" onSubmit={submit}>
+                <input type="email" placeholder="you@work.com" value={email} onChange={(e) => setEmail(e.target.value)} autoFocus/>
+                <button className="btn btn-coral" type="submit" disabled={!valid}>Claim my 100 credits</button>
+              </form>
+              <div className="wllp-exit-fine">
+                <span>&#10003; No card</span><span>&#10003; No spam</span><span>&#10003; One email when your seat opens</span>
+              </div>
+            </React.Fragment>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 /* ============= PAGE ============= */
 
 const WAITLIST_TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
@@ -340,6 +445,8 @@ function WaitlistLandingPage() {
       <WaitlistFinalCta/>
 
       <Footer/>
+
+      <ExitPopup/>
 
       <TweaksPanel title="Tweaks · Fonts & color">
         <TweakSection label="Headlines"/>
