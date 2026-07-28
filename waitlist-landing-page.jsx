@@ -212,15 +212,16 @@ function ExitPopup() {
   const shown = React.useRef(false);
 
   React.useEffect(() => {
-    try { if (localStorage.getItem("abwai_exit_seen") === "1") shown.current = true; } catch (e) {}
     const fire = () => {
       if (shown.current) return;
       shown.current = true;
-      try { localStorage.setItem("abwai_exit_seen", "1"); } catch (e) {}
       setOpen(true);
     };
+    // Exit intent: trigger immediately when mouse leaves viewport
     const onLeave = (e) => { if (e.clientY <= 0) fire(); };
-    const t = setTimeout(() => document.addEventListener("mouseout", onLeave), 30000);
+    document.addEventListener("mouseout", onLeave);
+    // Timed fallback: show after 30 seconds regardless
+    const t = setTimeout(fire, 30000);
     return () => { clearTimeout(t); document.removeEventListener("mouseout", onLeave); };
   }, []);
 
