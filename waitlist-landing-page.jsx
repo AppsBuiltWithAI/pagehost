@@ -217,20 +217,25 @@ function ExitPopup() {
       shown.current = true;
       setOpen(true);
     };
-    // Exit intent: mouse moves above viewport (top of page)
+    // Exit intent: detect mouse leaving the window from any edge
     const onMouseOut = (e) => {
-      if (e.clientY <= 0 || e.relatedTarget === null && e.clientY < 50) fire();
+      // e.relatedTarget is null when cursor leaves the browser window
+      if (!e.relatedTarget && !e.toElement) fire();
     };
     document.addEventListener("mouseout", onMouseOut);
-    // Exit intent: mouse leaves the document element entirely
-    const onLeave = () => fire();
-    document.documentElement.addEventListener("mouseleave", onLeave);
+    // Backup: track rapid upward mouse movement toward address bar
+    let lastY = 0;
+    const onMouseMove = (e) => {
+      if (lastY - e.clientY > 40 && e.clientY < 10) fire();
+      lastY = e.clientY;
+    };
+    document.addEventListener("mousemove", onMouseMove);
     // Timed fallback: show after 30 seconds regardless
     const t = setTimeout(fire, 30000);
     return () => {
       clearTimeout(t);
       document.removeEventListener("mouseout", onMouseOut);
-      document.documentElement.removeEventListener("mouseleave", onLeave);
+      document.removeEventListener("mousemove", onMouseMove);
     };
   }, []);
 
