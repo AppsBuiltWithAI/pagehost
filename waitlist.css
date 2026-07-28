@@ -2149,3 +2149,46 @@
   margin-bottom: 20px;
 }
 .wllp-exit-done .btn { margin-top: 4px; }
+
+/* ---- Exit popup: mobile responsive ---- */
+@media (max-width: 780px) {
+  .wllp-exit-scrim { padding: 16px; }
+  .wllp-exit {
+    max-width: 100%;
+    border-radius: 22px;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+  .wllp-exit-art { min-height: 160px; }
+  .wllp-exit-coin {
+    width: 110px; height: 110px;
+  }
+  .wllp-exit-coin-num { font-size: 40px; }
+  .wllp-exit-coin-lbl { font-size: 9px; margin-top: 4px; }
+  .wllp-exit-chip-1 { top: 18px; left: 14px; font-size: 11px; padding: 5px 11px; }
+  .wllp-exit h3 { font-size: 26px; }
+  .wllp-exit p { font-size: 14.5px; }
+  .wllp-exit-badge { font-size: 10px; padding: 6px 12px; margin-bottom: 14px; }
+  .wllp-exit-form input { padding: 13px 14px; font-size: 15px; }
+  .wllp-exit-form .btn { padding: 13px 18px; font-size: 14.5px; }
+  .wllp-exit-x { top: 12px; right: 14px; font-size: 24px; }
+}
+
+@media (max-width: 420px) {
+  .wllp-exit-scrim { padding: 10px; }
+  .wllp-exit { border-radius: 18px; }
+  .wllp-exit-art { min-height: 130px; }
+  .wllp-exit-coin { width: 90px; height: 90px; }
+  .wllp-exit-coin-num { font-size: 32px; }
+  .wllp-exit-coin-lbl { font-size: 8px; }
+  .wllp-exit-chip-1 { display: none; }
+  .wllp-exit-body { padding: 24px 18px 22px; }
+  .wllp-exit h3 { font-size: 22px; margin-bottom: 10px; }
+  .wllp-exit p { font-size: 13.5px; margin-bottom: 18px; }
+  .wllp-exit-form { gap: 8px; }
+  .wllp-exit-form input { padding: 12px 12px; font-size: 14px; border-radius: 11px; }
+  .wllp-exit-form .btn { padding: 12px 14px; font-size: 14px; }
+  .wllp-exit-fine { font-size: 11px; gap: 4px 12px; }
+  .wllp-exit-done .wllp-exit-check { width: 50px; height: 50px; font-size: 24px; }
+  .wllp-exit-x { top: 8px; right: 10px; font-size: 22px; }
+}
