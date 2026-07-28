@@ -217,12 +217,21 @@ function ExitPopup() {
       shown.current = true;
       setOpen(true);
     };
-    // Exit intent: trigger immediately when mouse leaves viewport
-    const onLeave = (e) => { if (e.clientY <= 0) fire(); };
-    document.addEventListener("mouseout", onLeave);
+    // Exit intent: mouse moves above viewport (top of page)
+    const onMouseOut = (e) => {
+      if (e.clientY <= 0 || e.relatedTarget === null && e.clientY < 50) fire();
+    };
+    document.addEventListener("mouseout", onMouseOut);
+    // Exit intent: mouse leaves the document element entirely
+    const onLeave = () => fire();
+    document.documentElement.addEventListener("mouseleave", onLeave);
     // Timed fallback: show after 30 seconds regardless
     const t = setTimeout(fire, 30000);
-    return () => { clearTimeout(t); document.removeEventListener("mouseout", onLeave); };
+    return () => {
+      clearTimeout(t);
+      document.removeEventListener("mouseout", onMouseOut);
+      document.documentElement.removeEventListener("mouseleave", onLeave);
+    };
   }, []);
 
   React.useEffect(() => {
