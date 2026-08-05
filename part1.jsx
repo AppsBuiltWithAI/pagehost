@@ -12,10 +12,14 @@ function Reveal({ children, delay = 0, as: Tag = "div", className = "", style = 
       if (typeof IntersectionObserver === "undefined") { el.classList.remove("pre"); return; }
       const io = new IntersectionObserver((entries) => {
         entries.forEach((e) => {
-          if (e.isIntersecting) { el.classList.remove("pre"); io.unobserve(el); }
+          if (e.isIntersecting) { el.classList.remove("pre"); io.unobserve(el); clearTimeout(fallback); }
         });
       }, { threshold: 0.12, rootMargin: "0px 0px -60px 0px" });
       io.observe(el);
+      /* Safety: IntersectionObservers (and CSS transitions) get throttled to a
+         halt in inactive/embedded iframes, which can leave reveals stuck at
+         opacity:0. Guarantee the content shows even if the observer never fires. */
+      var fallback = setTimeout(() => { el.classList.remove("pre"); io.disconnect(); }, 1600);
     });
   }, []);
   return (
@@ -38,7 +42,7 @@ function Plus() {
 /* ============= LOGO ============= */
 function Logo() {
   return (
-    <a className="logo" href="index.html">
+    <a className="logo" href={(typeof window !== "undefined" && window.POOF_HOME) || "index.html"}>
       <img src="assets/logo-primary.png" alt="AppsBuiltWithAI" className="logo-lockup"/>
     </a>
   );
@@ -83,25 +87,178 @@ function PromptBox({ value, onChange, pulse }) {
 }
 
 /* ============= NAV ============= */
-function Nav() {
+function Nav({ ctaLabel, onCta, hidePricing, hideSignIn, hideCta, bare }) {
+  const [resOpen, setResOpen] = useState(false);
+  const [featOpen, setFeatOpen] = useState(false);
+  const resTimer = useRef(null);
+  const featTimer = useRef(null);
+  const openRes = () => { clearTimeout(resTimer.current); setResOpen(true); };
+  const closeRes = () => { resTimer.current = setTimeout(() => setResOpen(false), 140); };
+  const openFeat = () => { clearTimeout(featTimer.current); setFeatOpen(true); };
+  const closeFeat = () => { featTimer.current = setTimeout(() => setFeatOpen(false), 140); };
+
+  const FEATURES = [
+    { label: "All features", desc: "Everything on one page", href: "features.html" },
+    { label: "Describe & build", desc: "Plain English → working app", href: "how-it-works.html" },
+    { label: "Connectors", desc: "Stripe, Gmail, Sheets & more", href: "connectors.html" },
+    { label: "Import projects", desc: "From GitHub, Lovable, or Bolt", href: "import.html" },
+    { label: "Use cases", desc: "What people like you are building", href: "use-cases.html" },
+    { label: "Dashboard", desc: "Open the app builder", href: "dashboard/index.html" },
+  ];
+
+  const RESOURCES = [
+    { label: "Training", desc: "Hands-on courses & office hours", href: "resources.html#training" },
+    { label: "Tutorials", desc: "Step-by-step guides & articles", href: "resources.html#learn" },
+    { label: "Community", desc: "Forums, events & showcases", href: "community.html" },
+    { label: "Certification partners", desc: "Get certified with a partner", href: "certification.html" },
+    { label: "Templates", desc: "Start from a ready-made app", href: "templates.html" },
+  ];
+
   return (
-    <div className="nav-wrap">
+    <>
+      <a className="topbar" href={bare ? undefined : "import.html"}>
+        <span className="topbar-tag">New</span>
+        <span className="topbar-text">Import your existing project from <strong>GitHub, Lovable, or Bolt</strong> — now in beta</span>
+        <span className="topbar-text-mobile">Import from <strong>GitHub, Lovable, or Bolt</strong></span>
+        <span className="topbar-cta">{bare ? "Coming soon" : <>Try it <span aria-hidden="true">→</span></>}</span>
+      </a>
+      <div className="nav-wrap">
       <div className="wrap nav">
         <div><Logo/></div>
         <nav className="nav-links">
-          <a className="nav-link" href="templates.html">Templates</a>
+          {!bare && <>
+          <div
+            className={"nav-dd" + (featOpen ? " open" : "")}
+            onMouseEnter={openFeat}
+            onMouseLeave={closeFeat}
+          >
+            <button
+              className="nav-link nav-dd-trigger"
+              aria-expanded={featOpen}
+              onClick={() => setFeatOpen((v) => !v)}
+            >
+              Features
+              <svg className="nav-dd-caret" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div className="nav-dd-panel" role="menu">
+              {FEATURES.map((r) => (
+                <a key={r.label} className="nav-dd-item" href={r.href} role="menuitem">
+                  <span className="nav-dd-item-label">{r.label}</span>
+                  <span className="nav-dd-item-desc">{r.desc}</span>
+                </a>
+              ))}
+            </div>
+          </div>
+          <div
+            className={"nav-dd" + (resOpen ? " open" : "")}
+            onMouseEnter={openRes}
+            onMouseLeave={closeRes}
+          >
+            <button
+              className="nav-link nav-dd-trigger"
+              aria-expanded={resOpen}
+              onClick={() => setResOpen((v) => !v)}
+            >
+              Resources
+              <svg className="nav-dd-caret" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div className="nav-dd-panel" role="menu">
+              {RESOURCES.map((r) => (
+                <a key={r.label} className="nav-dd-item" href={r.href} role="menuitem">
+                  <span className="nav-dd-item-label">{r.label}</span>
+                  <span className="nav-dd-item-desc">{r.desc}</span>
+                </a>
+              ))}
+            </div>
+          </div>
+          <a className="nav-link" href="use-cases.html">Use cases</a>
           <a className="nav-link" href="how-it-works.html">How it works</a>
-          <a className="nav-link" href="pricing.html">Pricing</a>
-          <a className="nav-link" href="certification.html">Certification</a>
-          <a className="nav-link" href="webinars.html">Webinars</a>
-          <a className="nav-link" href="community.html">Community</a>
-          <a className="nav-link" href="support.html">Support</a>
+          {!hidePricing && <a className="nav-link" href="pricing.html">Pricing</a>}
           <a className="nav-link nav-link-accent" href="summit.html">Summit</a>
+          </>}
         </nav>
         <div className="nav-cta">
-          <a className="btn btn-ghost" href="signin.html">Sign in</a>
-          <a className="btn btn-ink" href="signup.html">Start free</a>
+          {!hideSignIn && <a className="btn btn-ghost" href="signin.html">Sign in</a>}
+          {!hideCta && (onCta
+            ? <button className="btn btn-ink" onClick={onCta}>{ctaLabel || "Start free"}</button>
+            : <a className="btn btn-ink" href="signup.html">{ctaLabel || "Start free"}</a>)}
         </div>
+      </div>
+    </div>
+    </>
+  );
+}
+
+/* ============= LANGUAGE SWITCHER ============= */
+const LANGS = [
+  { code: "en", label: "English", flag: "🇺🇸" },
+  { code: "es", label: "Español", flag: "🇪🇸" },
+  { code: "fr", label: "Français", flag: "🇫🇷" },
+  { code: "de", label: "Deutsch", flag: "🇩🇪" },
+  { code: "pt", label: "Português", flag: "🇧🇷" },
+  { code: "it", label: "Italiano", flag: "🇮🇹" },
+  { code: "nl", label: "Nederlands", flag: "🇳🇱" },
+  { code: "ja", label: "日本語", flag: "🇯🇵" },
+  { code: "ko", label: "한국어", flag: "🇰🇷" },
+  { code: "zh", label: "中文", flag: "🇨🇳" },
+  { code: "hi", label: "हिन्दी", flag: "🇮🇳" },
+  { code: "ar", label: "العربية", flag: "🇸🇦" },
+];
+
+function LangSwitcher({ variant = "nav", drop = "down" }) {
+  const [open, setOpen] = useState(false);
+  const [code, setCode] = useState("en");
+  const ref = useRef(null);
+
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem("abwai-lang");
+      if (saved && LANGS.some((l) => l.code === saved)) setCode(saved);
+    } catch (e) {}
+  }, []);
+
+  useEffect(() => {
+    const onDoc = (e) => { if (ref.current && !ref.current.contains(e.target)) setOpen(false); };
+    document.addEventListener("mousedown", onDoc);
+    const onSync = (e) => { if (e.detail && e.detail !== code) setCode(e.detail); };
+    window.addEventListener("abwai-lang-change", onSync);
+    return () => {
+      document.removeEventListener("mousedown", onDoc);
+      window.removeEventListener("abwai-lang-change", onSync);
+    };
+  }, [code]);
+
+  const choose = (c) => {
+    setCode(c);
+    setOpen(false);
+    try { localStorage.setItem("abwai-lang", c); } catch (e) {}
+    document.documentElement.lang = c;
+    window.dispatchEvent(new CustomEvent("abwai-lang-change", { detail: c }));
+  };
+
+  const cur = LANGS.find((l) => l.code === code) || LANGS[0];
+
+  return (
+    <div className={"lang " + (variant === "footer" ? "lang-footer" : "lang-nav") + (open ? " open" : "") + (drop === "up" ? " drop-up" : "")} ref={ref}>
+      <button className="lang-trigger" aria-expanded={open} aria-label="Change language" onClick={() => setOpen((v) => !v)}>
+        <svg className="lang-globe" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        <span className="lang-cur">{cur.label}</span>
+        <svg className="lang-caret" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div className="lang-panel" role="menu">
+        {LANGS.map((l) => (
+          <button
+            key={l.code}
+            className={"lang-item" + (l.code === code ? " active" : "")}
+            role="menuitemradio"
+            aria-checked={l.code === code}
+            onClick={() => choose(l.code)}
+          >
+            <span className="lang-flag">{l.flag}</span>
+            <span className="lang-name">{l.label}</span>
+            {l.code === code && <svg className="lang-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>}
+          </button>
+        ))}
       </div>
     </div>
   );
@@ -204,50 +361,43 @@ function Hero() {
   };
 
   return (
-    <section className="hero" data-screen-label="hero">
-      <div className="wrap" style={{ marginBottom: 18 }}>
-        <div className="launch-stat-bar">
-          <span className="launch-stat-num">90%</span>
-          <span className="launch-stat-text">of people who build an app never launch it. <strong>We changed that.</strong></span>
-          <a className="launch-stat-cta">See how →</a>
+    <section className="hero hero-b" data-screen-label="hero">
+      <div className="hero-b-inner">
+        <span className="hero-b-eyebrow">
+          <span className="hero-b-faces">
+            <span style={{ background: "linear-gradient(135deg,#FF7A4D,#FFC53D)" }}></span>
+            <span style={{ background: "linear-gradient(135deg,#7A3FB0,#A23C9C)" }}></span>
+            <span style={{ background: "linear-gradient(135deg,#1FB295,#6FA8E0)" }}></span>
+          </span>
+          <span>Trusted by companies <b>worldwide</b></span>
+        </span>
+
+        <h1 className="hero-b-h">The app builder for <em>non&#8209;coders.</em></h1>
+        <p className="hero-b-sub">
+          Tell it like you'd tell a friend. AppsBuiltWithAI builds the real, working app — and publishes it before your coffee gets cold.
+        </p>
+
+        <div className="prompt-glow">
+          <PromptBox value={text} onChange={setText} pulse={pulse}/>
         </div>
-      </div>
-
-      <div className="wrap">
-        <div className="hero-card">
-          <div className="hero-photo"><HeroArt/></div>
-          <div className="bubble bubble-user">"a booking page for my bakery"</div>
-          <div className="bubble bubble-ai">Got it. ✨ Building <em>Crumb &amp; Co.</em></div>
-
-          <div className="hero-content">
-            <span className="hero-eyebrow"><span className="dot"></span>For non-coders. No exceptions.</span>
-            <h1 className="hero-h">
-              The app builder<br/>
-              for <em>non-coders.</em>
-            </h1>
-            <p className="hero-sub">
-              Describe what you want in plain English. AppsBuiltWithAI builds the real, working app — and publishes it before your coffee gets cold.
-            </p>
-          </div>
-        </div>
-
-        <PromptBox value={text} onChange={setText} pulse={pulse}/>
 
         <p className="chips-label">— or start with —</p>
         <div className="chips">
           {chips.map((c) => <button key={c} className="chip" onClick={() => pick(c)}>{c}</button>)}
         </div>
+
+        {window.HeroBuilderDemo && <window.HeroBuilderDemo/>}
       </div>
     </section>
   );
 }
 
 /* ============= LOGOS — scrolling marquee ============= */
-function Logos() {
-  const names = ["Anthropic", "Compass", "Together", "Hubspot", "ElevenLabs", "Notion", "Linear", "Stripe", "Vercel", "Cursor", "Brex", "Loom"];
+function Logos({ names: overrideNames, label }) {
+  const names = overrideNames || ["Meta", "Anthropic", "Compass", "Together", "Hubspot", "ElevenLabs", "Notion", "Linear", "Stripe", "Vercel", "Cursor", "Brex", "Loom"];
   return (
     <section className="logos">
-      <div className="logos-label">Trusted by 200,000+ non-coders at companies like</div>
+      <div className="logos-label">{label || "Trusted by teams at companies like"}</div>
       <div className="logos-marquee">
         <div className="logos-track">
           {[...names, ...names].map((n, i) => <div key={i} className="logo-item">{n}</div>)}
@@ -268,7 +418,7 @@ function TypewriterDemo() {
   ], []);
   const [msgIdx, setMsgIdx] = React.useState(0);
   const [typed, setTyped] = React.useState("");
-  const [phase, setPhase] = React.useState("typing");
+  const [phase, setPhase] = React.useState("typing"); // typing → send → reply → idle
 
   React.useEffect(() => {
     let timer;
@@ -277,32 +427,54 @@ function TypewriterDemo() {
       if (typed.length < current.length) {
         timer = setTimeout(() => setTyped(current.slice(0, typed.length + 1)), 38 + Math.random() * 40);
       } else {
-        timer = setTimeout(() => setPhase("reply"), 600);
+        timer = setTimeout(() => setPhase("send"), 500);
       }
+    } else if (phase === "send") {
+      timer = setTimeout(() => setPhase("reply"), 450);
     } else if (phase === "reply") {
-      timer = setTimeout(() => setPhase("idle"), 1400);
+      timer = setTimeout(() => setPhase("idle"), 1600);
     } else if (phase === "idle") {
       timer = setTimeout(() => {
         setTyped("");
         setMsgIdx((i) => (i + 1) % messages.length);
         setPhase("typing");
-      }, 800);
+      }, 700);
     }
     return () => clearTimeout(timer);
   }, [typed, phase, msgIdx, messages]);
 
+  const sent = phase === "reply" || phase === "idle";
   return (
     <div className="art-canvas art-warm typewriter-scene">
-      <div className="mini-chat">
-        <div className="mini-bubble user">
-          {typed}<span className="caret">|</span>
+      <div className="prompt-composer">
+        <div className="pc-head">
+          <span className="pc-dot"></span><span className="pc-dot"></span><span className="pc-dot"></span>
+          <span className="pc-title">New app</span>
         </div>
-        {phase === "reply" && (
-          <div className="mini-bubble ai">
-            <span className="dots"><span></span><span></span><span></span></span>
-            <span style={{ marginLeft: 8 }}>On it. ✨</span>
-          </div>
-        )}
+        <div className="pc-thread">
+          {sent && (
+            <div className="pc-sent-msg">{messages[msgIdx]}</div>
+          )}
+          {phase === "reply" && (
+            <div className="pc-ai-msg">
+              <span className="dots"><span></span><span></span><span></span></span>
+              <span style={{ marginLeft: 8 }}>On it — building that now ✨</span>
+            </div>
+          )}
+          {phase === "idle" && (
+            <div className="pc-ai-msg done">✓ Done. Anything else?</div>
+          )}
+        </div>
+        <div className={"pc-input" + (phase === "send" ? " sending" : "")}>
+          <span className="pc-input-text">
+            {!sent && typed}
+            {phase === "typing" && <span className="caret">|</span>}
+            {sent && <span className="pc-placeholder">Tell it like you'd tell a friend…</span>}
+          </span>
+          <button className={"pc-send" + (phase === "send" ? " fired" : "") + (typed && !sent ? " ready" : "")} aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg>
+          </button>
+        </div>
       </div>
     </div>
   );
@@ -312,23 +484,44 @@ function TypewriterDemo() {
 function BuildDemo() {
   const [step, setStep] = React.useState(0);
   React.useEffect(() => {
-    const t = setInterval(() => setStep((s) => (s + 1) % 4), 1400);
+    const t = setInterval(() => setStep((s) => (s + 1) % 6), 1500);
     return () => clearInterval(t);
   }, []);
-  const labels = ["Composing layout…", "Adding components…", "Wiring forms…", "Almost done…"];
+  const labels = ["Composing layout…", "Adding your menu…", "Wiring the order form…", "Polishing…", "✓ Your app is live", "✓ Your app is live"];
+  const built = step >= 4;
   return (
     <div className="art-canvas art-sunset build-scene">
       <div className="feature-phone">
-        <div className="feature-phone-inner">
-          <div className="fp-row lg" style={{ background: "#181818", width: "55%" }}></div>
-          <div className="fp-row" style={{ width: "85%", opacity: step >= 1 ? 1 : 0, transition: "opacity .5s" }}></div>
-          <div className="fp-row mint" style={{ height: 56, borderRadius: 10, marginTop: 8, opacity: step >= 1 ? 1 : 0, transform: step >= 1 ? "translateY(0)" : "translateY(8px)", transition: "all .5s ease-out" }}></div>
-          <div className="fp-row sun"  style={{ height: 56, borderRadius: 10, opacity: step >= 2 ? 1 : 0, transform: step >= 2 ? "translateY(0)" : "translateY(8px)", transition: "all .5s ease-out" }}></div>
-          <div className="fp-row coral" style={{ height: 40, borderRadius: 999, width: "60%", marginTop: 8, opacity: step >= 3 ? 1 : 0, transform: step >= 3 ? "scale(1)" : "scale(0.9)", transition: "all .5s ease-out" }}></div>
+        <div className={"feature-phone-inner bd-app" + (built ? " is-live" : "")}>
+          <div className="bd-appbar" style={{ opacity: 1 }}>
+            <span className="bd-logo"></span>
+            <span className="bd-appname">Crumb &amp; Co.</span>
+            <span className="bd-cart" style={{ opacity: step >= 2 ? 1 : 0 }}>🧺</span>
+          </div>
+          <div className="bd-hero" style={{ opacity: step >= 1 ? 1 : 0, transform: step >= 1 ? "none" : "translateY(8px)" }}>
+            <span className="bd-hero-t">Fresh this morning</span>
+            <span className="bd-hero-s">Order ahead · skip the line</span>
+          </div>
+          <div className="bd-items">
+            <div className="bd-item" style={{ opacity: step >= 1 ? 1 : 0, transitionDelay: ".1s" }}>
+              <span className="bd-thumb" style={{ background: "linear-gradient(135deg,#FFD873,#FF8A5C)" }}></span>
+              <span className="bd-item-meta"><b>Sourdough loaf</b><i>$8</i></span>
+              <span className="bd-add" style={{ opacity: step >= 2 ? 1 : 0 }}>+</span>
+            </div>
+            <div className="bd-item" style={{ opacity: step >= 2 ? 1 : 0, transitionDelay: ".15s" }}>
+              <span className="bd-thumb" style={{ background: "linear-gradient(135deg,#6FD3B8,#6FA8E0)" }}></span>
+              <span className="bd-item-meta"><b>Morning buns (4)</b><i>$12</i></span>
+              <span className="bd-add" style={{ opacity: step >= 3 ? 1 : 0 }}>+</span>
+            </div>
+          </div>
+          <div className="bd-cta" style={{ opacity: step >= 3 ? 1 : 0, transform: step >= 3 ? "scale(1)" : "scale(.92)" }}>
+            {built ? "Order for pickup →" : "Order for pickup"}
+          </div>
+          {built && <div className="bd-live-tag">● LIVE</div>}
         </div>
       </div>
-      <div className="build-progress">
-        <span className="dots"><span></span><span></span><span></span></span>
+      <div className={"build-progress" + (built ? " done" : "")}>
+        {!built && <span className="dots"><span></span><span></span><span></span></span>}
         <span>{labels[step]}</span>
       </div>
     </div>
@@ -411,7 +604,10 @@ function PublishDemo() {
   );
 }
 
-function Features() {
+function Features({ onStart }) {
+  const Link = ({ children }) => onStart
+    ? <button className="feature-link" onClick={onStart}>{children} <ArrowRight/></button>
+    : <a className="feature-link" href="how-it-works.html">{children} <ArrowRight/></a>;
   return (
     <section className="pad" id="features" data-screen-label="features">
       <div className="wrap">
@@ -424,10 +620,10 @@ function Features() {
           <div className="feature">
             <div className="feature-art"><TypewriterDemo/></div>
             <div className="feature-copy">
-              <div className="eyebrow">01 · Describe</div>
+              <div className="step-tag"><span className="step-num">01</span><span className="step-lbl">Describe</span></div>
               <h3>Tell it like you'd<br/>tell a friend.</h3>
               <p>No prompts to memorize. No "specifications." Just say what you want — "a pickup-order page for my bakery, with a time picker." It figures the rest out.</p>
-              <a className="feature-link">See examples <ArrowRight/></a>
+              <Link>See examples</Link>
             </div>
           </div>
         </Reveal>
@@ -436,10 +632,10 @@ function Features() {
           <div className="feature reverse">
             <div className="feature-art"><BuildDemo/></div>
             <div className="feature-copy">
-              <div className="eyebrow">02 · Watch it build</div>
+              <div className="step-tag"><span className="step-num">02</span><span className="step-lbl">Watch it build</span></div>
               <h3>Real software.<br/>In minutes.</h3>
               <p>Not a slideshow. Not a "design." A working app appears on screen in real time — buttons that click, forms that save, pages you can share. Want changes? Just ask.</p>
-              <a className="feature-link">See a build <ArrowRight/></a>
+              <Link>See a build</Link>
             </div>
           </div>
         </Reveal>
@@ -448,10 +644,10 @@ function Features() {
           <div className="feature">
             <div className="feature-art"><PublishDemo/></div>
             <div className="feature-copy">
-              <div className="eyebrow">03 · Ship it</div>
+              <div className="step-tag"><span className="step-num">03</span><span className="step-lbl">Ship it</span></div>
               <h3>One click.<br/>Live on the internet.</h3>
               <p>No "deploy." No "hosting." No "DNS." Click publish, get a real URL, send it to your customers. Bring your own domain when you're ready.</p>
-              <a className="feature-link">How publishing works <ArrowRight/></a>
+              <Link>How publishing works</Link>
             </div>
           </div>
         </Reveal>
@@ -460,4 +656,26 @@ function Features() {
   );
 }
 
-window.PoofPart1 = { Reveal, Nav, Hero, Logos, Features, PromptBox, Logo, ArrowRight, Check, Plus };
+/* ============= DIFFERENTIATOR STAT BAND ============= */
+function StatBand({ onStart }) {
+  return (
+    <section className="diff-band" data-screen-label="differentiator">
+      <div className="wrap-tight">
+        <Reveal>
+          <div className="diff-band-inner">
+            <span className="diff-band-num"><span className="countup" data-to="9">9</span> in 10</span>
+            <p className="diff-band-text">
+              people who start building software on other tools <strong>never finish it.</strong>{" "}
+              That's the real difference here — with AppsBuiltWithAI, you actually ship.
+            </p>
+            {onStart
+              ? <button className="diff-band-cta" onClick={onStart}>Get started <ArrowRight/></button>
+              : <a className="diff-band-cta" href="how-it-works.html">See why <ArrowRight/></a>}
+          </div>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
+window.PoofPart1 = { Reveal, Nav, Hero, Logos, Features, StatBand, PromptBox, LangSwitcher, Logo, ArrowRight, Check, Plus };

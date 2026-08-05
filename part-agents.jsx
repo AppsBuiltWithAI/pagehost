@@ -2,7 +2,14 @@
 const { Reveal, ArrowRight } = window.PoofPart1;
 
 /* ============= AGENTS — Plan, Editor, Testing, Security, Launch ============= */
-function Agents() {
+function Agents({ onStart }) {
+  React.useEffect(() => {
+    if (!document.querySelector('script[src*="voomly.com"]')) {
+      const s = document.createElement('script');
+      s.src = 'https://embed.voomly.com/embed/embed-build.js';
+      document.body.appendChild(s);
+    }
+  }, []);
   const agents = [
     {
       tag: "01 · Plan",
@@ -47,7 +54,7 @@ function Agents() {
     {
       tag: "06 · Grow",
       title: "Marketing",
-      headline: "Find your tribe. Drive real growth.",
+      headline: "An agent that sells your app for you.",
       desc: "The marketing agent scans 4,200+ communities and surfaces the highest-leverage ones for your app — drafts a native post for each, runs your ads, and turns your product into 30 feed-ready posts.",
       tint: "agent-coral",
       mock: <MarketingMock/>,
@@ -57,7 +64,15 @@ function Agents() {
   return (
     <section className="pad agents-section" data-screen-label="agents">
       <div className="wrap">
-        <Reveal className="sec-head">
+        <Reveal>
+          <div className="voomly-embed"
+            data-id="izmAOWnQARTHBVRB2OvRXNnDhUCHcvhbrwVRKP8NbQqSKhFdG"
+            data-ratio="1.777778" data-type="v" data-skin-color="#008EFF" data-shadow=""
+            style={{ width: '100%', aspectRatio: '1.77778 / 1', background: 'linear-gradient(45deg, rgb(142, 150, 164) 0%, rgb(201, 208, 222) 100%)', borderRadius: '16px', marginBottom: '48px' }}
+          />
+        </Reveal>
+
+        <Reveal className="sec-head" style={{ marginTop: 32 }}>
           <div className="eyebrow">Built-in agents</div>
           <h2>Six agents.<br/><em>From idea to growth.</em></h2>
           <p>Most app builders dump a half-built thing on your lap and walk away. Ours stick around — planning, building, testing, securing, launching, and finding your first 1,000 members.</p>
@@ -68,10 +83,15 @@ function Agents() {
             <Reveal key={a.title} delay={(i % 2) * 80}>
               <div className={"agent-tile " + a.tint + (i % 2 === 1 ? " reverse" : "")}>
                 <div className="agent-copy">
-                  <div className="eyebrow agent-tag">{a.tag}</div>
+                  <div className="step-tag">
+                    <span className="step-num">{a.tag.split(" · ")[0]}</span>
+                    <span className="step-lbl">{a.tag.split(" · ")[1]}</span>
+                  </div>
                   <h3>{a.headline}</h3>
                   <p>{a.desc}</p>
-                  <a className="feature-link">Try the {a.title} agent <ArrowRight/></a>
+                  {onStart
+                    ? <button className="feature-link" onClick={onStart}>Try the {a.title} agent <ArrowRight/></button>
+                    : <a className="feature-link" href="signup.html">Try the {a.title} agent <ArrowRight/></a>}
                 </div>
                 <div className="agent-art">{a.mock}</div>
               </div>
