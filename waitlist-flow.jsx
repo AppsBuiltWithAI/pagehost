@@ -355,26 +355,26 @@ function SignupFlow({ idea, onClose }) {
     return () => { document.removeEventListener("keydown", h); document.body.style.overflow = ""; };
   }, [step]);
 
-  const COUNTER_URL = "https://jsonblob.com/api/jsonBlob/019fd31d-13e2-72d1-9a8d-2a6edae94a36";
+  const FIRESTORE_URL = "https://firestore.googleapis.com/v1/projects/abwai-waitlist/databases/(default)/documents/waitlist/counter";
 
   const create = async () => {
     if (f.username.trim().length < 3) return setErr("Please enter your name.");
     if (!/^\S+@\S+\.\S+$/.test(f.email)) return setErr("That email doesn't look right.");
     setBusy(true);
 
-    /* Fetch shared counter, increment, and write back */
+    /* Fetch shared counter from Firestore, increment, and write back */
     let n = 2618;
     try {
-      const res = await fetch(COUNTER_URL, { headers: { Accept: "application/json" } });
-      const data = await res.json();
-      n = (typeof data.position === "number" && data.position >= 2618) ? data.position + 1 : 2618;
-      await fetch(COUNTER_URL, {
-        method: "PUT",
+      const res = await fetch(FIRESTORE_URL);
+      const doc = await res.json();
+      const current = parseInt(doc.fields && doc.fields.position && doc.fields.position.integerValue, 10);
+      n = (Number.isFinite(current) && current >= 2618) ? current + 1 : 2618;
+      await fetch(FIRESTORE_URL + "?updateMask.fieldPaths=position", {
+        method: "PATCH",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ position: n }),
+        body: JSON.stringify({ fields: { position: { integerValue: String(n) } } }),
       });
     } catch (e) {
-      /* Fallback to localStorage if the service is unreachable */
       try {
         const stored = parseInt(localStorage.getItem("abwai_wl_place") || "", 10);
         n = Number.isFinite(stored) ? stored + 1 : 2618;
