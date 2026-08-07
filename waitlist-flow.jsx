@@ -404,7 +404,7 @@ function SignupFlow({ idea, onClose }) {
         }),
       });
     } catch (err) {}
-    setTimeout(() => { setBusy(false); setStep("done"); if (typeof fbq === "function") fbq("track", "Subscribe"); }, 1100);
+    setTimeout(() => { setBusy(false); setStep("done"); }, 1100);
   };
 
   return (
