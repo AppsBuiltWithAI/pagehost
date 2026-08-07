@@ -288,6 +288,13 @@ function Footer({ lean, onStart }) {
               <span className="footer-sign-dot">·</span>
               <span>Made for people who'd rather not become engineers</span>
             </div>
+            <div className="footer-sign-row" style={{ marginTop: 8 }}>
+              <a href="privacy-policy.html" style={{ color: 'inherit', textDecoration: 'none' }}>Privacy Policy</a>
+              <span className="footer-sign-dot">·</span>
+              <a href="terms-of-service.html" style={{ color: 'inherit', textDecoration: 'none' }}>Terms of Service</a>
+              <span className="footer-sign-dot">·</span>
+              <a href="cookie-policy.html" style={{ color: 'inherit', textDecoration: 'none' }}>Cookie Policy</a>
+            </div>
           </div>
         )}
         </div>
