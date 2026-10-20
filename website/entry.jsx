@@ -14,7 +14,8 @@ if (clean !== window.location.pathname) {
 }
 
 // appsbuiltwithai.com shows this site inside a GHL iframe. The app needs the whole window
-// (Stripe Checkout refuses to load in a frame), so app links and redirects leave the frame.
+// (Stripe Checkout refuses to load in a frame), so app links and redirects leave the frame,
+// as do links to other sites (the GHL pages themselves, or sites like X that refuse frames).
 function openApp(url) {
   if (window.top !== window.self) {
     try { window.top.location.href = url; return; } catch (error) { /* blocked: stay in the frame */ }
@@ -24,7 +25,7 @@ function openApp(url) {
 window.__abwOpenApp = openApp;
 document.addEventListener('click', event => {
   const link = event.target.closest && event.target.closest('a[href]');
-  if (link && !link.target && link.href.startsWith(APP_URL + '/')) link.target = '_top';
+  if (link && !link.target && /^https?:$/.test(link.protocol) && link.origin !== window.location.origin) link.target = '_top';
 }, true);
 
 function Leave({ to }) {

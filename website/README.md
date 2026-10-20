@@ -12,7 +12,7 @@ This is the public website, built from the marketing site in the app repository.
 
 The generated pages load the Google Fonts stylesheet in their HTML, so fonts download alongside `website.js` instead of after it.
 
-`entry.jsx` runs the upstream `SiteApp` on static hosting. Sign in, sign up and password reset go to https://app.appsbuiltwithai.com. Paths that are not site routes load as separate pages, so `waitlist-landing.html` keeps its own pagehost version with tracking and the live counter.
+`entry.jsx` runs the upstream `SiteApp` on static hosting. Sign in, sign up and password reset go to https://app.appsbuiltwithai.com. appsbuiltwithai.com (GHL) shows this site in an iframe, so every link to another site, the app included, opens in the full window, and the waitlist's redirect to app sign-up does the same. Paths that are not site routes load as separate pages, so `waitlist-landing.html` keeps its own pagehost version with tracking and the live counter.
 
 Run `npm ci` and `npm run build` after changing the source. The build creates `website.js`, `website.css`, one HTML file per site route (so GitHub Pages serves `/education`, `/about` and the rest), and redirect pages for `signin`, `login`, `signup` and `forgot`. Commit the generated files with the source.
 
