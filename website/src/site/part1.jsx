@@ -148,13 +148,9 @@ const NAV_IC = {
 };
 function NavIc({ n }) { return <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d={NAV_IC[n]}/></svg>; }
 function Nav({ ctaLabel, onCta, hidePricing, hideSignIn, hideCta, bare }) {
-  const [resOpen, setResOpen] = useState(false);
   const [featOpen, setFeatOpen] = useState(false);
   const [mobOpen, setMobOpen] = useState(false);
-  const resTimer = useRef(null);
   const featTimer = useRef(null);
-  const openRes = () => { clearTimeout(resTimer.current); setResOpen(true); };
-  const closeRes = () => { resTimer.current = setTimeout(() => setResOpen(false), 140); };
   const openFeat = () => { clearTimeout(featTimer.current); setFeatOpen(true); };
   const closeFeat = () => { featTimer.current = setTimeout(() => setFeatOpen(false), 140); };
 
@@ -163,11 +159,6 @@ function Nav({ ctaLabel, onCta, hidePricing, hideSignIn, hideCta, bare }) {
     { label: "Describe & build", desc: "Plain English → working app", href: "/how-it-works", ic: "chat", tone: "sun" },
     { label: "Connectors", desc: "Stripe, Gmail, Sheets & more", href: "/connectors", ic: "plug", tone: "mint" },
     { label: "Use cases", desc: "What people like you are building", href: "/use-cases", ic: "spark", tone: "pink" },
-  ];
-
-  const RESOURCES = [
-    { label: "Education", desc: "Courses and weekly live sessions", href: "/education", ic: "cap", tone: "plum" },
-    { label: "Tutorials", desc: "Step-by-step how-tos", href: "/resources", ic: "book", tone: "sky" },
   ];
 
   return (
@@ -205,29 +196,6 @@ function Nav({ ctaLabel, onCta, hidePricing, hideSignIn, hideCta, bare }) {
               ))}
             </div>
           </div>
-          <div
-            className={"nav-dd" + (resOpen ? " open" : "")}
-            onMouseEnter={openRes}
-            onMouseLeave={closeRes}
-          >
-            <button
-              className="nav-link nav-dd-trigger"
-              aria-expanded={resOpen}
-              onClick={() => setResOpen((v) => !v)}
-            >
-              Resources
-              <svg className="nav-dd-caret" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-            </button>
-            <div className="nav-dd-panel" role="menu">
-              {RESOURCES.map((r) => (
-                <a key={r.label} className="nav-dd-item" href={r.href} role="menuitem">
-                  <span className={"nav-dd-ic tone-" + r.tone}><NavIc n={r.ic}/></span>
-                  <span className="nav-dd-txt"><span className="nav-dd-item-label">{r.label}</span>
-                  <span className="nav-dd-item-desc">{r.desc}</span></span>
-                </a>
-              ))}
-            </div>
-          </div>
           <a className="nav-link" href="/use-cases">Use cases</a>
           <a className="nav-link" href="/how-it-works">How it works</a>
           {!hidePricing && <a className="nav-link" href="/pricing">Pricing</a>}
@@ -247,8 +215,6 @@ function Nav({ ctaLabel, onCta, hidePricing, hideSignIn, hideCta, bare }) {
         <div className="nav-mob">
           <div className="nav-mob-sec">Features</div>
           {FEATURES.map((r) => <a key={r.label} className="nav-mob-link nav-mob-ic" href={r.href}><span className={"nav-dd-ic tone-" + r.tone}><NavIc n={r.ic}/></span>{r.label}</a>)}
-          <div className="nav-mob-sec">Resources</div>
-          {RESOURCES.map((r) => <a key={r.label} className="nav-mob-link nav-mob-ic" href={r.href}><span className={"nav-dd-ic tone-" + r.tone}><NavIc n={r.ic}/></span>{r.label}</a>)}
           <div className="nav-mob-sec">More</div>
           <a className="nav-mob-link" href="/how-it-works">How it works</a>
           {!hidePricing && <a className="nav-mob-link" href="/pricing">Pricing</a>}

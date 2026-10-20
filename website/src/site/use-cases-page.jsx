@@ -25,7 +25,7 @@ function UseCasesPage() {
             <nav className="uc2-jump" aria-label="Jump to a use case">
               {UC_CASES.map((c) => (
                 <a key={c.id} href={"#uc-" + c.id} className={"uc2-jump-chip tone-" + c.tone}>
-                  {UC_IMG[c.id] && <img src={UC_IMG[c.id]} alt=""/>}<span>{c.who}</span>
+                  {UC_IMG[c.id] && <img src={UC_IMG[c.id].replace(".webp", "-thumb.webp")} alt="" width="34" height="34"/>}<span>{c.who}</span>
                 </a>
               ))}
             </nav>
@@ -39,7 +39,7 @@ function UseCasesPage() {
             <Reveal key={c.id}>
               <article id={"uc-" + c.id} className={"uc2-row tone-" + c.tone + (i % 2 ? " flip" : "")}>
                 <div className="uc2-media">
-                  {UC_IMG[c.id] && <img src={UC_IMG[c.id]} alt="" loading="lazy"/>}
+                  {UC_IMG[c.id] && <img src={UC_IMG[c.id]} alt="" width="1400" height="788" loading="lazy"/>}
                   {c.quote && (
                     <blockquote className="uc2-quote">
                       <p>"{c.quote}"</p>

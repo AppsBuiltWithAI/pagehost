@@ -333,10 +333,8 @@ function Footer({ lean, onStart }) {
             </ul>
           </div>
           <div className="footer-col">
-            <h5>Resources</h5>
+            <h5>Help</h5>
             <ul>
-              <li><a href="/resources">Tutorials</a></li>
-              <li><a href="/education">Education</a></li>
               <li><a href="/support">Support</a></li>
             </ul>
           </div>

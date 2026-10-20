@@ -52,7 +52,7 @@
 .abw-site .uc2-list .wrap > .reveal + .reveal{margin-top:clamp(56px,7vw,104px);}
 .abw-site .uc2-row{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(32px,5vw,80px);align-items:center;scroll-margin-top:100px;}
 .abw-site .uc2-row.flip .uc2-media{order:2;}
-.abw-site .uc2-media{position:relative;border-radius:28px;overflow:hidden;aspect-ratio:5/4;background:var(--bg-tint);box-shadow:0 40px 80px -48px rgba(31,26,46,.5);}
+.abw-site .uc2-media{position:relative;border-radius:28px;overflow:hidden;aspect-ratio:1400/788;background:var(--bg-tint);box-shadow:0 40px 80px -48px rgba(31,26,46,.5);}
 .abw-site .uc2-media img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s cubic-bezier(.2,.7,.2,1);}
 .abw-site .uc2-row:hover .uc2-media img{transform:scale(1.03);}
 .abw-site .uc2-quote{position:absolute;left:18px;right:18px;bottom:18px;margin:0;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border-radius:18px;padding:16px 18px;box-shadow:0 16px 32px -20px rgba(31,26,46,.5);max-width:380px;}

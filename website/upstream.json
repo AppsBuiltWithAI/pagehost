@@ -8,14 +8,16 @@
     "public/site": "site"
   },
   "modified": {
-    "src/site/part1.jsx": "Summit banner replaces the Import banner, and Import projects is removed from the Features menu.",
-    "src/site/use-cases-page.jsx": "Use case images point to the new WebP screenshots.",
+    "src/site/part1.jsx": "Summit banner replaces the Import banner, Import projects is removed from the Features menu, and the Resources dropdown (Education, Tutorials) is removed.",
+    "src/site/use-cases-page.jsx": "Use case images point to the new WebP screenshots, with small thumbnails for the jump chips and fixed dimensions.",
     "public/site/site-images/v2/use-cases/usecase-consultants.jpg": "Replaced by usecase-consultants.webp.",
     "public/site/site-images/v2/use-cases/usecase-creators.jpg": "Replaced by usecase-creators.webp.",
     "public/site/site-images/v2/use-cases/usecase-founders.jpg": "Replaced by usecase-founders.webp.",
     "public/site/site-images/v2/use-cases/usecase-local.jpg": "Replaced by usecase-local.webp.",
     "public/site/site-images/v2/use-cases/usecase-sellers.jpg": "Replaced by usecase-sellers.webp.",
-    "public/site/site-images/v2/use-cases/usecase-studios.jpg": "Replaced by usecase-studios.webp."
+    "public/site/site-images/v2/use-cases/usecase-studios.jpg": "Replaced by usecase-studios.webp.",
+    "src/site/styles/use-cases.css": "Use case image frames match the 1400x788 screenshots instead of cropping them to 5:4.",
+    "src/site/part3.jsx": "Footer drops the Tutorials and Education links; the remaining Support link sits under Help."
   },
   "files": {
     "src/site/SiteApp.jsx": "2fb96dfc53b4685ad49da61a263eec172219f0c1eb9de979cb5323a120035dd1",
