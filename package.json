@@ -1,0 +1,11 @@
+{
+  "name": "pagehost-homepage",
+  "private": true,
+  "scripts": {
+    "build": "node scripts/build-homepage.cjs",
+    "preview": "python -m http.server 4175 --bind 127.0.0.1"
+  },
+  "devDependencies": {
+    "@babel/standalone": "7.29.0"
+  }
+}

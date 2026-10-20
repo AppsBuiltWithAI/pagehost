@@ -1,0 +1,377 @@
+/* =========================================================
+   ENHANCEMENTS, pricing emphasis, motion polish, unified
+   hover-lift, screenshot drop overlays.
+   Loaded after styles.css + showcase.css so it wins.
+   ========================================================= */
+
+/* ---------- 3 · PRICING: emphasize 'Most popular' ---------- */
+.abw-site .pricing{ align-items: stretch; }
+.abw-site .price-card{
+  transition: transform .3s cubic-bezier(.2,.7,.2,1), box-shadow .3s, border-color .2s;
+}
+.abw-site .price-card.featured{
+  transform: scale(1.045);
+  z-index: 2;
+  border-color: var(--coral) !important;
+  box-shadow:
+    0 0 0 1.5px var(--coral),
+    0 36px 80px -34px rgba(255,92,77,.65),
+    0 10px 30px -16px rgba(26,15,34,.5);
+  position: relative;
+  overflow: hidden;
+}
+/* animated coral aura sweep behind the featured card */
+.abw-site .price-card.featured::after{
+  content: "";
+  position: absolute;
+  inset: -40%;
+  background: radial-gradient(closest-side, rgba(255,92,77,.22), transparent 70%);
+  z-index: 0;
+  pointer-events: none;
+  animation: priceAura 6s ease-in-out infinite alternate;
+}
+.abw-site .price-card.featured > *{ position: relative; z-index: 1; }
+@keyframes priceAura{
+  0%{ transform: translate(-12%, -8%) scale(1); opacity: .8; }
+  100%{ transform: translate(12%, 10%) scale(1.15); opacity: 1; }
+}
+.abw-site .price-card.featured .price-tag{
+  background: var(--coral);
+  color: #fff;
+  box-shadow: 0 8px 20px -8px rgba(255,92,77,.8);
+  animation: tagFloat 3s ease-in-out infinite;
+}
+@keyframes tagFloat{
+  0%, 100%{ transform: translateY(0); }
+  50%{ transform: translateY(-3px); }
+}
+.abw-site .price-card:not(.featured):hover{
+  transform: translateY(-6px);
+  box-shadow: 0 28px 60px -32px rgba(26,15,34,.4);
+  border-color: var(--ink);
+}
+@media (prefers-reduced-motion: reduce){
+  .abw-site .price-card.featured::after, .abw-site .price-card.featured .price-tag{ animation: none; }
+}
+@media (max-width: 880px){
+  .abw-site .price-card.featured{ transform: none; }
+}
+
+/* ---------- 4 · COUNT-UP ---------- */
+.abw-site .countup{ font-variant-numeric: tabular-nums; }
+
+/* ---------- 6 · MOTION POLISH ---------- */
+/* unified hover-lift across interactive cards */
+.abw-site .tpl-card, .abw-site .trust-card, .abw-site .story-card, .abw-site .feature-art{
+  transition: transform .3s cubic-bezier(.2,.7,.2,1), box-shadow .3s;
+}
+.abw-site .tpl-card:hover, .abw-site .trust-card:hover, .abw-site .story-card:hover{
+  transform: translateY(-6px);
+  box-shadow: 0 30px 64px -34px rgba(26,15,34,.42);
+}
+/* tilt targets get smooth GPU transform (JS sets the actual transform) */
+.abw-site [data-tilt]{ transform-style: preserve-3d; }
+
+/* gentle stagger for grouped reveals already handled by delay prop;
+   add a subtle scale-in flavor to hero proof cards */
+.abw-site .hero-b-apps .hb-card{
+  transition: transform .35s cubic-bezier(.2,.7,.2,1), box-shadow .35s;
+}
+
+/* ---------- 8 · SCREENSHOT DROP OVERLAYS ---------- */
+/* showcase: a full-card slot layered over each mockup. Empty = mockup shows
+   through (transparent frame, hint only on hover). Filled = real screenshot. */
+.abw-site .sc-shot{
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  width: 100%;
+  height: 100%;
+}
+.abw-site .sc-shot::part(frame){ background: transparent; border-radius: 0; }
+.abw-site .sc-shot::part(empty){
+  opacity: 0;
+  transition: opacity .2s;
+  background: rgba(20,16,28,.55);
+  backdrop-filter: blur(2px);
+  color: #fff;
+}
+.abw-site .sc-app:hover .sc-shot::part(empty){ opacity: 1; }
+.abw-site .sc-shot::part(ring){ border-radius: 0; }
+
+/* publish mock screenshot slot, make the hint inviting */
+.abw-site .pub-site-image image-slot::part(empty){
+  background: rgba(20,16,28,.04);
+  color: var(--ink-3);
+}
+
+/* =========================================================
+   FEATURED QUOTE BAND, dark, full-bleed emotional moment
+   ========================================================= */
+.abw-site .quoteband{
+  background:
+    radial-gradient(900px 480px at 12% 0%, rgba(255,122,77,.22), transparent 62%),
+    radial-gradient(820px 520px at 92% 110%, rgba(156,53,151,.30), transparent 66%),
+    #15101F;
+  padding: 96px 0;
+  overflow: hidden;
+}
+.abw-site .quoteband-inner{
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 64px;
+  align-items: center;
+}
+.abw-site .quoteband-portrait-wrap{ position: relative; }
+.abw-site .quoteband-portrait{
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 40px 90px -34px rgba(0,0,0,.7);
+}
+.abw-site .quoteband-portrait image-slot{ position: absolute; inset: 0; width: 100%; height: 100%; }
+.abw-site .quoteband-badge{
+  position: absolute;
+  right: -22px;
+  bottom: -22px;
+  background: var(--coral);
+  color: #fff;
+  border-radius: 18px;
+  padding: 16px 20px;
+  text-align: center;
+  box-shadow: 0 22px 44px -18px rgba(255,92,77,.8);
+}
+.abw-site .quoteband-badge-num{
+  font-family: var(--f-head);
+  font-weight: 900;
+  font-size: 38px;
+  line-height: 1;
+  letter-spacing: -.03em;
+  font-variant-numeric: tabular-nums;
+}
+.abw-site .quoteband-badge-lbl{ font-size: 11px; font-weight: 600; opacity: .92; margin-top: 3px; }
+
+.abw-site .quoteband-body{ position: relative; max-width: 640px; }
+.abw-site .quoteband-mark{ width: 52px; height: 52px; color: rgba(255,255,255,.22); margin-bottom: 6px; }
+.abw-site .quoteband-q{
+  font-family: var(--f-head);
+  font-weight: 800;
+  font-size: clamp(28px, 3.2vw, 42px);
+  line-height: 1.18;
+  letter-spacing: -.025em;
+  color: #fff;
+  margin: 0 0 26px;
+  text-wrap: balance;
+}
+.abw-site .quoteband-q em{
+  font-style: normal;
+  background: linear-gradient(95deg, #FFC53D 0%, #FF7A4D 55%, #E8769E 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+}
+.abw-site .quoteband-name{ font-size: 16px; font-weight: 700; color: #fff; }
+.abw-site .quoteband-role{ font-size: 13.5px; color: rgba(255,255,255,.6); margin-top: 2px; }
+.abw-site .quoteband-link{
+  display: inline-flex; align-items: center; gap: 8px;
+  margin-top: 24px;
+  font-size: 14px; font-weight: 600;
+  color: var(--sun);
+  transition: gap .15s;
+}
+.abw-site .quoteband-link svg{ width: 16px; height: 16px; }
+.abw-site .quoteband-link:hover{ gap: 12px; }
+@media (max-width: 860px){
+  .abw-site .quoteband-inner{ grid-template-columns: 1fr; gap: 56px; }
+  .abw-site .quoteband-portrait{ max-width: 320px; }
+  .abw-site .quoteband-badge{ right: auto; left: 240px; }
+}
+
+/* =========================================================
+   FOOTER NEWSLETTER
+   ========================================================= */
+.abw-site .footer-news{ margin-top: 22px; max-width: 280px; }
+.abw-site .footer-news-label{
+  display: block;
+  font-size: 12.5px;
+  color: rgba(233,223,203,.7);
+  margin-bottom: 9px;
+  font-weight: 500;
+}
+.abw-site .footer-news-row{
+  display: flex;
+  gap: 8px;
+  background: rgba(255,255,255,.07);
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 12px;
+  padding: 5px 5px 5px 14px;
+  transition: border-color .15s;
+}
+.abw-site .footer-news-row:focus-within{ border-color: rgba(255,255,255,.4); }
+.abw-site .footer-news-input{
+  flex: 1; min-width: 0;
+  background: none; border: 0; outline: none;
+  color: #fff; font-size: 13.5px;
+}
+.abw-site .footer-news-input::placeholder{ color: rgba(233,223,203,.4); }
+.abw-site .footer-news-btn{
+  flex-shrink: 0;
+  width: 34px; height: 34px;
+  border-radius: 9px;
+  background: var(--coral);
+  color: #fff;
+  display: grid; place-items: center;
+  transition: background .15s, transform .15s;
+}
+.abw-site .footer-news-btn svg{ width: 16px; height: 16px; }
+.abw-site .footer-news-btn:hover{ background: var(--coral-deep); transform: translateY(-1px); }
+.abw-site .footer-news-ok{
+  display: none;
+  font-size: 12.5px;
+  color: var(--sun);
+  margin-top: 10px;
+  font-weight: 600;
+}
+.abw-site .footer-news.done .footer-news-row{ display: none; }
+.abw-site .footer-news.done .footer-news-label{ display: none; }
+.abw-site .footer-news.done .footer-news-ok{ display: block; }
+
+/* =========================================================
+   LANGUAGE SWITCHER (nav + footer variants)
+   ========================================================= */
+.abw-site .lang{ position: relative; }
+.abw-site .lang-trigger{
+  display: inline-flex; align-items: center; gap: 7px;
+  background: none; border: 0; cursor: pointer; font: inherit;
+  border-radius: 999px;
+  transition: color .15s, background .15s, border-color .15s;
+}
+.abw-site .lang-globe{ flex-shrink: 0; opacity: .85; }
+.abw-site .lang-caret{ opacity: .6; transition: transform .2s; }
+.abw-site .lang.open .lang-caret{ transform: rotate(180deg); }
+
+/* nav variant, sits before the buttons */
+.abw-site .lang-nav .lang-trigger{
+  padding: 8px 12px;
+  color: var(--ink-2);
+  border: 1px solid var(--line);
+  font-size: 14px;
+}
+.abw-site .lang-nav .lang-trigger:hover{ color: var(--ink); border-color: var(--ink); }
+
+/* footer variant, quiet, on the dark bar */
+.abw-site .lang-footer .lang-trigger{
+  padding: 7px 12px;
+  color: rgba(233,223,203,.8);
+  border: 1px solid rgba(255,255,255,.16);
+  font-size: 13px;
+  font-weight: 600;
+}
+.abw-site .lang-footer .lang-trigger:hover{ color: #fff; border-color: rgba(255,255,255,.4); }
+
+/* panel */
+.abw-site .lang-panel{
+  position: absolute;
+  z-index: 80;
+  width: 210px;
+  max-height: 320px;
+  overflow-y: auto;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  box-shadow: 0 24px 60px -24px rgba(26,15,34,.45);
+  padding: 6px;
+  opacity: 0; visibility: hidden; pointer-events: none;
+  transform: translateY(-6px);
+  transition: opacity .16s, transform .16s;
+  scrollbar-width: thin;
+}
+.abw-site .lang-panel::-webkit-scrollbar{ width: 6px; }
+.abw-site .lang-panel::-webkit-scrollbar-thumb{ background: var(--line); border-radius: 3px; }
+/* drop down (default): below trigger, right-aligned */
+.abw-site .lang-nav .lang-panel{ top: calc(100% + 10px); right: 0; }
+/* drop up: above trigger (footer) */
+.abw-site .lang.drop-up .lang-panel{ bottom: calc(100% + 10px); left: 0; transform: translateY(6px); }
+.abw-site .lang.open .lang-panel{ opacity: 1; visibility: visible; pointer-events: auto; transform: translateY(0); }
+
+.abw-site .lang-item{
+  display: flex; align-items: center; gap: 10px; width: 100%;
+  padding: 9px 11px; border-radius: 9px; cursor: pointer;
+  background: none; border: 0; font: inherit; text-align: left;
+  color: var(--ink-2); transition: background .12s, color .12s;
+}
+.abw-site .lang-item:hover{ background: var(--bg-tint); color: var(--ink); }
+.abw-site .lang-item.active{ color: var(--ink); font-weight: 600; }
+.abw-site .lang-flag{ font-size: 16px; flex-shrink: 0; line-height: 1; }
+.abw-site .lang-name{ flex: 1; font-size: 14px; }
+.abw-site .lang-check{ color: var(--coral); flex-shrink: 0; }
+
+/* footer bar: keep lang + copyright on one row */
+.abw-site .footer-bar-left{ display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+@media (max-width: 600px){
+  .abw-site .footer-bar-left{ flex-direction: column; align-items: flex-start; gap: 12px; }
+}
+
+/* =========================================================
+   FOOTER TOP, trust row + floating idea chips
+   ========================================================= */
+/* retire the old plain spheres */
+.abw-site .footer-deco-sun, .abw-site .footer-deco-coral{ display: none; }
+
+.abw-site .footer-trust{
+  display: inline-flex;
+  align-items: center;
+  gap: 13px;
+  margin-top: 30px;
+  font-size: 14.5px;
+  color: var(--ink-2);
+}
+.abw-site .footer-trust strong{ color: var(--ink); font-weight: 700; }
+.abw-site .footer-trust-faces{ display: flex; }
+.abw-site .footer-trust-faces img{
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2.5px solid var(--bg);
+  margin-left: -12px;
+  box-shadow: 0 2px 8px -2px rgba(20,12,28,.3);
+}
+.abw-site .footer-trust-faces img:first-child{ margin-left: 0; }
+
+/* floating "idea" chips, what people build */
+.abw-site .footer-chip{
+  position: absolute;
+  z-index: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 11px 16px;
+  border-radius: 999px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  box-shadow: 0 18px 40px -18px rgba(20,12,28,.4);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  white-space: nowrap;
+  pointer-events: none;
+}
+.abw-site .footer-chip-1{ top: 92px;  left: 4%;   transform: rotate(-7deg);  animation: footerChipFloat 9s  ease-in-out infinite; }
+.abw-site .footer-chip-2{ top: 60px;  right: 3%;  transform: rotate(6deg);   animation: footerChipFloat 11s ease-in-out infinite .6s; }
+.abw-site .footer-chip-3{ top: 250px; left: 1%;   transform: rotate(5deg);   animation: footerChipFloat 10s ease-in-out infinite .3s; }
+.abw-site .footer-chip-4{ top: 232px; right: 2%;  transform: rotate(-6deg);  animation: footerChipFloat 12s ease-in-out infinite .9s; }
+@keyframes footerChipFloat{
+  0%, 100%{ translate: 0 0; }
+  50%{ translate: 0 -16px; }
+}
+@media (prefers-reduced-motion: reduce){
+  .abw-site .footer-chip{ animation: none !important; }
+}
+@media (max-width: 1080px){
+  .abw-site .footer-chip-1, .abw-site .footer-chip-3{ left: -2%; }
+  .abw-site .footer-chip-2, .abw-site .footer-chip-4{ right: -2%; }
+}
+@media (max-width: 860px){
+  .abw-site .footer-chip{ display: none; }
+}
