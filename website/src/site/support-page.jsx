@@ -203,11 +203,6 @@ function SupportPage() {
             )}
           </Reveal>
 
-          <div className="supx-meta">
-            <span><span className="supx-meta-dot"/> All systems operational</span>
-            <span className="supx-meta-sep">·</span>
-            <a href="/status" className="supx-meta-link">Live status →</a>
-          </div>
         </div>
       </section>
 
@@ -279,14 +274,6 @@ function SupportPage() {
                   </Reveal>
                 ))}
               </div>
-              <Reveal delay={80}>
-                <div className="supx-contact-card supx-contact-status" style={{ marginTop: 22 }}>
-                  <div className="supx-contact-ic"><span className="supx-status-pulse"/></div>
-                  <h3>System status</h3>
-                  <p>Editor · Publish · Stripe · Domains, all green.</p>
-                  <a className="btn btn-outline btn-block" href="/status">Open status page →</a>
-                </div>
-              </Reveal>
             </div>
           </div>
         </div>

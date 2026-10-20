@@ -27,8 +27,10 @@ const allRoutes = [...siteApp.matchAll(/path="([^"]+)"/g)]
   .map(match => match[1]).filter(route => route !== '*');
 // The waitlist landing page keeps its own pagehost version with tracking and the live counter.
 const ownPages = new Set(['/waitlist-landing']);
+// Upstream pages the public site doesn't publish: the status page showed mocked uptime.
+const unpublished = new Set(['/status']);
 const redirectRoutes = new Set(['/login', '/waitlist-site']);
-const siteRoutes = allRoutes.filter(route => !ownPages.has(route));
+const siteRoutes = allRoutes.filter(route => !ownPages.has(route) && !unpublished.has(route));
 const pageRoutes = siteRoutes.filter(route => !redirectRoutes.has(route));
 const authPages = { signin: '/signin', login: '/signin', signup: '/signup', forgot: '/forgot' };
 

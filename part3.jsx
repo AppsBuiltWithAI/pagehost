@@ -234,7 +234,6 @@ function Footer({ lean, onStart }) {
               <li><a href="connectors.html">Connectors</a></li>
               <li><a href="roadmap.html">Roadmap</a></li>
               <li><a href="changelog.html">Change log</a></li>
-              <li><a href="status.html">Status</a></li>
             </ul>
           </div>
           <div className="footer-col">
