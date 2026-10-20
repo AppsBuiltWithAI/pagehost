@@ -57,6 +57,7 @@ function WaitHero({ onStart }) {
 
 function DemoButton() {
   const [open, setOpen] = useState(false);
+  const dialogRef = useRef(null);
   const frameRef = useRef(null);
   const triggerRef = useRef(null);
   const closeRef = useRef(null);
@@ -70,10 +71,13 @@ function DemoButton() {
     window.addEventListener("keydown", keydown);
     window.addEventListener("message", message);
     document.body.style.overflow = "hidden";
+    const dialog = dialogRef.current;
+    if (!dialog.open) dialog.showModal();
     closeRef.current?.focus();
     return () => {
       window.removeEventListener("keydown", keydown);
       window.removeEventListener("message", message);
+      if (dialog.open) dialog.close();
       document.body.style.overflow = previousOverflow;
       triggerRef.current?.focus();
     };
@@ -85,12 +89,12 @@ function DemoButton() {
         Watch the demo <span className="demo-btn-time">2 min</span>
       </button>
       {open && (
-        <div className="demo-bg" onClick={() => setOpen(false)}>
-          <div className="demo-modal" role="dialog" aria-modal="true" aria-label="Product demo" onClick={(ev) => ev.stopPropagation()}>
+          <dialog className="demo-modal demo-dialog" ref={dialogRef} aria-label="Product demo"
+            onCancel={event => { event.preventDefault(); setOpen(false); }}
+            onClick={event => { if (event.target === event.currentTarget) setOpen(false); }}>
             <button className="demo-close" ref={closeRef} onClick={() => setOpen(false)} aria-label="Close"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
             <iframe src="/site/demo-video.html" ref={frameRef} title="AppsBuiltWithAI demo" sandbox="allow-scripts" allow="autoplay; fullscreen; picture-in-picture" allowFullScreen></iframe>
-          </div>
-        </div>
+          </dialog>
       )}
     </>
   );

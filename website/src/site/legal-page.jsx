@@ -1,30 +1,37 @@
 import React, { useState as useLgState, useEffect as useLgEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Reveal } from './part1.jsx';
 /* ============= LEGAL HUB: Privacy / Cookie / Concerns / Terms ============= */
 
 const FULL_TERMS = "https://app.appsbuiltwithai.com/terms";
+const APP_PRIVACY = "https://app.appsbuiltwithai.com/privacy";
 
 const LEGAL_TABS = [
   { id: "privacy", label: "Privacy Policy", updated: "October 20, 2026", href: "/legal#privacy", h: "Privacy Policy", em: "Your data stays yours." },
-  { id: "cookie", label: "Cookie Policy", updated: "October 20, 2026", href: "/legal#cookie", h: "Cookie Policy", em: "Here's every one we use." },
-  { id: "concerns", label: "Security", updated: "October 20, 2026", href: "/legal#concerns", h: "Security", em: "Tell us, we'll fix it." },
+  { id: "cookie", label: "Cookie Policy", updated: "October 20, 2026", href: "/legal#cookie", h: "Cookie Policy", em: "What runs, and your choices." },
+  { id: "concerns", label: "Security", updated: "October 20, 2026", href: "/legal#concerns", h: "Security", em: "Report a concern." },
   { id: "terms", label: "Terms of Service", updated: "October 20, 2026", href: "/legal#terms", h: "Terms of Service", em: "The deal, in plain words." },
 ];
 
 const PLAIN_ENGLISH = {
-  privacy:  "We collect what we need to run the builder: your account, what you type and build, and basic usage and security data. Your prompts go to Anthropic's Claude models so they can build your app. Card details stay with Stripe. We don't sell your data. You can download your data or delete your account from Settings.",
-  cookie:   "The builder uses one sign-in cookie and PostHog to count page views and feature use. It doesn't record your screen and has no ad trackers. Our main page at appsbuiltwithai.com and our waitlist page use advertising and analytics tags (Meta Pixel, Google Analytics, Vaudit) to measure our marketing.",
-  concerns: "Passwords are hashed, keys for your connected accounts are encrypted, and all traffic uses HTTPS. Found a security issue? Email security@appsbuiltwithai.com. We acknowledge reports within 24 hours and won't take action against good-faith research.",
-  terms:    "You own what you build. Use the platform legally and don't abuse it. Credits pay for AI work, and a build that ends broken gets its credits back. You're responsible for the apps you publish and the people who use them. Our liability is capped at what you paid us in the last 12 months. Georgia law applies. This is a summary: the full Terms of Service are the binding version.",
+  privacy:  "We collect account information, what you type and build, and usage and security data. Building an app sends relevant content to our AI and hosting providers. Card details stay with Stripe. We don't sell your data. You can download your data or delete your account from Settings.",
+  cookie:   "The builder uses a sign-in cookie and PostHog to count page views and feature use. It doesn't record your screen and has no ad trackers. Our main page at appsbuiltwithai.com and our waitlist page use advertising and analytics tags (Meta Pixel, Google Analytics, Vaudit). Below is each one and how to switch it off.",
+  concerns: "Passwords are hashed, and connected-account keys are encrypted. Found a security issue? Email security@appsbuiltwithai.com with steps to reproduce it. Please use accounts you own and avoid accessing other people's data or disrupting the service.",
+  terms:    "You own what you build. Use the platform legally and check AI output before you rely on it. Credits pay for AI work and aren't refundable as cash. You're responsible for the apps you publish and the people who use them. Our liability is capped at what you paid us in the last 12 months, and Georgia law applies. This is a summary: the full Terms of Service are the binding version.",
 };
 
 const LEGAL_TOC = {
-  privacy: [["who-we-are", "Who we are"], ["what-we-collect", "What we collect"], ["your-apps", "Your apps and their visitors"], ["ai-training", "AI and your data"], ["how-we-use", "How we use your data"], ["who-we-share", "Who we share with"], ["where-stored", "Where your data lives"], ["retention", "How long we keep it"], ["your-rights", "Your rights"], ["children", "Children"], ["contact", "Changes and contact"]],
-  cookie: [["what-cookies", "What we mean by cookies"], ["essential", "Essential"], ["analytics", "Product analytics"], ["advertising", "Advertising and measurement"], ["other-services", "Other services on our pages"], ["manage", "Managing cookies"]],
-  concerns: [["protect", "How we protect you"], ["report", "How to report"], ["response", "What happens next"], ["rewards", "Thanks and rewards"], ["scope", "What's in scope"], ["safe-harbor", "Safe harbor"]],
-  terms: [["agreement", "The agreement"], ["account", "Your account"], ["ownership", "Who owns what"], ["ai-output", "AI output"], ["your-apps", "Apps you publish"], ["providers", "Connected services"], ["payments", "Plans, credits & payment"], ["acceptable", "What you can't do"], ["termination", "Cancelling and suspension"], ["liability", "Liability"], ["copyright", "Copyright"], ["law", "Governing law & contact"]],
+  privacy: [["who-we-are", "Who we are"], ["what-we-collect", "What we collect"], ["your-apps", "Your apps and their visitors"], ["ai-training", "AI and your data"], ["how-we-use", "Purposes and legal bases"], ["who-we-share", "Who we share with"], ["where-stored", "Where your data lives"], ["retention", "How long we keep it"], ["your-rights", "Your rights"], ["children", "Children"], ["contact", "Changes and contact"]],
+  cookie: [["what-cookies", "What we mean by cookies"], ["essential", "Sign-in and preferences"], ["analytics", "Product analytics"], ["advertising", "Advertising and measurement"], ["other-services", "Other services on our pages"], ["manage", "Managing cookies"]],
+  concerns: [["protect", "How we protect you"], ["report", "How to report"], ["response", "What happens next"], ["rewards", "Thanks and rewards"], ["scope", "What's in scope"], ["research", "Responsible research"]],
+  terms: [["agreement", "The agreement"], ["account", "Your account"], ["ownership", "Who owns what"], ["ai-output", "AI output"], ["published-apps", "Apps you publish"], ["providers", "Connected services"], ["payments", "Plans, credits & payment"], ["acceptable", "What you can't do"], ["termination", "Cancelling and suspension"], ["liability", "Liability"], ["copyright", "Copyright"], ["law", "Governing law & contact"]],
 };
+
+function tabForHash(hash) {
+  const id = hash.replace("#", "");
+  return LEGAL_TABS.find(t => t.id === id)?.id ||
+    Object.keys(LEGAL_TOC).find(tab => LEGAL_TOC[tab].some(([section]) => section === id));
+}
 
 function LegalPage() {
   const fixed = typeof window !== "undefined" ? window.LEGAL_DOC : null;
@@ -32,23 +39,29 @@ function LegalPage() {
     if (fixed) return fixed;
     if (typeof window !== "undefined") {
       const h = window.location.hash.replace("#", "");
-      if (LEGAL_TABS.some(t => t.id === h)) return h;
+      if (tabForHash(h)) return tabForHash(h);
     }
     return "privacy";
   });
 
-  // Footer links such as /legal#terms change only the hash, so follow it while the page stays mounted.
-  const { hash } = useLocation();
+  const location = useLocation();
+  const navigate = useNavigate();
   useLgEffect(() => {
-    const h = hash.replace("#", "");
-    if (!fixed && LEGAL_TABS.some(t => t.id === h)) setTab(h);
-  }, [hash]);
+    if (fixed) return;
+    const next = tabForHash(location.hash) || "privacy";
+    setTab(next);
+  }, [location.hash, fixed]);
 
   useLgEffect(() => {
-    if (typeof window === "undefined" || fixed) return;
-    if (window.location.hash !== "#" + tab) history.replaceState(null, "", "#" + tab);
-    window.scrollTo({ top: 0, behavior: "instant" });
-  }, [tab]);
+    if (fixed) return;
+    const id = location.hash.slice(1);
+    if (LEGAL_TABS.some(t => t.id === id) || !id) {
+      window.scrollTo({ top: 0, behavior: "instant" });
+    } else {
+      const section = document.getElementById(id);
+      if (section) window.scrollTo({ top: section.getBoundingClientRect().top + window.scrollY - 90, behavior: "instant" });
+    }
+  }, [tab, location.key, location.hash, fixed]);
 
   const meta = LEGAL_TABS.find(t => t.id === tab);
 
@@ -63,8 +76,8 @@ function LegalPage() {
               : <h1 className="serif">The fine print, <em>in big print.</em></h1>}
             <p className="sub-lead">
               We wrote this to be read, not skimmed past. Every tab starts
-              with a plain-English summary, and everything below it matches
-              how the product works today.
+              with a plain-English summary, and the app's full policies are
+              linked wherever they go into more detail.
             </p>
           </Reveal>
           <Reveal delay={120}>
@@ -75,7 +88,7 @@ function LegalPage() {
                 <button
                   key={t.id}
                   className={"legal-tab" + (tab === t.id ? " active" : "")}
-                  onClick={() => setTab(t.id)}
+                  onClick={() => navigate({ search: location.search, hash: t.id }, { replace: true })}
                 >
                   {t.label}
                 </button>
@@ -127,8 +140,9 @@ function H2({ children, id }) { return <h2 id={id}>{children}</h2>; }
 function PrivacyBody() {
   return (
     <>
+      <p>This notice explains our marketing pages and how the builder handles your data. Your builder account is also covered by the <a href={APP_PRIVACY}>app Privacy Policy</a> linked during signup.</p>
       <H2 id="who-we-are">1. Who we are</H2>
-      <p>AppsBuiltWithAI is run by Miestro, Inc., d/b/a AppsBuiltWithAI, a Georgia corporation at 3355 Lennox Road Northeast, Suite 750, Atlanta, Georgia 30326. This policy covers our websites (appsbuiltwithai.com and pages.appsbuiltwithai.com) and the builder at app.appsbuiltwithai.com.</p>
+      <p>AppsBuiltWithAI is run by Miestro, Inc., d/b/a AppsBuiltWithAI, a Georgia corporation at 3355 Lennox Road Northeast, Suite 750, Atlanta, Georgia 30326. This website notice covers appsbuiltwithai.com and pages.appsbuiltwithai.com. Details about the builder are an overview of the account practices covered by the app Privacy Policy.</p>
 
       <H2 id="what-we-collect">2. What we collect</H2>
       <ul>
@@ -146,11 +160,12 @@ function PrivacyBody() {
       <p>Data your app collects from its own users, such as sign-ups or form entries, is stored in the database connected to your app, which you control. You're responsible for that data, including telling your users how you use it and having a lawful basis to collect it.</p>
 
       <H2 id="ai-training">4. AI and your data</H2>
-      <p>To build and check your app, we send your prompts, conversation history, the text of files you attach and your app's code to Anthropic, whose Claude models power the builder. Under Anthropic's commercial terms, it doesn't use this data to train its models.</p>
-      <p>We may use de-identified or aggregated data to improve our AI features. To keep your content out of model training entirely, email <a href="mailto:support@appsbuiltwithai.com">support@appsbuiltwithai.com</a>. It's free and works on every plan.</p>
+      <p>To build and check your app, the builder sends relevant prompts, conversation history, attached content and app code to its configured AI provider. Anthropic is the default provider. Its commercial API does not use inputs and outputs for model training by default; different terms can apply if data use is explicitly enabled.</p>
+      <p>If image or video generation is available and you use it, prompts are also sent through KIE.ai to the selected image or video model. Other configured AI services may have different data-handling terms. Contact us if you need to confirm which providers will receive your content before using a feature.</p>
+      <p>As described in the <a href={APP_PRIVACY}>app Privacy Policy</a>, we may use anonymized or aggregated data to improve AI features. Identifiable customer content is not used for general model training without permission. You can request an account-level model-training opt-out at <a href="mailto:support@appsbuiltwithai.com">support@appsbuiltwithai.com</a>, free on every plan. Processing a prompt to produce a response is different from training a model.</p>
       <p>Please don't put sensitive data into the builder, such as health records, government ID numbers or payment card numbers.</p>
 
-      <H2 id="how-we-use">5. How we use your data</H2>
+      <H2 id="how-we-use">5. Purposes and legal bases</H2>
       <ul>
         <li>To run the builder, generate your apps and host the apps you publish.</li>
         <li>To process payments and manage your plan and credits.</li>
@@ -160,12 +175,15 @@ function PrivacyBody() {
         <li>To understand how the product is used and improve it.</li>
         <li>To meet our legal obligations.</li>
       </ul>
+      <p>The app Privacy Policy identifies contract, legitimate interests, consent and legal obligations as the bases that apply to different processing activities. Where UK or EU data protection law applies, providing requested account, building, hosting and billing services relies on contract. Securing and improving the service, preventing abuse and providing support rely on legitimate interests where appropriate, subject to your rights. Optional marketing and tracking require consent where the law requires it; legal obligations cover tax, accounting and other required records. Our legitimate interests are operating and improving a reliable service and protecting users and the business. You can object to processing based on legitimate interests or withdraw consent by contacting us. Withdrawal does not affect processing that was lawful before you withdrew it.</p>
+      <p>Account and billing information needed to provide a requested service must be supplied to use that service. Optional marketing choices do not determine whether you can create an account or buy a plan.</p>
 
       <H2 id="who-we-share">6. Who we share data with</H2>
-      <p>We don't sell your personal information. We share it only with the companies that help us run AppsBuiltWithAI, each limited to what they need:</p>
+      <p>The services that receive data depend on the pages and features you use. They include:</p>
       <ul>
         <li><strong>Amazon Web Services</strong>: hosting, database and file storage.</li>
-        <li><strong>Anthropic</strong>: the AI models that build your apps.</li>
+        <li><strong>Anthropic and any other configured AI provider</strong>: content needed to generate and check your apps.</li>
+        <li><strong>KIE.ai and the selected model provider</strong>: image and video prompts when those generation features are enabled and used.</li>
         <li><strong>Modal</strong>: isolated environments where your app's code is built and tested.</li>
         <li><strong>Stripe</strong>: payments for your plan, and Stripe Connect when your app takes payments.</li>
         <li><strong>Customer.io</strong>: account and marketing emails.</li>
@@ -175,15 +193,19 @@ function PrivacyBody() {
         <li><strong>GitHub and Supabase</strong>: only when you choose to connect them.</li>
         <li><strong>GoHighLevel</strong>: our main website and some checkout pages.</li>
         <li><strong>ip-api.com</strong>: turns a sign-in IP address into an approximate location.</li>
+        <li><strong>Google Fonts and Voomly</strong>: font delivery and the demo video, including IP address and browser details needed to deliver them.</li>
+        <li><strong>Meta, Google Analytics and Vaudit</strong>: advertising and measurement on marketing pages where their tags are used, as explained in the Cookie Policy.</li>
       </ul>
+      <p>Advertising disclosures may count as a sale or sharing under applicable US state privacy laws, depending on the service and configuration. The Cookie Policy explains the distinction between the builder, this website and separately hosted marketing pages. You can ask us about the recipients and choices that apply to your visit.</p>
       <p>We may also share data when the law requires it, to protect people's safety or our rights, or as part of a merger or sale of the business, in which case this policy continues to apply.</p>
 
       <H2 id="where-stored">7. Where your data lives</H2>
-      <p>Our servers are in the United States (Amazon Web Services, Oregon). If you use AppsBuiltWithAI from outside the US, your data is transferred there. Where the law requires it, we rely on safeguards such as the EU Standard Contractual Clauses.</p>
+      <p>The platform uses Amazon Web Services infrastructure in the United States, including Oregon. Our providers may process information in other countries; this is not a promise that every copy stays in one region. International transfers must use a legally permitted mechanism where required. Email <a href="mailto:privacy@appsbuiltwithai.com">privacy@appsbuiltwithai.com</a> to request information about the countries, applicable transfer mechanism and a copy of any contractual safeguards relevant to your data.</p>
 
       <H2 id="retention">8. How long we keep it</H2>
-      <p>We keep your data while your account is open. When you delete your account in Settings, your account, apps, conversations and sessions are removed from our database straight away. This can't be undone, so download anything you want to keep first.</p>
-      <p>Some copies aren't removed automatically: files you attached, records at Stripe, and data held by our email and analytics providers. Email <a href="mailto:privacy@appsbuiltwithai.com">privacy@appsbuiltwithai.com</a> and we'll delete those too, unless the law requires us to keep them.</p>
+      <p>We retain information for as long as needed to provide the service, meet legal obligations, prevent fraud and resolve disputes. Account and project information is needed while your account is active. Billing records are retained for applicable tax and accounting obligations; security logs are retained according to security and fraud-prevention needs; provider records and backups follow their applicable retention schedules.</p>
+      <p>Deleting an account removes its active database account and associated project records. It does not immediately erase every attachment, stored file, backup or third-party record. For those copies, request erasure at <a href="mailto:privacy@appsbuiltwithai.com">privacy@appsbuiltwithai.com</a>. We will assess the request under applicable law and explain any information that must be retained and why. Ask us for the retention period or criteria for a particular category.</p>
+      <p>Account deletion is permanent and is separate from cancelling a paid subscription. Cancel a paid plan through billing settings before deleting your account, or contact support for help. Export the work you want to keep first.</p>
 
       <H2 id="your-rights">9. Your rights</H2>
       <ul>
@@ -191,15 +213,15 @@ function PrivacyBody() {
         <li><strong>Delete your account</strong>: from Settings, at any time.</li>
         <li><strong>Ask us</strong> for a copy of your data, a correction or a deletion by emailing <a href="mailto:privacy@appsbuiltwithai.com">privacy@appsbuiltwithai.com</a>. We'll answer within the time the law allows.</li>
         <li><strong>In the EU and UK</strong>, you can also object to or restrict how we use your data, and complain to your local data protection authority.</li>
-        <li><strong>In California and other US states</strong>, you have the right to know, correct and delete your data, and to opt out of its sale or sharing. We don't sell it. For the advertising tags on our marketing pages, see the Cookie Policy. We won't treat you differently for using these rights.</li>
-        <li><strong>Marketing</strong>: unsubscribe from any email, or reply STOP to a text.</li>
+        <li><strong>In California and other US states</strong>, your rights may include knowing, correcting and deleting your data and opting out of sale, sharing or targeted advertising, depending on the law that applies. Send requests to <a href="mailto:privacy@appsbuiltwithai.com">privacy@appsbuiltwithai.com</a>. Advertising choices depend on the page you visit; see the Cookie Policy. We won't discriminate against you for exercising applicable privacy rights.</li>
+        <li><strong>Marketing</strong>: unsubscribe from an email, reply STOP to a text, or tell us another reasonable way that you want marketing to stop. Giving us a phone number does not, by itself, establish permission for marketing communications that legally require separate consent.</li>
       </ul>
 
       <H2 id="children">10. Children</H2>
-      <p>AppsBuiltWithAI is for adults. You must be 18 or older, or have a parent or guardian's consent, to create an account. We don't knowingly collect data from children under 13, and we delete it if we learn we have.</p>
+      <p>The services are intended for adults. Under the full Terms, someone under 18 needs a parent or legal guardian's consent. If we learn that we collected personal data from a minor without appropriate consent, we will delete it. Contact us if you believe a minor's information has been provided without that consent.</p>
 
       <H2 id="contact">11. Changes and contact</H2>
-      <p>When we change this policy we update the date at the top, and we'll tell you by email or in the app before a material change takes effect. Questions or requests: <a href="mailto:privacy@appsbuiltwithai.com">privacy@appsbuiltwithai.com</a>, or by mail to Miestro, Inc. / AppsBuiltWithAI, 3355 Lennox Road Northeast, Suite 750, Atlanta, Georgia 30326.</p>
+      <p>We update the date when this notice changes. As stated in the app Privacy Policy, material changes receive at least 30 days' notice by email or in the app before they take effect. Questions or requests: <a href="mailto:privacy@appsbuiltwithai.com">privacy@appsbuiltwithai.com</a>, or by mail to Miestro, Inc. / AppsBuiltWithAI, 3355 Lennox Road Northeast, Suite 750, Atlanta, Georgia 30326.</p>
     </>
   );
 }
@@ -208,10 +230,10 @@ function CookieBody() {
   return (
     <>
       <H2 id="what-cookies">1. What we mean by cookies</H2>
-      <p>Cookies are small files a website stores in your browser. Some of our pages use your browser's local storage in a similar way. This page lists both, and says which part of AppsBuiltWithAI sets them.</p>
+      <p>Cookies are small files a website stores in your browser. Local storage can remember information in a similar way. The examples below identify the service involved; third-party names and durations can vary with provider configuration.</p>
 
-      <H2 id="essential">2. Essential</H2>
-      <p>These make the product work. Blocking them will break things.</p>
+      <H2 id="essential">2. Sign-in and preferences</H2>
+      <p>The sign-in cookie is needed to stay signed in. Other storage supports optional preferences or page features; appearing in this list does not make it strictly necessary.</p>
       <ul>
         <li><code>abwa_token</code> (builder app): keeps you signed in for up to 7 days. Scripts on the page can't read it, and it's only sent over HTTPS.</li>
         <li><code>abwai-lang</code> (website, local storage): remembers the language you picked.</li>
@@ -219,10 +241,11 @@ function CookieBody() {
         <li><code>abwai_exit_seen</code> (website, local storage): makes sure you don't see the same offer twice.</li>
         <li><code>abwai-roadmap-likes</code> (website, local storage): remembers which roadmap items you voted for.</li>
       </ul>
-      <p>The website's local storage stays in your browser. It isn't sent to us.</p>
+      <p>These website preferences remain until you clear them unless an expiry is stated. Local storage is kept in your browser, but information you later submit, such as an app idea during signup, can be sent to us as part of that action.</p>
 
       <H2 id="analytics">3. Product analytics</H2>
       <p>The builder app uses PostHog to count page views and some product events, linked to your account, so we can see which features get used and where people get stuck. It stores a <code>ph_</code> cookie and local storage. We don't record your screen or sessions.</p>
+      <p>Contact <a href="mailto:privacy@appsbuiltwithai.com">privacy@appsbuiltwithai.com</a> about your account's analytics choices. Cookie consent and privacy rights depend on the tracking involved and the law that applies.</p>
 
       <H2 id="advertising">4. Advertising and measurement</H2>
       <p>The builder app has no advertising trackers. Our marketing pages do use them to measure which ads bring people to us and to check ad traffic for fraud:</p>
@@ -230,15 +253,19 @@ function CookieBody() {
         <li><strong>appsbuiltwithai.com</strong>, our main page, which runs on GoHighLevel: the Meta Pixel (cookie <code>_fbp</code>) and Vaudit. GoHighLevel may also set its own cookies to run the page.</li>
         <li><strong>Our waitlist page</strong>: Google Analytics (cookies <code>_ga</code> and <code>_ga_*</code>) and Vaudit.</li>
       </ul>
+      <p>Depending on the law that applies, you may have a right to withhold or withdraw consent to optional advertising tracking, or to opt out of sale, sharing or targeted advertising. Sharing can be covered even when no money changes hands. Global Privacy Control is one way to communicate an applicable opt-out choice to a site you visit.</p>
+      <p>These marketing pages can be hosted separately or shown around this website in an embedded frame. This website does not provide controls for tags in its surrounding host page or in the builder. Use the controls on the page that sets those tags or contact us for help with that page.</p>
 
       <H2 id="other-services">5. Other services on our pages</H2>
       <p>Our website loads fonts from Google Fonts and plays our demo video through Voomly. Delivering these means those services receive your IP address and basic browser details.</p>
+      <p>When you click "Watch the demo", the Voomly player loads automatically. Voomly receives your IP address and browser details and may use cookies or local storage. To remove cookies or data already received, use your browser's site-data controls or contact the provider.</p>
 
       <H2 id="manage">6. Managing cookies</H2>
       <ul>
         <li>Your browser can block or delete cookies and local storage for any site. Blocking <code>abwa_token</code> signs you out of the builder.</li>
         <li>You can limit ad tracking in your Meta ad preferences, and opt out of Google Analytics with Google's browser add-on.</li>
         <li>To opt out of product analytics in the builder, email <a href="mailto:privacy@appsbuiltwithai.com">privacy@appsbuiltwithai.com</a>.</li>
+        <li>To exercise applicable sale, sharing or targeted-advertising opt-out rights, email <a href="mailto:privacy@appsbuiltwithai.com">privacy@appsbuiltwithai.com</a>. Browser add-ons and account preferences at an advertising provider are additional tools; they do not replace consent or opt-out controls required on the page you visit.</li>
       </ul>
     </>
   );
@@ -249,7 +276,7 @@ function ConcernsBody() {
     <>
       <H2 id="protect">1. How we protect you</H2>
       <ul>
-        <li>All traffic uses HTTPS, including custom domains on the apps you publish.</li>
+        <li>Our websites, the builder and the apps you publish, including custom domains, are served over HTTPS.</li>
         <li>Passwords are stored only as bcrypt hashes. Nobody here can read them.</li>
         <li>Access keys for your connected accounts (GitHub, Supabase and tools such as Gmail) are encrypted with AES-256-GCM.</li>
         <li>You can turn on two-factor sign-in with an authenticator app, and see or sign out of your active sessions in Settings.</li>
@@ -263,10 +290,10 @@ function ConcernsBody() {
 
       <H2 id="response">3. What happens next</H2>
       <ul>
-        <li><strong>Acknowledgement</strong> within 24 hours.</li>
-        <li><strong>Assessment</strong>: we'll tell you how serious we think it is and when we expect to fix it.</li>
-        <li><strong>Fix</strong>: we'll let you know when it's fixed so you can check it.</li>
-        <li><strong>Disclosure</strong>: we'll agree on timing with you before anything is made public. If we can't agree, the default is 90 days from your report.</li>
+        <li><strong>Review</strong>: we assess reports according to their impact and the information provided.</li>
+        <li><strong>Follow-up</strong>: include a way to reach you so we can ask questions and discuss remediation.</li>
+        <li><strong>Timing</strong>: response and fix times depend on the issue; this page does not promise a response or resolution deadline.</li>
+        <li><strong>Disclosure</strong>: please coordinate publication with us so users can be protected while an issue is assessed and fixed.</li>
       </ul>
 
       <H2 id="rewards">4. Thanks and rewards</H2>
@@ -284,8 +311,8 @@ function ConcernsBody() {
         <li>Problems in third-party services we use (report them to that company) and bugs in the code of an app someone built with us (report them to the app's owner).</li>
       </ul>
 
-      <H2 id="safe-harbor">6. Safe harbor</H2>
-      <p>If you research in good faith (you only use accounts you own, don't view or keep other people's data beyond what's needed to show the issue, don't disrupt the service, and give us reasonable time to fix it before going public), we won't take legal action against you or report you to law enforcement for it.</p>
+      <H2 id="research">6. Responsible research</H2>
+      <p>Please limit testing to accounts and data you own, avoid disruption, and stop if you encounter someone else's information. A disclosure policy does not authorize access to third-party systems or another user's data. Contact us before testing if you need written authorization or clarification of scope.</p>
     </>
   );
 }
@@ -308,12 +335,12 @@ function TermsBody() {
 
       <H2 id="ownership">3. Who owns what</H2>
       <p>You own what you put in and what the builder makes for you: your prompts, your files, your apps and the AI output, subject to any rights that third parties have in them. We own the AppsBuiltWithAI platform and the usage data it generates.</p>
-      <p>You give us permission to host, copy, process and display your content as needed to run and improve the service, including our AI features. You can opt out of model training at any time, free on every plan, by emailing <a href="mailto:support@appsbuiltwithai.com">support@appsbuiltwithai.com</a>.</p>
+      <p>The full Terms grant permission to host, copy, process and display content to operate and improve the service, including AI features. The <a href={APP_PRIVACY}>app Privacy Policy</a> explains that identifiable customer content is not used for general model training without permission, while anonymized or aggregated data may be used for improvement. You can request a model-training opt-out at any time, free on every plan, by emailing <a href="mailto:support@appsbuiltwithai.com">support@appsbuiltwithai.com</a>. Processing your prompt to build an app is different from model training.</p>
 
       <H2 id="ai-output">4. AI output</H2>
       <p>AI can make mistakes. Review and test what the builder makes before you rely on it, especially for anything medical, legal, financial or otherwise high-risk. Output may look like what other people get from similar prompts, and we don't guarantee it's accurate, unique or free of other people's rights.</p>
 
-      <H2 id="your-apps">5. Apps you publish</H2>
+      <H2 id="published-apps">5. Apps you publish</H2>
       <ul>
         <li>You're responsible for your apps and what they do, including having the rights and a legal basis for any data they collect from your users.</li>
         <li>Don't use your apps to collect health records, government ID numbers, card numbers or similar sensitive data unless we've agreed to it in writing.</li>
@@ -328,7 +355,7 @@ function TermsBody() {
       <ul>
         <li>Paid plans renew automatically until you cancel in your account settings.</li>
         <li>Credits pay for AI work such as building, editing and planning. Bigger jobs use more credits.</li>
-        <li>If a build ends broken, or fails because of a problem on our side, the credits it used come back automatically. A build that stops because you ran out of credits isn't refunded.</li>
+        <li>Today, if a build ends broken or fails because of a problem on our side, the credits it used go back to your balance automatically. A build that stops because you ran out of credits doesn't get them back. Returned credits aren't a cash refund.</li>
         <li>At renewal you can carry over up to one or two months' worth of your plan's credits, depending on the plan. Anything above that expires, and the Free plan doesn't roll over. See <a href="/pricing">Pricing</a> for the details of each plan.</li>
         <li>Credits have no cash value, can't be transferred, and aren't refundable except where the law requires.</li>
         <li>Payments are processed by Stripe. You're responsible for any sales tax or VAT on your purchases.</li>
@@ -350,7 +377,8 @@ function TermsBody() {
       </ul>
 
       <H2 id="termination">9. Cancelling and suspension</H2>
-      <p>You can cancel at any time from your account settings, and your remaining credits stay available until the end of the billing period. We can end an account with reasonable notice, or immediately for a serious breach, fraud, illegal activity or a security risk. If we end an account for breach or fraud, its remaining credits are lost. Deleting your account is immediate and permanent, so export your work first.</p>
+      <p>Cancelling a paid subscription and deleting your account are different actions. Cancel renewal through billing settings before deleting an account, or ask support for help. The full Terms describe access to remaining credits through the billing period after voluntary cancellation. Deleting the account removes access to its apps and credits and cannot be undone; export your work first. External files, backups and provider records may remain as described in the Privacy Policy.</p>
+      <p>We can end an account with reasonable notice, or immediately for a serious breach, fraud, illegal activity or a security risk. If we end an account for breach or fraud, its remaining credits are lost, subject to applicable law.</p>
 
       <H2 id="liability">10. Liability</H2>
       <p>The service and its AI output are provided "as is", without warranties. We aren't liable for indirect or consequential losses such as lost profits or lost data. Our total liability for any claim is limited to what you paid us in the 12 months before it arose, except where the law doesn't allow that limit. If your use of the service or your content causes a claim against us, you agree to cover our costs.</p>

@@ -64,7 +64,8 @@
     "public/site/site-images/v2/resources/prompting.png": "Replaced by prompting.webp (compressed WebP).",
     "public/site/site-images/v2/resources/shop.png": "Replaced by shop.webp (compressed WebP).",
     "public/site/site-images/v2/resources/stripe.png": "Replaced by stripe.webp (compressed WebP).",
-    "src/site/legal-page.jsx": "Legal hub rewritten to match how the product works (verified against the app repo) and to summarize the app Terms of Service."
+    "src/site/legal-page.jsx": "Legal hub rewritten to match how the product works (checked against the app repo), summarizing the app Terms of Service; tabs follow the address hash.",
+    "src/site/waitlist-flow.jsx": "Demo video opens in a native dialog with focus, Escape and backdrop handling."
   },
   "files": {
     "src/site/SiteApp.jsx": "2fb96dfc53b4685ad49da61a263eec172219f0c1eb9de979cb5323a120035dd1",

@@ -17207,3 +17207,10 @@ html,body{margin:0;padding:0}
   -webkit-text-fill-color: transparent !important;
   color: transparent !important;
 }
+
+.abw-site .demo-dialog {
+  position: fixed; inset: 0; margin: auto; padding: 0; border: 0; max-width: none; max-height: none;
+  width: min(820px, calc(100vw - 48px), calc((100dvh - 48px) * 1.777778));
+}
+.abw-site .demo-dialog::backdrop { background: rgba(20,14,30,.72); backdrop-filter: blur(6px); }
+.abw-site .demo-dialog .demo-close:focus-visible { outline: 3px solid var(--sun); outline-offset: 2px; }
