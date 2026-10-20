@@ -34,8 +34,8 @@ const authPages = { signin: '/signin', login: '/signin', signup: '/signup', forg
 
 const BRAND = 'AppsBuiltWithAI';
 const titles = {
-  '/': `${BRAND} — apps built with AI, by anyone`,
-  '/full-site': `${BRAND} — apps built with AI, by anyone`,
+  '/': `${BRAND}: Build websites & apps with AI`,
+  '/full-site': `${BRAND}: Build websites & apps with AI`,
   '/affiliate': 'Affiliate program', '/affiliate-thanks': 'Thanks for applying',
   '/certified-builders': 'Certified builders', '/changelog': 'Change log',
   '/compare': `${BRAND} vs. the alternatives`, '/embed': '"Built with" badge',
@@ -127,7 +127,7 @@ function page(title, head, body) {
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>${title}</title>
+  <title>${title.replace(/&/g, '&amp;').replace(/</g, '&lt;')}</title>
 ${head}
 </head>
 <body>
