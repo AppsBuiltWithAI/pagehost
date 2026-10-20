@@ -17195,3 +17195,15 @@ html,body{margin:0;padding:0}
 .abw-site .ct-again{margin-top:10px}
 
 .abw-site .ct-topic{white-space:nowrap;height:auto;min-height:40px}
+
+/* pagehost overrides, loaded after the upstream styles. */
+
+/* Every light-background hero headline uses the homepage gradient (.hero-b-h em) on its accent words.
+   The dark heroes on affiliate, education and summit keep their own colors. */
+.abw-site h1:not(.edu-hero-h, .summit-hero-h, .af-hero-overlay h1) em {
+  background: linear-gradient(95deg, #FF7A4D 0%, #E84A8C 48%, #9C3597 100%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  color: transparent !important;
+}

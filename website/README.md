@@ -8,6 +8,8 @@ This is the public website, built from the marketing site in the app repository.
 - `src/site/part1.jsx` and `src/site/part3.jsx`: the Resources dropdown, and the footer's Tutorials and Education links, are removed. Both pages remain at `/education` and `/resources`.
 - `../site/`: every PNG and JPG is replaced by a compressed WebP of the same name (photos and screenshots at 1400px wide). The build points image paths in the source at the WebP files and fails if any `.png` or `.jpg` reference remains.
 
+`overrides.css` holds pagehost's own style changes and loads after the upstream styles. It gives every light-background hero headline the homepage's gradient accent.
+
 The generated pages load the Google Fonts stylesheet in their HTML, so fonts download alongside `website.js` instead of after it.
 
 `entry.jsx` runs the upstream `SiteApp` on static hosting. Sign in, sign up and password reset go to https://app.appsbuiltwithai.com. Paths that are not site routes load as separate pages, so `waitlist-landing.html` keeps its own pagehost version with tracking and the live counter.

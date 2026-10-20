@@ -165,7 +165,8 @@ async function main() {
   const layout = fs.readFileSync(path.join(siteDir, 'SiteLayout.jsx'), 'utf8');
   const styles = [...layout.matchAll(/^import '\.\/(styles\/[^']+\.css)';$/gm)].map(match => match[1]);
   const css = 'html,body{margin:0;padding:0}\n' +
-    styles.map(name => fs.readFileSync(path.join(siteDir, name), 'utf8')).join('\n');
+    styles.map(name => fs.readFileSync(path.join(siteDir, name), 'utf8')).join('\n') + '\n' +
+    fs.readFileSync(path.join(root, 'website/overrides.css'), 'utf8');
 
   fs.writeFileSync(path.join(root, 'website.js'), javascript);
   fs.writeFileSync(path.join(root, 'website.css'), css);
