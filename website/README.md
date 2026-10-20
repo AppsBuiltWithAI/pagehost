@@ -2,7 +2,7 @@ This is the public website, built from the marketing site in the app repository.
 
 `src/` and `../site/` are copied unchanged from `src/site`, `src/config/importSources.js` and `public/site` in `funnelactive/appsbuiltwithaiapp`. `upstream.json` records the revision and the hash of every copied file. The build rejects any copied file that no longer matches, apart from the modifications listed there:
 
-- `src/site/part1.jsx`: the October 21-23 summit banner replaces the Import banner, and Import projects is removed from the Features menu.
+- `src/site/part1.jsx`: the October 20-23 buildathon banner replaces the Import banner, and Import projects is removed from the Features menu.
 - `src/site/use-cases-page.jsx` and `../site/site-images/v2/use-cases/`: new screenshots for the six use cases, as 1400px WebP files, replace the original JPGs. The jump chips use 112px `-thumb.webp` versions.
 - `src/site/styles/use-cases.css`: the use case image frames match the screenshots' 1400x788 shape instead of cropping them to 5:4.
 - `src/site/part1.jsx` and `src/site/part3.jsx`: the Resources dropdown, and the footer's Tutorials and Education links, are removed. Both pages remain at `/education` and `/resources`.

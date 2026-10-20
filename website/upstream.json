@@ -8,7 +8,7 @@
     "public/site": "site"
   },
   "modified": {
-    "src/site/part1.jsx": "Summit banner replaces the Import banner, Import projects is removed from the Features menu, and the Resources dropdown (Education, Tutorials) is removed.",
+    "src/site/part1.jsx": "Buildathon banner (Oct 20-23) replaces the Import banner, Import projects is removed from the Features menu, and the Resources dropdown (Education, Tutorials) is removed.",
     "src/site/use-cases-page.jsx": "Use case images point to the new WebP screenshots, with small thumbnails for the jump chips and fixed dimensions.",
     "public/site/site-images/v2/use-cases/usecase-consultants.jpg": "Replaced by usecase-consultants.webp (compressed WebP).",
     "public/site/site-images/v2/use-cases/usecase-creators.jpg": "Replaced by usecase-creators.webp (compressed WebP).",
