@@ -8,7 +8,14 @@
     "public/site": "site"
   },
   "modified": {
-    "src/site/part1.jsx": "Summit banner replaces the Import banner, and Import projects is removed from the Features menu."
+    "src/site/part1.jsx": "Summit banner replaces the Import banner, and Import projects is removed from the Features menu.",
+    "src/site/use-cases-page.jsx": "Use case images point to the new WebP screenshots.",
+    "public/site/site-images/v2/use-cases/usecase-consultants.jpg": "Replaced by usecase-consultants.webp.",
+    "public/site/site-images/v2/use-cases/usecase-creators.jpg": "Replaced by usecase-creators.webp.",
+    "public/site/site-images/v2/use-cases/usecase-founders.jpg": "Replaced by usecase-founders.webp.",
+    "public/site/site-images/v2/use-cases/usecase-local.jpg": "Replaced by usecase-local.webp.",
+    "public/site/site-images/v2/use-cases/usecase-sellers.jpg": "Replaced by usecase-sellers.webp.",
+    "public/site/site-images/v2/use-cases/usecase-studios.jpg": "Replaced by usecase-studios.webp."
   },
   "files": {
     "src/site/SiteApp.jsx": "2fb96dfc53b4685ad49da61a263eec172219f0c1eb9de979cb5323a120035dd1",

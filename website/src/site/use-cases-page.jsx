@@ -9,7 +9,7 @@ const UC_CASES = [
   { id: "community", icon: "🎪", tone: "rose", who: "Creators & communities", t: "Own your audience", d: "Event pages, member directories, paid newsletters, and RSVPs: a home for your people that isn't rented from an algorithm.", apps: ["Events + RSVP", "Member directory", "Paid newsletter"], quote: "Our meetup outgrew the Facebook group.", by: "Leo · community organizer" },
 ];
 
-const UC_IMG = {"consult":"/site/site-images/v2/use-cases/usecase-consultants.jpg","community":"/site/site-images/v2/use-cases/usecase-creators.jpg","saas":"/site/site-images/v2/use-cases/usecase-founders.jpg","local":"/site/site-images/v2/use-cases/usecase-local.jpg","commerce":"/site/site-images/v2/use-cases/usecase-sellers.jpg","studios":"/site/site-images/v2/use-cases/usecase-studios.jpg"};
+const UC_IMG = {"consult":"/site/site-images/v2/use-cases/usecase-consultants.webp","community":"/site/site-images/v2/use-cases/usecase-creators.webp","saas":"/site/site-images/v2/use-cases/usecase-founders.webp","local":"/site/site-images/v2/use-cases/usecase-local.webp","commerce":"/site/site-images/v2/use-cases/usecase-sellers.webp","studios":"/site/site-images/v2/use-cases/usecase-studios.webp"};
 
 function UseCasesPage() {
   return (

@@ -3,6 +3,7 @@ This is the public website, built from the marketing site in the app repository.
 `src/` and `../site/` are copied unchanged from `src/site`, `src/config/importSources.js` and `public/site` in `funnelactive/appsbuiltwithaiapp`. `upstream.json` records the revision and the hash of every copied file. The build rejects any copied file that no longer matches, apart from the modifications listed there:
 
 - `src/site/part1.jsx`: the October 21-23 summit banner replaces the Import banner, and Import projects is removed from the Features menu.
+- `src/site/use-cases-page.jsx` and `../site/site-images/v2/use-cases/`: new screenshots for the six use cases, as 1400px WebP files, replace the original JPGs.
 
 `entry.jsx` runs the upstream `SiteApp` on static hosting. Sign in, sign up and password reset go to https://app.appsbuiltwithai.com. Paths that are not site routes load as separate pages, so `waitlist-landing.html` keeps its own pagehost version with tracking and the live counter.
 
