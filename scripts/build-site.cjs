@@ -49,6 +49,11 @@ function titleFor(route) {
 // Account links go straight to the app so they work without the client router.
 const linkTargets = new Set();
 const routing = /[\\/](SiteApp|SiteLayout)\.jsx$/;
+function webpUrl(value) {
+  const url = value.replace(/\.(png|jpe?g)$/i, '.webp');
+  if (!fs.existsSync(path.join(root, url))) throw new Error(`No WebP version of ${value}`);
+  return url;
+}
 function appUrl(value) {
   const [, pathname] = value.match(/^([^?#]*)/);
   if (!['/signup', '/signin', '/login'].includes(pathname)) return value;
@@ -74,11 +79,20 @@ function staticLinks() {
     return target?.type === 'MemberExpression' && target.property.name === 'href' &&
       target.object.type === 'MemberExpression' && target.object.property.name === 'location';
   }
+  // Images are served as WebP; paths may also be built as "/site/.../" + id + ".png".
+  function builtFromSite(nodePath) {
+    let left = nodePath.parent;
+    if (left?.type !== 'BinaryExpression' || left.right !== nodePath.node) return false;
+    while (left.type === 'BinaryExpression') left = left.left;
+    return left.type === 'StringLiteral' && left.value.startsWith('/site/');
+  }
   // Pages also keep account URLs in variables and lookup tables, so every account string is rewritten.
   // SiteApp and SiteLayout compare paths for routing and stay untouched.
   return { visitor: {
     StringLiteral(nodePath, state) {
-      const { value } = nodePath.node;
+      let { value } = nodePath.node;
+      if (/^\.(png|jpe?g)$/i.test(value) && builtFromSite(nodePath)) nodePath.node.value = '.webp';
+      if (/^\/site\/.*\.(png|jpe?g)$/i.test(value)) value = nodePath.node.value = webpUrl(value);
       if (!value.startsWith('/')) return;
       if (usesUrl(nodePath)) linkTargets.add(value);
       if (!routing.test(state.filename)) nodePath.node.value = appUrl(value);
@@ -135,6 +149,8 @@ async function main() {
     },
   });
   const javascript = result.outputFiles[0].contents;
+  const leftover = Buffer.from(javascript).toString().match(/\/site\/[^"'`]*\.(png|jpe?g)\b|["'`]\.(png|jpe?g)["'`]/gi);
+  if (leftover) throw new Error(`Images not mapped to WebP: ${[...new Set(leftover)].join(', ')}`);
 
   const layout = fs.readFileSync(path.join(siteDir, 'SiteLayout.jsx'), 'utf8');
   const styles = [...layout.matchAll(/^import '\.\/(styles\/[^']+\.css)';$/gm)].map(match => match[1]);
@@ -146,8 +162,11 @@ async function main() {
 
   // Each route gets its own file so GitHub Pages serves /education, /about and the rest directly.
   const version = sha256(Buffer.concat([Buffer.from(javascript), Buffer.from(css)])).slice(0, 12);
+  // Load SiteLayout's fonts from the HTML so they download alongside the bundle; SiteLayout skips its own copy.
+  const fontHref = layout.match(/const FONT_HREF =\s*'([^']+)'/)[1].replace(/&/g, '&amp;');
   const head = `  <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link id="abw-site-fonts" rel="stylesheet" href="${fontHref}" />
   <link rel="stylesheet" href="/website.css?v=${version}" />
   <script src="/website.js?v=${version}" defer></script>`;
   for (const route of pageRoutes) {

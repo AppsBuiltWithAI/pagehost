@@ -5,6 +5,10 @@ This is the public website, built from the marketing site in the app repository.
 - `src/site/part1.jsx`: the October 21-23 summit banner replaces the Import banner, and Import projects is removed from the Features menu.
 - `src/site/use-cases-page.jsx` and `../site/site-images/v2/use-cases/`: new screenshots for the six use cases, as 1400px WebP files, replace the original JPGs. The jump chips use 112px `-thumb.webp` versions.
 - `src/site/styles/use-cases.css`: the use case image frames match the screenshots' 1400x788 shape instead of cropping them to 5:4.
+- `src/site/part1.jsx` and `src/site/part3.jsx`: the Resources dropdown, and the footer's Tutorials and Education links, are removed. Both pages remain at `/education` and `/resources`.
+- `../site/`: every PNG and JPG is replaced by a compressed WebP of the same name (photos and screenshots at 1400px wide). The build points image paths in the source at the WebP files and fails if any `.png` or `.jpg` reference remains.
+
+The generated pages load the Google Fonts stylesheet in their HTML, so fonts download alongside `website.js` instead of after it.
 
 `entry.jsx` runs the upstream `SiteApp` on static hosting. Sign in, sign up and password reset go to https://app.appsbuiltwithai.com. Paths that are not site routes load as separate pages, so `waitlist-landing.html` keeps its own pagehost version with tracking and the live counter.
 
