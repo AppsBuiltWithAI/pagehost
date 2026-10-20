@@ -1,0 +1,38 @@
+/* =========================================================
+   CAREERS page
+   ========================================================= */
+.abw-site .cr-hero{ background: var(--surface-2); padding: calc(72px * var(--pad-scale)) 0 calc(24px * var(--pad-scale)); position: relative; overflow: hidden; }
+.abw-site .cr-hero::before{ content: ""; position: absolute; top: -120px; right: -80px; width: 460px; height: 460px; border-radius: 50%; background: radial-gradient(circle, var(--mint-tint, #DBF2E7) 0%, transparent 68%); pointer-events: none; }
+.abw-site .cr-head{ position: relative; z-index: 1; }
+.abw-site .cr-head h1{ font-size: clamp(46px, 5.6vw, 76px); line-height: 1.02; letter-spacing: -.03em; margin: 14px 0 18px; }
+.abw-site .cr-head p{ font-size: 20px; line-height: 1.6; color: var(--ink-2); max-width: 620px; text-wrap: pretty; }
+.abw-site .cr-hero-btn{ margin-top: 26px; font-size: 16.5px; padding: 15px 28px; }
+
+.abw-site .cr-values-sec{ background: var(--surface-2); }
+.abw-site .cr-values{ display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 8px; }
+@media (max-width: 760px){ .abw-site .cr-values{ grid-template-columns: 1fr; } }
+.abw-site .cr-value{ background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 28px 30px; height: 100%; transition: transform .4s cubic-bezier(.2,.7,.2,1), box-shadow .4s; }
+.abw-site .cr-value:hover{ transform: translateY(-3px); box-shadow: 0 24px 48px -30px rgba(24,24,24,.3); }
+.abw-site .cr-value-icon{ display: grid; place-items: center; width: 50px; height: 50px; border-radius: 14px; background: var(--mint-tint, #DBF2E7); font-size: 24px; margin-bottom: 16px; }
+.abw-site .cr-value h3{ font-size: 20px; letter-spacing: -.015em; margin: 0 0 8px; }
+.abw-site .cr-value p{ font-size: 15.5px; color: var(--ink-2); line-height: 1.6; margin: 0; }
+
+.abw-site .cr-roles-sec{ background: var(--surface-2); padding-top: 0; }
+.abw-site .cr-roles{ display: flex; flex-direction: column; gap: 26px; margin-top: 8px; }
+.abw-site .cr-team{ font-family: var(--f-mono); font-size: 11.5px; letter-spacing: .12em; text-transform: uppercase; font-weight: 600; color: var(--ink-3); margin-bottom: 10px; }
+.abw-site .cr-role{ display: flex; align-items: center; justify-content: space-between; gap: 18px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 20px 24px; margin-bottom: 8px; text-decoration: none; color: inherit; transition: transform .3s cubic-bezier(.2,.7,.2,1), box-shadow .3s, border-color .3s; }
+.abw-site .cr-role:hover{ transform: translateX(4px); border-color: var(--coral); box-shadow: 0 16px 34px -24px rgba(24,24,24,.3); }
+.abw-site .cr-role-title{ display: block; font-size: 18px; font-weight: 700; letter-spacing: -.012em; }
+.abw-site .cr-role-meta{ display: block; font-size: 13.5px; color: var(--ink-3); margin-top: 3px; }
+.abw-site .cr-role-arrow{ color: var(--coral); display: grid; place-items: center; }
+.abw-site .cr-open-note{ margin-top: 22px; font-size: 15px; color: var(--ink-2); background: var(--surface); border: 1px dashed var(--line); border-radius: 14px; padding: 18px 22px; }
+
+.abw-site .cr-perks-sec{ background: var(--surface-2); padding-top: 0; }
+.abw-site .cr-perks-card{ display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; background: #1F1A2E; border-radius: 24px; padding: 48px 50px; }
+@media (max-width: 860px){ .abw-site .cr-perks-card{ grid-template-columns: 1fr; gap: 26px; } }
+.abw-site .cr-perks-eyebrow{ color: #FFB238; }
+.abw-site .cr-perks-card h2{ color: #FAF5EA; font-size: clamp(26px, 3vw, 38px); letter-spacing: -.022em; line-height: 1.12; margin: 12px 0 0; }
+.abw-site .cr-perks{ list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 12px 20px; }
+@media (max-width: 560px){ .abw-site .cr-perks{ grid-template-columns: 1fr; } }
+.abw-site .cr-perks li{ display: flex; align-items: center; gap: 10px; color: rgba(250,245,234,.85); font-size: 15px; }
+.abw-site .cr-perk-check{ display: grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; background: rgba(255,178,56,.18); color: #FFB238; font-size: 11px; font-weight: 800; flex-shrink: 0; }

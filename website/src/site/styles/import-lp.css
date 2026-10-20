@@ -1,0 +1,164 @@
+/* =========================================================
+   IMPORT LANDING PAGE, import.html / import-page.jsx
+   Reuses the site token set + subpage classes; only the
+   import-specific pieces live here.
+   ========================================================= */
+
+.abw-site .btn-sm{ padding: 8px 15px; font-size: 13px; }
+
+/* ---- featured GitHub row ---- */
+.abw-site .imp-lp-featured{
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin: 40px 0 18px;
+  padding: 22px 24px;
+  border-radius: 18px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  box-shadow: var(--sh-sm, 0 10px 30px -18px rgba(0,0,0,.18));
+  text-decoration: none;
+  transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease;
+}
+.abw-site .imp-lp-featured:hover{
+  transform: translateY(-2px);
+  border-color: var(--ink);
+  box-shadow: 0 22px 50px -26px rgba(0,0,0,.4);
+}
+.abw-site .imp-lp-featured-text{ flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+.abw-site .imp-lp-featured-eyebrow{
+  font-family: var(--f-mono);
+  font-size: 10.5px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--coral-deep);
+}
+.abw-site .imp-lp-featured-text strong{ font-family: var(--f-head); font-weight: 800; font-size: 21px; letter-spacing: -.02em; color: var(--ink); }
+.abw-site .imp-lp-featured-desc{ font-size: 14px; line-height: 1.5; color: var(--ink-2); max-width: 56ch; }
+.abw-site .imp-lp-featured-arrow{ color: var(--ink-3); flex-shrink: 0; transition: transform .16s ease, color .16s ease; }
+.abw-site .imp-lp-featured:hover .imp-lp-featured-arrow{ transform: translateX(4px); color: var(--coral-deep); }
+
+/* ---- source grid ---- */
+.abw-site .imp-lp-grid{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+.abw-site .imp-lp-card{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 20px;
+  border-radius: 16px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  text-decoration: none;
+  transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease;
+}
+.abw-site .imp-lp-card:hover{
+  transform: translateY(-2px);
+  border-color: var(--ink);
+  box-shadow: 0 18px 40px -24px rgba(0,0,0,.36);
+}
+.abw-site .imp-lp-card .imp-lp-glyph{ margin-bottom: 4px; }
+.abw-site .imp-lp-card-name{ font-family: var(--f-head); font-weight: 700; font-size: 17px; letter-spacing: -.01em; color: var(--ink); }
+.abw-site .imp-lp-card-desc{ font-size: 13.5px; line-height: 1.5; color: var(--ink-2); }
+
+/* ---- comes-across split ---- */
+.abw-site .imp-lp-split{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+.abw-site .imp-lp-col{
+  padding: 26px 26px 28px;
+  border-radius: 18px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+}
+.abw-site .imp-lp-col ul{ list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 14px; }
+.abw-site .imp-lp-col-head{
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.abw-site .imp-lp-col-head.ok{ color: var(--mint, #1FB295); }
+.abw-site .imp-lp-col-head.warn{ color: #9a7000; }
+
+.abw-site .imp-lp-col-clean li{ display: flex; align-items: center; gap: 12px; font-size: 15px; color: var(--ink); }
+.abw-site .imp-lp-tick{
+  width: 24px; height: 24px; border-radius: 50%;
+  display: grid; place-items: center; flex-shrink: 0;
+  background: color-mix(in srgb, var(--mint, #1FB295) 14%, transparent);
+  color: var(--mint, #1FB295);
+}
+.abw-site .imp-lp-tick svg{ width: 14px; height: 14px; }
+
+.abw-site .imp-lp-col-rebuilt li{ display: flex; gap: 12px; }
+.abw-site .imp-lp-col-rebuilt strong{ display: block; font-size: 15px; color: var(--ink); font-weight: 600; }
+.abw-site .imp-lp-col-rebuilt small{ display: block; font-size: 13px; line-height: 1.5; color: var(--ink-2); margin-top: 3px; }
+.abw-site .imp-lp-dot{
+  width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; margin-top: 6px;
+  background: #E0A938;
+  box-shadow: 0 0 0 4px color-mix(in srgb, #E0A938 18%, transparent);
+}
+
+/* ---- responsive ---- */
+@media (max-width: 860px){
+  .abw-site .imp-lp-grid{ grid-template-columns: 1fr 1fr; }
+  .abw-site .imp-lp-split{ grid-template-columns: 1fr; }
+  .abw-site .imp-lp-featured{ flex-wrap: wrap; }
+}
+@media (max-width: 560px){
+  .abw-site .imp-lp-grid{ grid-template-columns: 1fr; }
+}
+
+/* ============ refined import landing ============ */
+.abw-site .imp-lp-actions{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:28px;}
+
+/* hero */
+.abw-site .imp-lp-hero{position:relative;overflow:hidden;}
+.abw-site .imp-lp-hero > .wrap-tight{position:relative;z-index:1;}
+.abw-site .imp-lp-hero-glow{position:absolute;inset:-30% -10% auto;height:520px;pointer-events:none;background:radial-gradient(58% 70% at 50% 0%,rgba(255,110,80,.16),rgba(255,110,80,0) 70%);}
+.abw-site .imp-lp-hero::after{content:"";position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(var(--line-2) 1px,transparent 1px),linear-gradient(90deg,var(--line-2) 1px,transparent 1px);background-size:64px 64px;opacity:.4;mask-image:radial-gradient(70% 60% at 50% 10%,#000,transparent 75%);-webkit-mask-image:radial-gradient(70% 60% at 50% 10%,#000,transparent 75%);}
+.abw-site .imp-lp-hero .sub-lead{max-width:62ch;margin-left:auto;margin-right:auto;text-wrap:pretty;}
+
+/* featured GitHub anchor, dark */
+.abw-site .imp-lp-featured-dark{position:relative;overflow:hidden;background:var(--ink,#1F1A2E);border-color:transparent;padding:26px 28px;}
+.abw-site .imp-lp-featured-dark::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(70% 140% at 88% 50%,rgba(255,110,80,.22),transparent 60%);}
+.abw-site .imp-lp-featured-dark .imp-lp-glyph{background:rgba(255,255,255,.1)!important;box-shadow:none!important;}
+.abw-site .imp-lp-featured-dark .imp-lp-featured-text strong{color:#FAF5EA;}
+.abw-site .imp-lp-featured-dark .imp-lp-featured-desc{color:rgba(250,245,234,.72);}
+.abw-site .imp-lp-featured-dark .imp-lp-featured-eyebrow{color:#FF8E6E;}
+.abw-site .imp-lp-featured-dark .imp-lp-featured-arrow{color:rgba(250,245,234,.6);position:relative;z-index:1;}
+.abw-site .imp-lp-featured-dark:hover{border-color:transparent;box-shadow:0 28px 60px -28px rgba(31,26,46,.6);}
+.abw-site .imp-lp-featured-dark:hover .imp-lp-featured-arrow{color:#FF8E6E;}
+
+/* source cards */
+.abw-site .imp-lp-sources .imp-lp-grid{margin-top:14px;}
+.abw-site .imp-lp-card{position:relative;overflow:hidden;}
+.abw-site .imp-lp-card::before{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:var(--acc,var(--coral));opacity:0;transition:opacity .16s ease;}
+.abw-site .imp-lp-card:hover::before{opacity:1;}
+.abw-site .imp-lp-card:hover{border-color:var(--line);box-shadow:0 20px 44px -26px color-mix(in oklab,var(--acc,#000) 55%,transparent);}
+.abw-site .imp-lp-card-desc{text-wrap:pretty;}
+
+/* comes-across */
+.abw-site .imp-lp-across{background:var(--surface-2);border-top:1px solid var(--line-2);border-bottom:1px solid var(--line-2);}
+.abw-site .imp-lp-col{position:relative;background:var(--surface);}
+.abw-site .imp-lp-col-clean{background:linear-gradient(180deg,color-mix(in oklab,var(--mint,#1FB295) 7%,var(--surface)),var(--surface) 60%);}
+.abw-site .imp-lp-col-rebuilt{background:linear-gradient(180deg,rgba(224,169,56,.09),var(--surface) 60%);}
+.abw-site .imp-lp-col-head{margin-bottom:20px;padding-bottom:14px;border-bottom:1px solid var(--line-2);}
+
+/* trust */
+.abw-site .imp-lp-trust .hiw-agent{transition:transform .16s ease,box-shadow .16s ease;}
+.abw-site .imp-lp-trust .hiw-agent:hover{transform:translateY(-2px);box-shadow:0 20px 44px -28px rgba(0,0,0,.35);}
+
+/* final CTA panel */
+.abw-site .imp-lp-final-panel{position:relative;overflow:hidden;border:1px solid var(--line);border-radius:26px;background:var(--surface);padding:clamp(40px,6vw,72px) clamp(24px,5vw,64px);}
+.abw-site .imp-lp-final-panel::before{content:"";position:absolute;inset:auto -20% -60% ;height:340px;pointer-events:none;background:radial-gradient(50% 70% at 50% 100%,rgba(255,110,80,.16),transparent 70%);}
+.abw-site .imp-lp-final-panel > *{position:relative;z-index:1;}

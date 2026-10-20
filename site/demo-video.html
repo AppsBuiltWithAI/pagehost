@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex" />
+  <title>AppsBuiltWithAI demo</title>
+  <style>html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#1F1A2E} .voomly-embed{width:100%;height:100%;background:linear-gradient(45deg,rgb(142,150,164),rgb(201,208,222));border-radius:10px}</style>
+</head>
+<body>
+  <div class="voomly-embed" data-id="XZFBdJqc2vKIm3RAkEVMr8dGCFyRzCHy3wpUBp5EcbqOkBpIc" data-ratio="1.777778" data-type="v" data-skin-color="rgba(170,84,244,1)" data-shadow=""></div>
+  <script>
+    if (window.top === window) {
+      window.location.replace('/');
+    } else {
+      window.addEventListener('keydown', event => {
+        if (event.key === 'Escape') window.parent.postMessage({ type: 'abw-demo-close' }, '*');
+      }, true);
+      const player = document.createElement('script');
+      player.src = 'https://embed.voomly.com/embed/embed-build.js';
+      document.body.appendChild(player);
+    }
+  </script>
+</body>
+</html>

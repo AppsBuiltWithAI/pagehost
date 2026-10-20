@@ -1,2 +1,3 @@
-homepage/source/** text eol=lf
-homepage/config/** text eol=lf
+# Upstream snapshot: keep bytes identical so the build hash check holds.
+website/src/** -text
+site/** -text

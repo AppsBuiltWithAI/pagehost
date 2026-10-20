@@ -1,11 +1,15 @@
 {
-  "name": "pagehost-homepage",
+  "name": "pagehost-website",
   "private": true,
   "scripts": {
-    "build": "node scripts/build-homepage.cjs",
-    "preview": "python -m http.server 4175 --bind 127.0.0.1"
+    "build": "node scripts/build-site.cjs",
+    "preview": "node scripts/preview.cjs"
   },
   "devDependencies": {
-    "@babel/standalone": "7.29.0"
+    "@babel/standalone": "7.29.0",
+    "esbuild": "0.25.12",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "react-router-dom": "7.18.4"
   }
 }
