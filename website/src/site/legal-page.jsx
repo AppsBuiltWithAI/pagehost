@@ -4,7 +4,6 @@ import { Reveal } from './part1.jsx';
 /* ============= LEGAL HUB: Privacy / Cookie / Concerns / Terms ============= */
 
 const FULL_TERMS = "https://app.appsbuiltwithai.com/terms";
-const APP_PRIVACY = "https://app.appsbuiltwithai.com/privacy";
 
 const LEGAL_TABS = [
   { id: "privacy", label: "Privacy Policy", updated: "October 20, 2026", href: "/legal#privacy", h: "Privacy Policy", em: "Your data stays yours." },
@@ -17,13 +16,13 @@ const PLAIN_ENGLISH = {
   privacy:  "We collect account information, what you type and build, and usage and security data. Building an app sends relevant content to our AI and hosting providers. Card details stay with Stripe. We don't sell your data. You can download your data or delete your account from Settings.",
   cookie:   "The builder uses a sign-in cookie and PostHog to count page views and feature use. It doesn't record your screen and has no ad trackers. Our main page at appsbuiltwithai.com and our waitlist page use advertising and analytics tags (Meta Pixel, Google Analytics, Vaudit). Below is each one and how to switch it off.",
   concerns: "Passwords are hashed, and connected-account keys are encrypted. Found a security issue? Email security@appsbuiltwithai.com with steps to reproduce it. Please use accounts you own and avoid accessing other people's data or disrupting the service.",
-  terms:    "You own what you build. Use the platform legally and check AI output before you rely on it. Credits pay for AI work and aren't refundable as cash. You're responsible for the apps you publish and the people who use them. Our liability is capped at what you paid us in the last 12 months, and Georgia law applies. This is a summary: the full Terms of Service are the binding version.",
+  terms:    "You own what you build. Use the platform legally and check AI output before you rely on it. Credits pay for AI work, and a build that ends broken gets its credits back automatically. Credits aren't refundable as cash. You're responsible for the apps you publish and the people who use them. Our liability is capped at what you paid us in the last 12 months, and Georgia law applies. This is a summary: the full Terms of Service are the binding version.",
 };
 
 const LEGAL_TOC = {
   privacy: [["who-we-are", "Who we are"], ["what-we-collect", "What we collect"], ["your-apps", "Your apps and their visitors"], ["ai-training", "AI and your data"], ["how-we-use", "Purposes and legal bases"], ["who-we-share", "Who we share with"], ["where-stored", "Where your data lives"], ["retention", "How long we keep it"], ["your-rights", "Your rights"], ["children", "Children"], ["contact", "Changes and contact"]],
   cookie: [["what-cookies", "What we mean by cookies"], ["essential", "Sign-in and preferences"], ["analytics", "Product analytics"], ["advertising", "Advertising and measurement"], ["other-services", "Other services on our pages"], ["manage", "Managing cookies"]],
-  concerns: [["protect", "How we protect you"], ["report", "How to report"], ["response", "What happens next"], ["rewards", "Thanks and rewards"], ["scope", "What's in scope"], ["research", "Responsible research"]],
+  concerns: [["protect", "How we protect you"], ["report", "How to report"], ["response", "What happens next"], ["scope", "What's in scope"], ["research", "Responsible research"]],
   terms: [["agreement", "The agreement"], ["account", "Your account"], ["ownership", "Who owns what"], ["ai-output", "AI output"], ["published-apps", "Apps you publish"], ["providers", "Connected services"], ["payments", "Plans, credits & payment"], ["acceptable", "What you can't do"], ["termination", "Cancelling and suspension"], ["liability", "Liability"], ["copyright", "Copyright"], ["law", "Governing law & contact"]],
 };
 
@@ -76,8 +75,8 @@ function LegalPage() {
               : <h1 className="serif">The fine print, <em>in big print.</em></h1>}
             <p className="sub-lead">
               We wrote this to be read, not skimmed past. Every tab starts
-              with a plain-English summary, and the app's full policies are
-              linked wherever they go into more detail.
+              with a plain-English summary, and the Terms tab links to the
+              full Terms of Service.
             </p>
           </Reveal>
           <Reveal delay={120}>
@@ -140,9 +139,9 @@ function H2({ children, id }) { return <h2 id={id}>{children}</h2>; }
 function PrivacyBody() {
   return (
     <>
-      <p>This notice explains our marketing pages and how the builder handles your data. Your builder account is also covered by the <a href={APP_PRIVACY}>app Privacy Policy</a> linked during signup.</p>
+      <p>This notice explains how our marketing pages and the builder handle your data.</p>
       <H2 id="who-we-are">1. Who we are</H2>
-      <p>AppsBuiltWithAI is run by Miestro, Inc., d/b/a AppsBuiltWithAI, a Georgia corporation at 3355 Lennox Road Northeast, Suite 750, Atlanta, Georgia 30326. This website notice covers appsbuiltwithai.com and pages.appsbuiltwithai.com. Details about the builder are an overview of the account practices covered by the app Privacy Policy.</p>
+      <p>AppsBuiltWithAI is run by Miestro, Inc., d/b/a AppsBuiltWithAI, a Georgia corporation at 3355 Lennox Road Northeast, Suite 750, Atlanta, Georgia 30326. This notice covers our websites (appsbuiltwithai.com and pages.appsbuiltwithai.com) and the builder at app.appsbuiltwithai.com.</p>
 
       <H2 id="what-we-collect">2. What we collect</H2>
       <ul>
@@ -162,7 +161,7 @@ function PrivacyBody() {
       <H2 id="ai-training">4. AI and your data</H2>
       <p>To build and check your app, the builder sends relevant prompts, conversation history, attached content and app code to its configured AI provider. Anthropic is the default provider. Its commercial API does not use inputs and outputs for model training by default; different terms can apply if data use is explicitly enabled.</p>
       <p>If image or video generation is available and you use it, prompts are also sent through KIE.ai to the selected image or video model. Other configured AI services may have different data-handling terms. Contact us if you need to confirm which providers will receive your content before using a feature.</p>
-      <p>As described in the <a href={APP_PRIVACY}>app Privacy Policy</a>, we may use anonymized or aggregated data to improve AI features. Identifiable customer content is not used for general model training without permission. You can request an account-level model-training opt-out at <a href="mailto:support@appsbuiltwithai.com">support@appsbuiltwithai.com</a>, free on every plan. Processing a prompt to produce a response is different from training a model.</p>
+      <p>We may use anonymized or aggregated data to improve AI features. Identifiable customer content is not used for general model training without permission. You can request an account-level model-training opt-out at <a href="mailto:support@appsbuiltwithai.com">support@appsbuiltwithai.com</a>, free on every plan. Processing a prompt to produce a response is different from training a model.</p>
       <p>Please don't put sensitive data into the builder, such as health records, government ID numbers or payment card numbers.</p>
 
       <H2 id="how-we-use">5. Purposes and legal bases</H2>
@@ -175,7 +174,7 @@ function PrivacyBody() {
         <li>To understand how the product is used and improve it.</li>
         <li>To meet our legal obligations.</li>
       </ul>
-      <p>The app Privacy Policy identifies contract, legitimate interests, consent and legal obligations as the bases that apply to different processing activities. Where UK or EU data protection law applies, providing requested account, building, hosting and billing services relies on contract. Securing and improving the service, preventing abuse and providing support rely on legitimate interests where appropriate, subject to your rights. Optional marketing and tracking require consent where the law requires it; legal obligations cover tax, accounting and other required records. Our legitimate interests are operating and improving a reliable service and protecting users and the business. You can object to processing based on legitimate interests or withdraw consent by contacting us. Withdrawal does not affect processing that was lawful before you withdrew it.</p>
+      <p>We rely on contract, legitimate interests, consent and legal obligations as the bases for different processing activities. Where UK or EU data protection law applies, providing requested account, building, hosting and billing services relies on contract. Securing and improving the service, preventing abuse and providing support rely on legitimate interests where appropriate, subject to your rights. Optional marketing and tracking require consent where the law requires it; legal obligations cover tax, accounting and other required records. Our legitimate interests are operating and improving a reliable service and protecting users and the business. You can object to processing based on legitimate interests or withdraw consent by contacting us. Withdrawal does not affect processing that was lawful before you withdrew it.</p>
       <p>Account and billing information needed to provide a requested service must be supplied to use that service. Optional marketing choices do not determine whether you can create an account or buy a plan.</p>
 
       <H2 id="who-we-share">6. Who we share data with</H2>
@@ -221,7 +220,7 @@ function PrivacyBody() {
       <p>The services are intended for adults. Under the full Terms, someone under 18 needs a parent or legal guardian's consent. If we learn that we collected personal data from a minor without appropriate consent, we will delete it. Contact us if you believe a minor's information has been provided without that consent.</p>
 
       <H2 id="contact">11. Changes and contact</H2>
-      <p>We update the date when this notice changes. As stated in the app Privacy Policy, material changes receive at least 30 days' notice by email or in the app before they take effect. Questions or requests: <a href="mailto:privacy@appsbuiltwithai.com">privacy@appsbuiltwithai.com</a>, or by mail to Miestro, Inc. / AppsBuiltWithAI, 3355 Lennox Road Northeast, Suite 750, Atlanta, Georgia 30326.</p>
+      <p>We update the date when this notice changes. Material changes receive at least 30 days' notice by email or in the app before they take effect. Questions or requests: <a href="mailto:privacy@appsbuiltwithai.com">privacy@appsbuiltwithai.com</a>, or by mail to Miestro, Inc. / AppsBuiltWithAI, 3355 Lennox Road Northeast, Suite 750, Atlanta, Georgia 30326.</p>
     </>
   );
 }
@@ -296,10 +295,7 @@ function ConcernsBody() {
         <li><strong>Disclosure</strong>: please coordinate publication with us so users can be protected while an issue is assessed and fixed.</li>
       </ul>
 
-      <H2 id="rewards">4. Thanks and rewards</H2>
-      <p>We don't run a paid bug bounty program right now. With your permission, we'll credit you publicly for valid reports, and we may offer a reward for significant findings at our discretion.</p>
-
-      <H2 id="scope">5. What's in scope</H2>
+      <H2 id="scope">4. What's in scope</H2>
       <p>In scope: appsbuiltwithai.com, pages.appsbuiltwithai.com, app.appsbuiltwithai.com, and flaws in our platform that affect apps hosted with us.</p>
       <p>Out of scope:</p>
       <ul>
@@ -311,7 +307,7 @@ function ConcernsBody() {
         <li>Problems in third-party services we use (report them to that company) and bugs in the code of an app someone built with us (report them to the app's owner).</li>
       </ul>
 
-      <H2 id="research">6. Responsible research</H2>
+      <H2 id="research">5. Responsible research</H2>
       <p>Please limit testing to accounts and data you own, avoid disruption, and stop if you encounter someone else's information. A disclosure policy does not authorize access to third-party systems or another user's data. Contact us before testing if you need written authorization or clarification of scope.</p>
     </>
   );
@@ -320,7 +316,7 @@ function ConcernsBody() {
 function TermsBody() {
   return (
     <>
-      <p>This is a plain-English summary of our <a href={FULL_TERMS}>Terms of Service</a>. The full Terms are the binding agreement, and they apply if anything here differs.</p>
+      <p>This is a plain-English summary of our <a href={FULL_TERMS}>Terms of Service</a>. The full Terms are the binding agreement, and they apply if anything here differs, except the automatic credit return in section 7, which we apply in addition to them.</p>
 
       <H2 id="agreement">1. The agreement</H2>
       <p>The agreement is between you and Miestro, Inc., d/b/a AppsBuiltWithAI. By creating an account or using AppsBuiltWithAI, you agree to the Terms. If we make a material change, we'll give you at least 30 days' notice by email or in the app before it takes effect, unless the law or an urgent security issue needs a shorter period.</p>
@@ -335,7 +331,7 @@ function TermsBody() {
 
       <H2 id="ownership">3. Who owns what</H2>
       <p>You own what you put in and what the builder makes for you: your prompts, your files, your apps and the AI output, subject to any rights that third parties have in them. We own the AppsBuiltWithAI platform and the usage data it generates.</p>
-      <p>The full Terms grant permission to host, copy, process and display content to operate and improve the service, including AI features. The <a href={APP_PRIVACY}>app Privacy Policy</a> explains that identifiable customer content is not used for general model training without permission, while anonymized or aggregated data may be used for improvement. You can request a model-training opt-out at any time, free on every plan, by emailing <a href="mailto:support@appsbuiltwithai.com">support@appsbuiltwithai.com</a>. Processing your prompt to build an app is different from model training.</p>
+      <p>The full Terms grant permission to host, copy, process and display content to operate and improve the service, including AI features. Identifiable customer content is not used for general model training without permission, while anonymized or aggregated data may be used for improvement. You can request a model-training opt-out at any time, free on every plan, by emailing <a href="mailto:support@appsbuiltwithai.com">support@appsbuiltwithai.com</a>. Processing your prompt to build an app is different from model training.</p>
 
       <H2 id="ai-output">4. AI output</H2>
       <p>AI can make mistakes. Review and test what the builder makes before you rely on it, especially for anything medical, legal, financial or otherwise high-risk. Output may look like what other people get from similar prompts, and we don't guarantee it's accurate, unique or free of other people's rights.</p>
@@ -355,7 +351,7 @@ function TermsBody() {
       <ul>
         <li>Paid plans renew automatically until you cancel in your account settings.</li>
         <li>Credits pay for AI work such as building, editing and planning. Bigger jobs use more credits.</li>
-        <li>Today, if a build ends broken or fails because of a problem on our side, the credits it used go back to your balance automatically. A build that stops because you ran out of credits doesn't get them back. Returned credits aren't a cash refund.</li>
+        <li><strong>Automatic credit return</strong>: if a build ends broken, or fails because of a problem on our side, the credits it used go back to your balance automatically. A build that stops because you ran out of credits doesn't get them back. Returned credits aren't a cash refund. This return applies in addition to the full Terms.</li>
         <li>At renewal you can carry over up to one or two months' worth of your plan's credits, depending on the plan. Anything above that expires, and the Free plan doesn't roll over. See <a href="/pricing">Pricing</a> for the details of each plan.</li>
         <li>Credits have no cash value, can't be transferred, and aren't refundable except where the law requires.</li>
         <li>Payments are processed by Stripe. You're responsible for any sales tax or VAT on your purchases.</li>

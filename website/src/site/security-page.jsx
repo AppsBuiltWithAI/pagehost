@@ -132,27 +132,21 @@ function SecurityPage() {
         </div>
       </section>
 
-      {/* Bug bounty */}
+      {/* Vulnerability reports */}
       <section className="pad pt-0">
         <div className="wrap-tight">
           <Reveal>
             <div className="sec-bounty">
-              <div className="sec-bounty-eyebrow">Bug bounty</div>
-              <h2 className="serif">Found a <em>flaw?</em><br/> We'll thank you (and pay you).</h2>
+              <div className="sec-bounty-eyebrow">Report a vulnerability</div>
+              <h2 className="serif">Found a <em>flaw?</em><br/> Tell us.</h2>
               <p>
-                We pay $500 to $10,000 for vulnerabilities, scaling with impact.
-                Critical issues get same-day acknowledgement and a credit on
-                this page if you'd like.
+                Email security@appsbuiltwithai.com with the page or feature
+                affected and the steps to reproduce it. Please only test with
+                accounts you own.
               </p>
               <div className="sec-bounty-actions">
                 <a className="btn btn-coral" href="mailto:security@appsbuiltwithai.com">Report a vulnerability <ArrowRight/></a>
-                <a className="btn btn-outline" href="/legal#concerns">Read the rules</a>
-              </div>
-              <div className="sec-bounty-hall">
-                <span>2026 Hall of Thanks:</span>
-                {["@maya_h", "@n00n", "@oleksiy.k", "@ravi.s", "@thelinkerd", "@flora"].map(h => (
-                  <span key={h} className="sec-thanks-chip">{h}</span>
-                ))}
+                <a className="btn btn-outline" href="/legal#concerns">Read the details</a>
               </div>
             </div>
           </Reveal>
