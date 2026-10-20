@@ -27,8 +27,9 @@ const allRoutes = [...siteApp.matchAll(/path="([^"]+)"/g)]
   .map(match => match[1]).filter(route => route !== '*');
 // The waitlist landing page keeps its own pagehost version with tracking and the live counter.
 const ownPages = new Set(['/waitlist-landing']);
-// Upstream pages the public site doesn't publish: the status page showed mocked uptime.
-const unpublished = new Set(['/status']);
+// Upstream pages the public site doesn't publish (yet). Status showed mocked uptime;
+// changelog and roadmap are hidden for now and may come back.
+const unpublished = new Set(['/status', '/changelog', '/roadmap']);
 const redirectRoutes = new Set(['/login', '/waitlist-site']);
 const siteRoutes = allRoutes.filter(route => !ownPages.has(route) && !unpublished.has(route));
 const pageRoutes = siteRoutes.filter(route => !redirectRoutes.has(route));
@@ -51,6 +52,8 @@ function titleFor(route) {
 // Account links go straight to the app so they work without the client router.
 const linkTargets = new Set();
 const routing = /[\\/](SiteApp|SiteLayout)\.jsx$/;
+// Links inside unpublished pages (roadmap-page.jsx and so on) are never shown, so they aren't checked.
+const unpublishedFiles = new RegExp('[\\\\/](' + [...unpublished].map(route => route.slice(1)).join('|') + ')-page\\.jsx$');
 function webpUrl(value) {
   const url = value.replace(/\.(png|jpe?g)$/i, '.webp');
   if (!fs.existsSync(path.join(root, url))) throw new Error(`No WebP version of ${value}`);
@@ -106,13 +109,13 @@ function staticLinks({ types: t }) {
       if (/^\.(png|jpe?g)$/i.test(value) && builtFromSite(nodePath)) nodePath.node.value = '.webp';
       if (/^\/site\/.*\.(png|jpe?g)$/i.test(value)) value = nodePath.node.value = webpUrl(value);
       if (!value.startsWith('/')) return;
-      if (usesUrl(nodePath)) linkTargets.add(value);
+      if (usesUrl(nodePath) && !unpublishedFiles.test(state.filename)) linkTargets.add(value);
       if (!routing.test(state.filename)) nodePath.node.value = appUrl(value);
     },
     TemplateLiteral(nodePath, state) {
       const first = nodePath.node.quasis[0];
       if (!first.value.cooked.startsWith('/')) return;
-      if (usesUrl(nodePath)) linkTargets.add(first.value.cooked);
+      if (usesUrl(nodePath) && !unpublishedFiles.test(state.filename)) linkTargets.add(first.value.cooked);
       if (!routing.test(state.filename)) first.value.cooked = first.value.raw = appUrl(first.value.cooked);
     },
   } };

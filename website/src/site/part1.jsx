@@ -166,7 +166,7 @@ function Nav({ ctaLabel, onCta, hidePricing, hideSignIn, hideCta, bare }) {
       <a className="topbar" href="https://appsbuiltwithai.com/join">
         <span className="topbar-tag">Oct 20-23</span>
         <span className="topbar-text">Through Friday evening</span>
-        <span className="topbar-cta">Join the buildathon! <span aria-hidden="true">→</span></span>
+        <span className="topbar-cta">Join the Build-A-Thon! <span aria-hidden="true">→</span></span>
       </a>
       <div className="nav-wrap">
       <div className="wrap nav">

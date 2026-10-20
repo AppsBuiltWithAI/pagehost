@@ -8,11 +8,13 @@ This is the public website, built from the marketing site in the app repository.
 - `src/site/part1.jsx` and `src/site/part3.jsx`: the Resources dropdown, and the footer's Tutorials and Education links, are removed. Both pages remain at `/education` and `/resources`.
 - `src/site/legal-page.jsx`: the legal hub is rewritten to match how the product works (checked against the app repo), summarizes the app's binding Terms of Service, and follows the address so footer links and section links like `/legal#retention` open the right tab.
 - `src/site/security-page.jsx`: only practices verified in the app repo remain; the bug bounty is replaced by a plain vulnerability-report box.
-- `/status` is not published (`unpublished` in `scripts/build-site.cjs`): it showed mocked uptime. `src/site/part3.jsx` and `src/site/support-page.jsx` drop their status links and indicators.
+- `/status`, `/changelog` and `/roadmap` are not published (`unpublished` in `scripts/build-site.cjs`, so they can come back by removing them there). Status showed mocked uptime. `src/site/part3.jsx` and `src/site/support-page.jsx` drop their links and status indicators, and the footer newsletter form is commented out until it is connected to an email list.
+- `src/site/connectors-marketing-page.jsx`: connector logos load from `../site/connector-logos/` (Simple Icons SVGs, plus 64px WebP favicons for Postmark, S3, Slack, Twilio and OpenAI) instead of one outside request per logo. Add a file there when adding a connector.
+- `src/site/use-cases-page.jsx`: the bakery quote reads "We take 40% of orders through our app now."
 - `src/site/waitlist-flow.jsx`: the demo video opens in a native `<dialog>`, which handles focus, Escape and the backdrop. `../site/demo-video.html` is unchanged and still loads the Voomly player inside the sandboxed frame.
 - `../site/`: every PNG and JPG is replaced by a compressed WebP of the same name (photos and screenshots at 1400px wide). The build points image paths in the source at the WebP files and fails if any `.png` or `.jpg` reference remains.
 
-`overrides.css` holds pagehost's own style changes and loads after the upstream styles. It gives every light-background hero headline the homepage's gradient accent.
+`overrides.css` holds pagehost's own style changes and loads after the upstream styles. It gives every light-background hero headline the homepage's gradient accent, and makes the pricing page's Enterprise box one full-width column.
 
 The generated pages load the Google Fonts stylesheet in their HTML, so fonts download alongside `website.js` instead of after it.
 

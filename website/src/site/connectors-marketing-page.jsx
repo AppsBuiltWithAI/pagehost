@@ -39,7 +39,8 @@ function CnLogo({ c, className }) {
   const [err, setErr] = useCnState(false);
   const fav = CN_FAVICON[c.id];
   const s = CN_SLUG[c.id];
-  const src = fav ? "https://www.google.com/s2/favicons?domain=" + fav + "&sz=128" : s ? "https://cdn.simpleicons.org/" + s : null;
+  // Logos are served from /site/connector-logos (downloaded from Simple Icons and the brands' favicons) instead of one request per logo to outside services.
+  const src = fav ? "/site/connector-logos/" + c.id + ".webp" : s ? "/site/connector-logos/" + c.id + ".svg" : null;
   if (err || !src) return <div className={className} style={{ background: c.color }}>{c.letter}</div>;
   return <div className={className + " has-logo"}><img src={src} alt={c.name + " logo"} onError={() => setErr(true)}/></div>;
 }

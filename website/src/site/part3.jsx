@@ -309,6 +309,7 @@ function Footer({ lean, onStart }) {
           <div className="footer-brand">
             <Logo/>
             <p>The app builder for people who'd rather not become engineers.</p>
+            {/* Newsletter signup hidden until it's connected to an email list: the form doesn't send anywhere.
             {!lean && <form className="footer-news" onSubmit={(e) => { e.preventDefault(); const f = e.currentTarget; f.classList.add("done"); }}>
               <label className="footer-news-label">Get one good build idea a week</label>
               <div className="footer-news-row">
@@ -317,6 +318,7 @@ function Footer({ lean, onStart }) {
               </div>
               <span className="footer-news-ok">Thanks: see you Friday. ✦</span>
             </form>}
+            */}
           </div>
           {!lean && <><div className="footer-col">
             <h5>Product</h5>
@@ -327,8 +329,6 @@ function Footer({ lean, onStart }) {
               <li><a href="/compare">Compare</a></li>
               <li><a href="/pricing">Pricing</a></li>
               <li><a href="/connectors">Connectors</a></li>
-              <li><a href="/roadmap">Roadmap</a></li>
-              <li><a href="/changelog">Change log</a></li>
             </ul>
           </div>
           <div className="footer-col">
