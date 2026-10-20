@@ -7,9 +7,12 @@
   <meta name="robots" content="noindex" />
   <meta http-equiv="refresh" content="0; url=https://app.appsbuiltwithai.com/signin" />
   <link rel="canonical" href="https://app.appsbuiltwithai.com/signin" />
-  <script>window.location.replace("https://app.appsbuiltwithai.com/signin" + window.location.search + window.location.hash);</script>
+  <script>
+    var url = "https://app.appsbuiltwithai.com/signin" + window.location.search + window.location.hash;
+    try { (window.top !== window.self ? window.top : window).location.replace(url); } catch (error) { window.location.replace(url); }
+  </script>
 </head>
 <body>
-  <p><a href="https://app.appsbuiltwithai.com/signin">Continue to AppsBuiltWithAI</a></p>
+  <p><a href="https://app.appsbuiltwithai.com/signin" target="_top">Continue to AppsBuiltWithAI</a></p>
 </body>
 </html>

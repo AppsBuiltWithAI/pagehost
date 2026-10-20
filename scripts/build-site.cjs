@@ -59,7 +59,7 @@ function appUrl(value) {
   if (!['/signup', '/signin', '/login'].includes(pathname)) return value;
   return APP_URL + (pathname === '/login' ? '/signin' : pathname) + value.slice(pathname.length);
 }
-function staticLinks() {
+function staticLinks({ types: t }) {
   function usesUrl(nodePath) {
     // Climb through "prefix" + value, cond ? a : b and {...} to reach what uses the URL.
     let expression = nodePath;
@@ -89,6 +89,16 @@ function staticLinks() {
   // Pages also keep account URLs in variables and lookup tables, so every account string is rewritten.
   // SiteApp and SiteLayout compare paths for routing and stay untouched.
   return { visitor: {
+    // window.location.href = "/signup..." becomes window.__abwOpenApp(...), which leaves the GHL frame.
+    AssignmentExpression(nodePath) {
+      const { left, right } = nodePath.node;
+      const href = left.type === 'MemberExpression' && left.property.name === 'href' &&
+        left.object.type === 'MemberExpression' && left.object.property.name === 'location';
+      let first = right;
+      while (first.type === 'BinaryExpression') first = first.left;
+      if (!href || first.type !== 'StringLiteral' || !/^\/(signup|signin|login)\b/.test(first.value)) return;
+      nodePath.replaceWith(t.callExpression(t.memberExpression(t.identifier('window'), t.identifier('__abwOpenApp')), [right]));
+    },
     StringLiteral(nodePath, state) {
       let { value } = nodePath.node;
       if (/^\.(png|jpe?g)$/i.test(value) && builtFromSite(nodePath)) nodePath.node.value = '.webp';
@@ -181,8 +191,11 @@ async function main() {
       `  <meta name="robots" content="noindex" />
   <meta http-equiv="refresh" content="0; url=${target}" />
   <link rel="canonical" href="${target}" />
-  <script>window.location.replace(${JSON.stringify(target)} + window.location.search + window.location.hash);</script>`,
-      `  <p><a href="${target}">Continue to ${BRAND}</a></p>`));
+  <script>
+    var url = ${JSON.stringify(target)} + window.location.search + window.location.hash;
+    try { (window.top !== window.self ? window.top : window).location.replace(url); } catch (error) { window.location.replace(url); }
+  </script>`,
+      `  <p><a href="${target}" target="_top">Continue to ${BRAND}</a></p>`));
   }
 
   // Every root-relative link must reach a site route, an app page, or a static file.
