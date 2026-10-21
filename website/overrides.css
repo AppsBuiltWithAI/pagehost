@@ -24,3 +24,54 @@
 .abw-site .pp-ent-perks { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 @media (max-width: 900px) { .abw-site .pp-ent-perks { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 560px) { .abw-site .pp-ent-perks { grid-template-columns: minmax(0, 1fr); } }
+
+/* Phone layout. */
+
+/* A later upstream rule resets the footer to five columns at every width, which squeezes the
+   logo and stacks the link columns on top of each other. Restore the two-column tablet layout. */
+@media (max-width: 880px) {
+  .abw-site .footer-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .abw-site .footer-brand { grid-column: 1 / -1; }
+}
+@media (max-width: 560px) { .abw-site .footer-grid { gap: 40px 24px; padding-top: 56px; } }
+
+/* Homepage agent illustrations size to their column. Upstream pairs min-height: 340px with a
+   4/3 ratio on phones, which forces a 453px-wide box. */
+.abw-site .agent-tile > * { min-width: 0; }
+.abw-site .agent-art { grid-template-columns: minmax(0, 1fr); }
+.abw-site .agent-art .mock-card { min-width: 0; }
+@media (max-width: 720px) { .abw-site .agent-art { aspect-ratio: auto; min-height: 300px; } }
+
+/* Vision: the closing prompt sits below its heading instead of 30px over it, and the glow behind it
+   stays inside the section. */
+.abw-site .v-close-prompt .prompt-card { margin-top: 0; }
+.abw-site .v-close { overflow-x: clip; }
+
+/* Closing prompts on how it works, use cases and templates sit below their copy. Their boxes clip
+   overflow, so leave room for the "Your idea" tag above the card. */
+.abw-site .hiw2-final-box, .abw-site .uc2-final-box { padding-top: 16px; }
+.abw-site .uc2-final-box .prompt-card,
+.abw-site [data-screen-label="templates-cant-find"] .prompt-card { margin-top: 0; }
+
+/* The prompt box's Build it button drops to its own full-width row on small phones. */
+@media (max-width: 400px) {
+  .abw-site .prompt-bar { flex-wrap: wrap; }
+  .abw-site .prompt-bar > .btn { flex: 1 1 100%; justify-content: center; }
+}
+
+/* Certified builders: level tabs scroll sideways and the search takes the full row. */
+@media (max-width: 640px) {
+  .abw-site .cb-levels { max-width: 100%; overflow-x: auto; scrollbar-width: none; }
+  .abw-site .cb-lvl-b { padding: 8px 12px; }
+  .abw-site .cb-controls-r { flex: 1 1 100%; min-width: 0; }
+  .abw-site .cb-search { max-width: none; min-width: 0; }
+}
+@media (max-width: 560px) {
+  .abw-site .cert-verify { padding: 26px 22px; gap: 20px; }
+  .abw-site .cert-verify > * { min-width: 0; }
+}
+
+/* 16px stops iOS Safari zooming in when a field is focused. */
+@media (max-width: 640px) {
+  .abw-site input:not([type=checkbox]):not([type=radio]):not([type=range]), .abw-site textarea, .abw-site select { font-size: 16px; }
+}
