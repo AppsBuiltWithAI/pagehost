@@ -259,6 +259,8 @@
   grid-template-columns: 1fr 1fr;
   gap: 20px;
 }
+/* Let long code lines scroll inside their block instead of widening the page. */
+.emb-snip-grid > * { min-width: 0; }
 .emb-snip-title {
   font-family: var(--f-head);
   font-weight: 700;

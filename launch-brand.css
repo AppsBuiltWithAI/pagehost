@@ -1,0 +1,162 @@
+/* Launch pages use the original homepage's Roboto display type, gradient,
+   cream surfaces, colored bands, and layered preview treatments. */
+:root {
+  --brand-gradient: linear-gradient(95deg, #FF7A4D 0%, #E84A8C 48%, #9C3597 100%);
+  --brand-text-gradient: linear-gradient(95deg, #D65E36 0%, #C83476 48%, #9C3597 100%);
+  --brand-chip-gradient: linear-gradient(135deg, #B94B2A, #B72D6B 55%, #9C3597);
+}
+.brand-page h1, .brand-page h2, .brand-page h3 { font-family: var(--f-head); font-weight: 900; letter-spacing: -.035em; }
+.brand-page .sub-hero, .brand-page.sub-hero {
+  position: relative;
+  padding: 88px 0 68px;
+  background: radial-gradient(650px 360px at 18% 15%, rgba(255,197,61,.17), transparent 70%), radial-gradient(600px 380px at 85% 40%, rgba(232,74,140,.10), transparent 70%), var(--bg);
+}
+.brand-page .sub-hero h1, .brand-page.sub-hero h1 { font-size: clamp(44px, 6.4vw, 86px); font-weight: 900; line-height: .97; letter-spacing: -.035em; text-wrap: balance; margin-bottom: 26px; }
+.brand-page h1 em, .brand-page h2 em {
+  font-style: normal;
+  background: var(--brand-text-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+.brand-page .sub-lead { max-width: 660px; font-size: clamp(17px, 1.5vw, 20px); line-height: 1.6; }
+.brand-page .sub-hero .eyebrow, .brand-page.sub-hero .eyebrow { display: inline-flex; align-items: center; gap: 10px; color: #a63127; }
+.brand-page .sub-hero .eyebrow::before, .brand-page.sub-hero .eyebrow::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--brand-gradient); box-shadow: 0 0 0 5px rgba(232,74,140,.09); }
+.brand-page .sec-head h2 { font-size: clamp(34px, 4.2vw, 56px); line-height: 1.05; }
+.brand-page .sec-head p { font-size: 18px; line-height: 1.65; }
+.brand-page .feature-link { font-weight: 700; }
+.brand-page :is(.use-case-row, .marketing-preview-card, .launch-training, #support) .eyebrow { color: #a63127; }
+.brand-page .step-num { background: var(--brand-chip-gradient); }
+.brand-page .step-lbl { color: #AF3C30; }
+.brand-page .feature-hero-links { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; margin-top: 32px; }
+.brand-page.sub-hero .btn, .brand-page .sub-hero > .wrap-tight > .btn { margin-top: 28px; }
+
+/* Full-width feature scenes follow the original alternating agent sections. */
+.feature-overview { display: grid; gap: 36px; }
+.feature-overview-card { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 44px; padding: 48px; border-radius: var(--r-lg); border: 1px solid var(--line); background: #FBE7D3; }
+.feature-overview > .reveal:nth-child(even) .feature-overview-copy { order: 2; }
+.feature-overview-card h2 { font-size: clamp(34px, 3.9vw, 54px); line-height: 1.02; margin: 0 0 24px; }
+.feature-overview-card p { max-width: 44ch; color: var(--ink-2); font-size: 17px; }
+.feature-overview-card ul { list-style: none; padding: 0; margin: 26px 0; display: grid; gap: 10px; font-size: 15px; }
+.feature-overview-card li::before { content: "\2713"; margin-right: 12px; color: #28624f; font-weight: 800; }
+.feature-overview-card .step-tag { margin-bottom: 24px; }
+.feature-overview-card .step-lbl { font-size: 16px; }
+.feature-tone-mint { background: #E8F3ED; }
+.feature-tone-plum { background: #F0E7F4; }
+.feature-tone-sky { background: #E7F0FB; }
+.feature-overview-art { min-width: 0; padding: 30px 24px; border-radius: 24px; background: linear-gradient(135deg, #FFE7E1, #FFCFC2 60%, #FFB3A0); }
+.feature-tone-mint .feature-overview-art { background: linear-gradient(135deg, #E0F1EC, #B5E3D5 60%, #7DCFB6); }
+.feature-tone-plum .feature-overview-art { background: linear-gradient(135deg, #2A1F3D, #3a2845 50%, #5d3a83); }
+.feature-tone-sky .feature-overview-art { background: linear-gradient(135deg, #E7F0FB, #C0DAF3 65%, #93BFE9); }
+.feature-tone-plum .example-label { color: #f8e9ff; }
+.feature-overview-art img { width: 100%; height: auto; border-radius: 12px; box-shadow: 0 24px 44px -20px rgba(36,20,45,.45); transform: rotate(-2deg); }
+.feature-tone-sky .feature-overview-art img { transform: rotate(2deg); }
+.workflow-preview { overflow: hidden; border-radius: 16px; background: var(--surface); color: var(--ink); box-shadow: 0 24px 44px -20px rgba(36,20,45,.45); transform: rotate(-2deg); }
+.workflow-preview-bar { display: flex; align-items: center; gap: 5px; padding: 14px; border-bottom: 1px solid var(--line-2); }
+.workflow-preview-bar > span { width: 7px; height: 7px; border-radius: 50%; background: #E6DEC8; flex-shrink: 0; }
+.workflow-preview-bar > span:first-child { background: #FF9D8A; }
+.workflow-preview-bar > span:nth-child(2) { background: #FFC53D; }
+.workflow-preview-bar > span:nth-child(3) { background: #7DCFB6; }
+.workflow-preview-bar b { margin-left: 10px; font-size: 11px; font-weight: 500; }
+.workflow-preview-body { padding: 28px; }
+.workflow-preview-body .eyebrow { color: var(--ink-2); font-size: 10px; }
+.workflow-preview-body .workflow-preview-title { font-size: 32px; font-weight: 900; letter-spacing: -.035em; line-height: 1.05; color: var(--ink); margin: 16px 0 28px; }
+.workflow-preview-row { display: flex; gap: 12px; align-items: center; padding: 12px 0; border-top: 1px solid var(--line-2); font-size: 13px; }
+.workflow-preview-row > span { display: inline-grid; place-items: center; width: 25px; height: 25px; flex-shrink: 0; border-radius: 8px; font-size: 10px; font-family: var(--f-mono); color: #743179; background: #FBE4ED; }
+
+.marketing-preview { background: radial-gradient(800px 400px at 50% 0, rgba(255,197,61,.24), transparent 70%), #FFF1CB; border-block: 1px solid var(--line); }
+.marketing-preview .sec-head h2 { margin-top: 22px; }
+.marketing-preview-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.marketing-preview-card { position: relative; overflow: hidden; padding: 32px; border: 1px solid #dccda8; border-radius: var(--r); background: #fff9ee; box-shadow: 0 18px 36px -28px rgba(77,45,12,.3); }
+.marketing-preview-card:nth-child(2) { background: #FBE4ED; }
+.marketing-preview-card:nth-child(3) { background: #E9E1F5; }
+.marketing-preview-card .feature-number { display: block; font-size: 48px; font-weight: 900; line-height: 1; color: #9C3597; margin-bottom: 24px; letter-spacing: -.05em; }
+.marketing-preview-card .availability-badge { margin-bottom: 26px; }
+.marketing-preview-card h3 { font-size: 30px; line-height: 1.05; margin: 14px 0; }
+.marketing-preview-card p { font-size: 16px; color: var(--ink-2); }
+
+/* Finished layouts keep the original generous type and tinted art panels. */
+.use-case-list { display: grid; gap: 40px; }
+.use-case-row { display: grid; grid-template-columns: 1fr 1.1fr; align-items: center; gap: 48px; padding: 48px; border-radius: var(--r-lg); background: #E8F3ED; border: 1px solid var(--line); }
+.use-case-row:nth-child(2) { background: #E7F0FB; }
+.use-case-row:nth-child(3) { background: #FBE7D3; }
+.use-case-row:nth-child(even) > :first-child { order: 2; }
+.use-case-row h2 { font-size: clamp(34px, 3.9vw, 52px); line-height: 1.03; margin: 24px 0; }
+.use-case-row p { font-size: 17px; color: var(--ink-2); }
+.use-case-row .launch-note { text-align: left; font-size: 13px; margin: 24px 0; }
+.brand-page .use-case-outcome { padding: 24px; border-radius: var(--r); background: linear-gradient(135deg, #E0F1EC, #7DCFB6); }
+.brand-page .outcome-operations { background: linear-gradient(135deg, #E7F0FB, #93BFE9); }
+.brand-page .outcome-studio { background: linear-gradient(135deg, #FFE7E1, #FFB3A0); }
+.brand-page .use-case-outcome img { transform: rotate(-2deg); box-shadow: 0 20px 40px -20px rgba(30,40,50,.4); }
+.brand-page .use-case-outcome .feature-link { margin-top: 24px; }
+
+/* Learning and comparison are branded content, with no invented proof. */
+.brand-page .launch-resource { padding: 32px; border-radius: 24px; background: #FFF1CB; border-color: #ead8ab; }
+.brand-page .launch-resource:nth-child(2) { background: #FBE4ED; border-color: #ebc9da; }
+.brand-page .launch-resource:nth-child(3) { background: #E0F1EC; border-color: #bcded3; }
+.brand-page .launch-resource h3 { font-size: 30px; line-height: 1.06; }
+.brand-page .launch-resource .step-lbl { font-size: 15px; }
+.brand-page .launch-resource blockquote { padding: 20px; border: 0; border-radius: 16px; background: rgba(255,255,255,.65); }
+.brand-page .launch-training { padding: 48px; background: radial-gradient(450px 300px at 100% 100%, rgba(232,74,140,.14), transparent 80%), #FBE7D3; border: 1px solid var(--line); }
+.brand-page .launch-training h2 { font-size: clamp(30px, 3.5vw, 46px); line-height: 1.05; }
+.brand-page .res-tabs { margin-top: 34px; }
+.brand-page .res-tab:hover, .brand-page .res-tab:focus-visible { background: #FBE4ED; color: #743179; }
+.brand-page .hiw-step-copy h2 { font-size: clamp(34px, 3.9vw, 52px); line-height: 1.03; font-weight: 900; }
+.brand-page .hiw-step-num { font-weight: 900; font-style: normal; }
+.brand-page .enterprise-panel h2 { font-size: clamp(36px, 3.9vw, 52px); }
+.brand-page .enterprise-panel h2 em { background-image: linear-gradient(95deg, #FFD08A, #FF9DBD 55%, #D6AAFF); }
+.brand-page .enterprise-details h3 { letter-spacing: -.02em; font-weight: 700; }
+.brand-page .price-amt { font-weight: 900; }
+
+.comparison-scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--r); background: var(--surface); box-shadow: var(--sh-sm); }
+.launch-comparison { width: 100%; min-width: 870px; border-collapse: collapse; text-align: left; font-size: 14px; line-height: 1.5; }
+.launch-comparison th, .launch-comparison td { padding: 20px; border-bottom: 1px solid var(--line); width: 20%; vertical-align: top; }
+.launch-comparison thead th { background: var(--surface-2); font-size: 15px; }
+.launch-comparison tr > :nth-child(2) { background: var(--coral-tint); }
+.launch-comparison thead th:nth-child(2) { background: #4C3A5C; color: #fff8eb; }
+.launch-comparison tr:last-child > * { border-bottom: 0; }
+.comparison-sources { font-size: 12px; color: var(--ink-2); line-height: 1.7; margin-top: 20px; }
+.comparison-sources a { text-decoration: underline; text-underline-offset: 3px; }
+.brand-page .comparison-section { background: radial-gradient(700px 400px at 50% 0, rgba(111,168,224,.14), transparent 70%), var(--bg); }
+
+/* Connectors retain their original catalog, with the same display hierarchy. */
+.connectors-page .cn-featured-card { border-radius: 24px; background: #fff9ee; border-color: #e6d8bd; }
+.connectors-page .cn-featured > .reveal:nth-child(even) .cn-featured-card { background: #FBE4ED; }
+.connectors-page .cn-card { background: #fffaf1; }
+.connectors-page .cn-how-step { background: #E8F3ED; border-radius: 24px; }
+.connectors-page .cn-how > .reveal:nth-child(2) .cn-how-step { background: #FBE4ED; }
+.connectors-page .cn-how > .reveal:nth-child(3) .cn-how-step { background: #FFF1CB; }
+.connectors-page .cn-how-num { background: var(--brand-chip-gradient); color: white; font-style: normal; font-weight: 900; }
+.connectors-page .cn-cta h2 { font-size: clamp(34px, 4.2vw, 56px); line-height: 1.05; }
+
+@media (max-width: 980px) {
+  .feature-overview-card, .use-case-row { grid-template-columns: 1fr; gap: 32px; padding: 36px; }
+  .feature-overview > .reveal:nth-child(even) .feature-overview-copy, .use-case-row:nth-child(even) > :first-child { order: initial; }
+  .feature-overview-art { max-width: 620px; width: 100%; margin-inline: auto; }
+}
+@media (max-width: 800px) {
+  .marketing-preview-grid { grid-template-columns: 1fr; }
+  .launch-comparison th, .launch-comparison td { padding: 16px; }
+  .brand-page .launch-training { padding: 28px; }
+}
+@media (max-width: 560px) {
+  /* Row labels stay pinned while each product column swipes past at full width. */
+  .launch-comparison { min-width: 0; width: max-content; }
+  .launch-comparison th, .launch-comparison td { width: 200px; min-width: 200px; padding: 14px; }
+  .launch-comparison tr > :first-child { position: sticky; left: 0; z-index: 1; width: 108px; min-width: 108px; background: var(--surface); box-shadow: 1px 0 0 var(--line); }
+  .launch-comparison thead th:first-child { background: var(--surface-2); }
+  .brand-page .sub-hero, .brand-page.sub-hero { padding: 60px 0 48px; }
+  .feature-overview-card, .use-case-row { padding: 26px 22px; }
+  .feature-overview-art { padding: 24px 16px; }
+  .workflow-preview-body { padding: 22px; }
+  .workflow-preview-body .workflow-preview-title { font-size: 28px; }
+  .workflow-preview-bar b { font-size: 10px; }
+  .brand-page .launch-resource { padding: 26px; }
+  .brand-page .use-case-outcome { padding: 20px 16px; }
+}
+@media (forced-colors: active) {
+  .brand-page h1 em, .brand-page h2 em { background: none; -webkit-text-fill-color: CanvasText; color: CanvasText; }
+}
+
+

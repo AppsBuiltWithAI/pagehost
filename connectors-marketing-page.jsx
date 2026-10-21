@@ -54,7 +54,7 @@ function ConnectorsMarketingPage() {
   }, [cat]);
 
   return (
-    <>
+    <main className="brand-page connectors-page">
       <section className="sub-hero" data-screen-label="connectors-hero">
         <div className="wrap-tight">
           <Reveal>
@@ -181,7 +181,7 @@ function ConnectorsMarketingPage() {
           </Reveal>
         </div>
       </section>
-    </>
+    </main>
   );
 }
 

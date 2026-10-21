@@ -1,21 +1,14 @@
 /* global React, PoofPart1 */
-const { Reveal, ArrowRight } = window.PoofPart1;
+const { Reveal, ArrowRight, AppLink } = window.PoofPart1;
 
-/* ============= AGENTS — Plan, Editor, Testing, Security, Launch ============= */
+/* ============= AGENTS  -  Plan, Editor, Testing, Security, Launch ============= */
 function Agents({ onStart }) {
-  React.useEffect(() => {
-    if (!document.querySelector('script[src*="voomly.com"]')) {
-      const s = document.createElement('script');
-      s.src = 'https://embed.voomly.com/embed/embed-build.js';
-      document.body.appendChild(s);
-    }
-  }, []);
   const agents = [
     {
       tag: "01 · Plan",
       title: "Plan",
       headline: "From idea to PRD in 6 questions.",
-      desc: "Chat with the planner agent. It captures your user, their pains, and the must-have features — then hands a real PRD to the editor.",
+      desc: "Chat with the planner agent. It captures your user, their pains, and the must-have features, then hands a real PRD to the editor.",
       tint: "agent-coral",
       mock: <PlanMock/>,
     },
@@ -23,7 +16,7 @@ function Agents({ onStart }) {
       tag: "02 · Build",
       title: "Editor",
       headline: "Type. Watch it build. Tweak. Ship.",
-      desc: "Chat-driven editor with a live preview. Every word you type becomes working software in seconds — buttons that click, forms that save.",
+      desc: "Chat-driven editor with a live preview. Every word you type becomes working software in seconds: buttons that click, forms that save.",
       tint: "agent-sky",
       mock: <EditorMock/>,
     },
@@ -39,7 +32,7 @@ function Agents({ onStart }) {
       tag: "04 · Secure",
       title: "Security",
       headline: "A CTO, on autopilot.",
-      desc: "Continuous AI security scans, audit log, 2FA, SSO, session management — the boring-but-critical stuff, set up correctly by default.",
+      desc: "Continuous AI security scans, audit log, 2FA, SSO, session management: the boring-but-critical stuff, set up correctly by default.",
       tint: "agent-plum",
       mock: <SecMock/>,
     },
@@ -47,15 +40,16 @@ function Agents({ onStart }) {
       tag: "05 · Launch",
       title: "Launch",
       headline: "We get you across the line.",
-      desc: "Launch readiness score, soft-launch mode for friends-only, a daily co-pilot drafting your IG post & emails — and confetti when the first stranger actually visits.",
+      desc: "Launch readiness score, soft-launch mode for friends-only, and publishing support. And confetti when the first stranger actually visits. IG posts and email campaign tools are coming soon.",
       tint: "agent-sun",
       mock: <LaunchMock/>,
     },
     {
       tag: "06 · Grow",
       title: "Marketing",
-      headline: "An agent that sells your app for you.",
-      desc: "The marketing agent scans 4,200+ communities and surfaces the highest-leverage ones for your app — drafts a native post for each, runs your ads, and turns your product into 30 feed-ready posts.",
+      headline: "Coming soon: an agent that sells your app for you.",
+      status: window.ABWAI?.marketing || "coming-soon",
+      desc: "Coming soon: Tribe Finder will scan 4,200+ communities and surface the highest-leverage ones for your app, with tools for native posts, ads, and turning your product into 30 feed-ready posts. These tools are not available at launch.",
       tint: "agent-coral",
       mock: <MarketingMock/>,
     },
@@ -64,18 +58,11 @@ function Agents({ onStart }) {
   return (
     <section className="pad agents-section" data-screen-label="agents">
       <div className="wrap">
-        <Reveal>
-          <div className="voomly-embed"
-            data-id="izmAOWnQARTHBVRB2OvRXNnDhUCHcvhbrwVRKP8NbQqSKhFdG"
-            data-ratio="1.777778" data-type="v" data-skin-color="#008EFF" data-shadow=""
-            style={{ width: '100%', aspectRatio: '1.77778 / 1', background: 'linear-gradient(45deg, rgb(142, 150, 164) 0%, rgb(201, 208, 222) 100%)', borderRadius: '16px', marginBottom: '48px' }}
-          />
-        </Reveal>
-
-        <Reveal className="sec-head" style={{ marginTop: 32 }}>
+        <Reveal><iframe id="home-video" className="home-video" src="home-video.html" title="AppsBuiltWithAI walkthrough" sandbox="allow-scripts" loading="lazy" allow="fullscreen; picture-in-picture" allowFullScreen/></Reveal>
+<Reveal className="sec-head" style={{ marginTop: 32 }}>
           <div className="eyebrow">Built-in agents</div>
           <h2>Six agents.<br/><em>From idea to growth.</em></h2>
-          <p>Most app builders dump a half-built thing on your lap and walk away. Ours stick around — planning, building, testing, securing, launching, and finding your first 1,000 members.</p>
+          <p>Most app builders dump a half-built thing on your lap and walk away. Ours stick around: planning, building, testing, securing, launching, and getting you ready to share. Marketing tools are coming soon.</p>
         </Reveal>
 
         <div className="agents-list">
@@ -89,11 +76,11 @@ function Agents({ onStart }) {
                   </div>
                   <h3>{a.headline}</h3>
                   <p>{a.desc}</p>
-                  {onStart
+                  {a.title === "Marketing" && a.status !== "available" ? <span className="availability-badge">Coming soon</span> : onStart
                     ? <button className="feature-link" onClick={onStart}>Try the {a.title} agent <ArrowRight/></button>
-                    : <a className="feature-link" href="signup.html">Try the {a.title} agent <ArrowRight/></a>}
+                    : <AppLink className="feature-link">Try the {a.title} agent <ArrowRight/></AppLink>}
                 </div>
-                <div className="agent-art">{a.mock}</div>
+                <div className="agent-art"><span className="example-label">{a.title === "Marketing" ? "Coming soon preview" : "Illustrative agent preview"}</span><div role="img" aria-label={"Illustrative " + a.title.toLowerCase() + " agent preview"}>{a.mock}</div></div>
               </div>
             </Reveal>
           ))}
@@ -225,7 +212,7 @@ function LaunchMock() {
       </div>
       <div className="mock-row pass"><span className="mock-num mint">✓</span><span>Domain verified</span></div>
       <div className="mock-row pass"><span className="mock-num mint">✓</span><span>Test order placed</span></div>
-      <div className="mock-row warn"><span className="mock-num warn">!</span><span>Email draft ready</span></div>
+      <div className="mock-row warn"><span className="mock-num warn">!</span><span>Final checks remaining</span></div>
       <div className="mock-cta-coral">🚀 Open the doors</div>
     </div>
   );
@@ -239,7 +226,7 @@ function MarketingMock() {
         <span className="mock-mkt-letter" style={{ background: "#5865F2" }}>IH</span>
         <div style={{ flex: 1, minWidth: 0 }}>
           <div className="mock-mkt-tag">DISCORD · STRONG FIT</div>
-          <div className="mock-mkt-name">Indie Hackers — Mindful Founders</div>
+          <div className="mock-mkt-name">Indie Hackers: Mindful Founders</div>
         </div>
         <span className="mock-num mint">✓</span>
       </div>

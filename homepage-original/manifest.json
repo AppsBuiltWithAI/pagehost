@@ -1,0 +1,75 @@
+{
+  "repository": "https://github.com/funnelactive/appsbuiltwithaiapp",
+  "revision": "3719da445463477a1bc79bc73b24b8339991183b",
+  "referenceUrl": "https://ap-3cd47a3b66984a1f8a386add27740d24.ecs.us-west-2.on.aws/",
+  "files": {
+    "part1.jsx": {
+      "source": "src/site/part1.jsx",
+      "sha256": "9d02dcd0937e7ff245ee25ccaf2551c7d80434d1b9e39947bbfdccc0363201df"
+    },
+    "part3.jsx": {
+      "source": "src/site/part3.jsx",
+      "sha256": "ab75f07bcf9848492edd2e294e15577c6904c4e7e98014f4020e0fef39fab1da"
+    },
+    "part-agents.jsx": {
+      "source": "src/site/part-agents.jsx",
+      "sha256": "16bbbce0e6ea058dd178313f2e2bcce41ad2e727e69c6df35ffec45cfbd39b38"
+    },
+    "part-alive.jsx": {
+      "source": "src/site/part-alive.jsx",
+      "sha256": "b64764e7fc14f2e5b1e8a2e6b992786a3090e9eb524532d82ecf8a256f93ef4a"
+    },
+    "part-enhance.jsx": {
+      "source": "src/site/part-enhance.jsx",
+      "sha256": "1f2e0ce54f432310842f266034ee0cdd3c0da0829458f3666b902e7e4eff62d8"
+    },
+    "hero-demo.jsx": {
+      "source": "src/site/hero-demo.jsx",
+      "sha256": "2088bc080836adab197715f16f6069b52a48e81fbebc6a9c38f84a2cbf47bde5"
+    },
+    "waitlist-flow.jsx": {
+      "source": "src/site/waitlist-flow.jsx",
+      "sha256": "17fa938fedd1a76fd19690fb145750b1abdf5e7cfa608f67c427438b48297db4"
+    },
+    "waitlist-app.jsx": {
+      "source": "src/site/waitlist-app.jsx",
+      "sha256": "18dd16796cc15ff2f9b609233805d65d26f6fc37c2d30a57a77385dc3c40b42f"
+    },
+    "styles/styles.css": {
+      "source": "src/site/styles/styles.css",
+      "sha256": "bd16aaeba4d86af54c1c9a16500ee0b2e1025d1ce9352deeb3bd2b9357917c62"
+    },
+    "styles/showcase.css": {
+      "source": "src/site/styles/showcase.css",
+      "sha256": "6f204bc8506256d1b3586ba2592d2a213295865a27615d917dd7c4d3c05da081"
+    },
+    "styles/enhance.css": {
+      "source": "src/site/styles/enhance.css",
+      "sha256": "d1f223aa7cdae6032b7a2e60a82a7ae264736cc018a1db54d3da095977998f8d"
+    },
+    "styles/alive.css": {
+      "source": "src/site/styles/alive.css",
+      "sha256": "d46d36f54a66ef09a6477760118eeaab767840c2658e930ac21ce887f1c5bfa8"
+    },
+    "styles/hero-demo.css": {
+      "source": "src/site/styles/hero-demo.css",
+      "sha256": "76067b0837ed1d958264fb6ea4775391ebafd888655fb7204f88da7c21a82af7"
+    },
+    "styles/polish.css": {
+      "source": "src/site/styles/polish.css",
+      "sha256": "74adf72e1466d574672bedb93d3a983d2074ca0052952da7463a451f3db2b657"
+    },
+    "styles/waitlist-flow.css": {
+      "source": "src/site/styles/waitlist-flow.css",
+      "sha256": "24695b964b13d5d48e052c5dbdf446c7477a82c459d52eef2733c0cc92d24552"
+    },
+    "styles/waitlist.css": {
+      "source": "src/site/styles/waitlist.css",
+      "sha256": "e0fcfeb688d9d94547126aacedd94f190b5e5c520fb54be60654a53a9da9fd23"
+    },
+    "../config/importSources.js": {
+      "source": "src/config/importSources.js",
+      "sha256": "6b7580c733cfd9c4a1cdd9c3ca5c523d778e6a40660c4aba66a0dfe18a06fa29"
+    }
+  }
+}

@@ -1,18 +1,18 @@
 /* global React, PoofPart1 */
-const { useState: useStateP2 } = React;
-const { Reveal, ArrowRight, Check, Plus, Logo, PromptBox } = window.PoofPart1;
+const { Reveal, ArrowRight, Check } = window.PoofPart1;
 
-/* ============= TEMPLATE PREVIEWS — illustrated mini-app mockups ============= */
+/* ============= TEMPLATE PREVIEWS  -  illustrated mini-app mockups ============= */
 function TemplatePreview({ kind }) {
+  const filterId = "template-" + React.useId();
   // Each preview is a stylised browser-window snapshot of the actual template UI.
   const Frame = ({ children, bg = "#fff" }) => (
     <svg viewBox="0 0 400 300" className="tpl-preview-svg" preserveAspectRatio="xMidYMid meet">
       <defs>
-        <filter id={"tps-" + kind} x="-5%" y="-5%" width="110%" height="115%">
+        <filter id={filterId} x="-5%" y="-5%" width="110%" height="115%">
           <feDropShadow dx="0" dy="6" stdDeviation="10" floodColor="#1A0F22" floodOpacity="0.18"/>
         </filter>
       </defs>
-      <g filter={`url(#tps-${kind})`}>
+      <g filter={`url(#${filterId})`}>
         <rect x="30" y="22" width="340" height="256" rx="14" fill={bg}/>
         {/* mini browser chrome */}
         <g>
@@ -250,8 +250,8 @@ function Templates() {
       <div className="wrap">
         <Reveal className="sec-head">
           <div className="eyebrow">Start somewhere</div>
-          <h2>Pick a template.<br/>Make it yours.</h2>
-          <p>Real apps that other non-coders shipped this week. Click any to remix in seconds.</p>
+          <h2>Pick a direction.<br/>Make it yours.</h2>
+          <p>Real apps that other non-coders shipped this week. Pick a direction for your next build.</p>
         </Reveal>
 
         <Reveal>
@@ -259,7 +259,7 @@ function Templates() {
             {filters.map((f) => (
               <button
                 key={f}
-                className={"tpl-filter" + (active === f ? " active" : "")}
+                className={"tpl-filter" + (active === f ? " active" : "")} aria-pressed={active === f}
                 onClick={() => setActive(f)}
               >
                 {f}
@@ -286,15 +286,12 @@ function Templates() {
                       <p>{t.desc}</p>
                     </div>
                   </div>
-                  <div className="tpl-use">
-                    Use
-                    <ArrowRight/>
-                  </div>
                 </div>
               </div>
             </Reveal>
           ))}
         </div>
+      <div className="homepage-examples-link"><a className="feature-link" href="use-cases.html">See example apps <ArrowRight/></a></div>
       </div>
     </section>
   );
@@ -338,7 +335,7 @@ function Trust() {
       n: "02",
       kicker: "Yours to keep",
       title: "Your code. Your data. Your call.",
-      body: "Your app is your app. Export the full source code anytime on Pro. Take it elsewhere, hand it to a developer, or keep it here — never anyone else's decision but yours.",
+      body: "Your app is your app. Export the full source code on paid plans. Take it elsewhere, hand it to a developer, or keep it here; never anyone else's decision but yours.",
       spec: "MIT",
       specLabel: "Open export license",
       facts: ["Full source export", "Postgres dumps", "Walk away anytime"],
@@ -367,10 +364,10 @@ function Trust() {
       n: "03",
       kicker: "Honest pricing",
       title: "Start free. Cancel in two clicks.",
-      body: "Free forever to build, prototype, and ship your first apps. Pay only when something's working — and walk away in 30 seconds if it isn't. No \"talk to sales,\" no retention dance.",
+      body: "Start free to build, prototype, and ship your first app. Pay only when something's working, and walk away in 30 seconds if it isn't. No \"talk to sales\" to cancel, no retention dance.",
       spec: "$0",
-      specLabel: "Free, forever",
-      facts: ["No card to start", "Cancel · 2 clicks", "Refund · always"],
+      specLabel: "Free plan",
+      facts: ["No card to start", "Cancel · 2 clicks", "Clear plan pricing"],
       art: (
         <svg viewBox="0 0 200 140" className="trust-art trust-art-receipt" preserveAspectRatio="xMidYMid meet">
           <defs>
@@ -415,7 +412,7 @@ function Trust() {
           <div className="trust-lead">
             <div className="eyebrow">The fine print, unfine-printed</div>
             <h2 className="trust-head">Quietly engineered.<br/><em>Always yours.</em></h2>
-            <p className="trust-sub">A reassurance page, with receipts. Skim it now — you won't have to read it later.</p>
+            <p className="trust-sub">A reassurance page, with receipts. Skim it now; you won't have to read it later.</p>
           </div>
         </Reveal>
 
@@ -454,7 +451,7 @@ function Trust() {
             {factsRow.map((f, i) => (
               <React.Fragment key={f}>
                 <span className="trust-stripe-item">{f}</span>
-                {i < factsRow.length - 1 && <span className="trust-stripe-sep">·</span>}
+                {i < factsRow.length - 1 && <span className="trust-stripe-sep" aria-hidden="true">·</span>}
               </React.Fragment>
             ))}
           </div>
@@ -476,7 +473,7 @@ function BigPhoto() {
     metricLabel: "in pre-orders, first month",
     tint: "warm",
     pull: "Twenty-three minutes.",
-    quote: "I described what I wanted in one sentence. Twenty-three minutes later my customers were placing orders. I still don't know what \u201cdeploy\u201d means \u2014 and I don't have to.",
+    quote: "I described what I wanted in one sentence. Twenty-three minutes later my customers were placing orders. I still don't know what \u201cdeploy\u201d means, and I don't have to.",
   };
 
   const stories = [
@@ -490,7 +487,7 @@ function BigPhoto() {
       metricLabel: "live in one week",
       tint: "rose",
       pull: "Zero engineers hired.",
-      quote: "Three apps live. Zero engineers hired. I'm a marketer \u2014 I built our entire ops dashboard in a week.",
+      quote: "Three apps live. Zero engineers hired. I'm a marketer; I built our entire ops dashboard in a week.",
     },
     {
       id: "proof-sarah",
@@ -536,12 +533,7 @@ function BigPhoto() {
         <Reveal>
           <article className={"story-featured tint-" + featured.tint}>
             <div className="story-portrait">
-              <image-slot
-                id={featured.id}
-                shape="rect"
-                radius="0"
-                placeholder={"Drop a photo of " + featured.name}
-              ></image-slot>
+
               <div className="story-portrait-fallback" aria-hidden="true">
                 <span className="initial">{featured.name[0]}</span>
               </div>
@@ -560,7 +552,7 @@ function BigPhoto() {
                   <div className="lbl">{featured.metricLabel}</div>
                 </div>
               </div>
-              <a className="story-link">Visit {featured.app} <ArrowRight/></a>
+              <a className="story-link" href="use-cases.html">Explore app ideas <ArrowRight/></a>
             </div>
           </article>
         </Reveal>
@@ -570,12 +562,7 @@ function BigPhoto() {
             <Reveal key={s.id} delay={i * 80}>
               <article className={"story-card tint-" + s.tint}>
                 <div className="story-card-portrait">
-                  <image-slot
-                    id={s.id}
-                    shape="rect"
-                    radius="0"
-                    placeholder={"Drop photo of " + s.name}
-                  ></image-slot>
+
                   <div className="story-portrait-fallback" aria-hidden="true">
                     <span className="initial">{s.name[0]}</span>
                   </div>
@@ -611,7 +598,7 @@ function Stats() {
     { n: "0",      l: "Lines of code you'll write, ever. Not a typo.", tag: "Effort" },
   ];
   return (
-    <section className="pad-sm proof-stats-section" data-screen-label="stats">
+    <section className="pad-sm proof-stats-section" id="stats" data-screen-label="stats">
       <div className="wrap">
         <Reveal className="sec-head">
           <div className="eyebrow">Proof is in the numbers</div>

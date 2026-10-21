@@ -173,7 +173,7 @@ function RoadmapPage() {
               We read every suggestion. The good ones get added to this page
               — sometimes with your name in the credit when they ship.
             </p>
-            <div style={{ display: "inline-flex", gap: 10 }}>
+            <div style={{ display: "inline-flex", flexWrap: "wrap", justifyContent: "center", gap: 10 }}>
               <a className="btn btn-coral btn-lg" href="signup.html">Suggest an idea <ArrowRight/></a>
               <a className="btn btn-outline btn-lg" href="changelog.html">See what shipped</a>
             </div>

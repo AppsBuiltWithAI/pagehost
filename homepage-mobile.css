@@ -1,0 +1,27 @@
+/* Phone fixes for the restored homepage. The original stylesheet is a pinned
+   snapshot, so these load after it instead of editing it. */
+
+/* Agent illustrations size to their column instead of to the mock cards. */
+.abw-site .agent-tile > * { min-width: 0; }
+.abw-site .agent-art { grid-template-columns: minmax(0, 1fr); }
+.abw-site .agent-art .mock-card { min-width: 0; }
+/* The original pairs min-height: 340px with a 4/3 ratio on phones, which
+   forces a 453px-wide box. Let the height follow the mock card instead. */
+@media (max-width: 720px) {
+  .abw-site .agent-art { aspect-ratio: auto; min-height: 300px; }
+}
+
+/* A later rule in the original resets the footer to five columns at every
+   width; restore its own two-column tablet layout. */
+@media (max-width: 880px) {
+  .abw-site .footer-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .abw-site .footer-brand { grid-column: 1 / -1; }
+}
+@media (max-width: 560px) {
+  .abw-site .footer-grid { gap: 40px 24px; padding-top: 56px; }
+}
+
+@media (max-width: 640px) {
+  /* 16px stops iOS Safari zooming in when a field is focused. */
+  .abw-site input:not([type=checkbox]):not([type=radio]):not([type=range]), .abw-site textarea, .abw-site select { font-size: 16px; }
+}

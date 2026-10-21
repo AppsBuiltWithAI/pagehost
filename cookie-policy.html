@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:ital,wght@0,400..900;1,400..900&display=swap" />
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css?v=launch-26d3e5293bf1" />
   <style>
     .legal-page { max-width: 780px; margin: 0 auto; padding: 60px 24px 100px; }
     .legal-back { display: inline-flex; align-items: center; gap: 6px; font-family: var(--f-mono); font-size: 11.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); text-decoration: none; margin-bottom: 32px; }
@@ -23,6 +23,10 @@
     .legal-page table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 14px; }
     .legal-page th { text-align: left; font-weight: 600; color: var(--ink); padding: 10px 12px; border-bottom: 2px solid var(--line); }
     .legal-page td { padding: 10px 12px; border-bottom: 1px solid var(--line); color: var(--ink-2); vertical-align: top; }
+    @media (max-width: 640px) {
+      .legal-page table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; font-size: 13px; }
+      .legal-page th, .legal-page td { padding: 10px 8px; min-width: 96px; }
+    }
     .legal-links { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--line); font-size: 13px; }
     .legal-links a { color: var(--ink-3); text-decoration: none; }
     .legal-links a:hover { color: var(--ink); }
