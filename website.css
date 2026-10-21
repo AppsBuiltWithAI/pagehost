@@ -17216,6 +17216,17 @@ html,body{margin:0;padding:0}
 .abw-site .demo-dialog::backdrop { background: rgba(20,14,30,.72); backdrop-filter: blur(6px); }
 .abw-site .demo-dialog .demo-close:focus-visible { outline: 3px solid var(--sun); outline-offset: 2px; }
 
+/* Features: the hero accent ("to launch an app you can sell.") carries a serif class that drops it to Roboto 400.
+   Match every other hero, where the accent keeps the headline's font and weight. */
+.abw-site .ft-head h1 em { font-family: inherit; font-weight: inherit; font-style: inherit; }
+/* The features hero is centered: label, headline, intro and the Build / Launch / Grow links.
+   The headline breaks after "launch" on wider screens and wraps naturally on phones. */
+.abw-site .ft-head { max-width: none; text-align: center; }
+.abw-site .ft-head p { margin-inline: auto; }
+.abw-site .ft-jump { justify-content: center; }
+.abw-site .ft-br { display: none; }
+@media (min-width: 900px) { .abw-site .ft-br { display: inline; } }
+
 /* Pricing: the Enterprise box is one full-width column, with its perks spread across the width. */
 .abw-site .pp-ent { grid-template-columns: minmax(0, 1fr); }
 .abw-site .pp-ent-l p { max-width: none; }

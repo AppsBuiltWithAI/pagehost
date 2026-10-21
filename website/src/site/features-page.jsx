@@ -36,7 +36,7 @@ function FeaturesPage() {
         <div className="wrap">
           <Reveal className="ft-head">
             <div className="eyebrow">Features</div>
-            <h1>Everything you need <em className="serif">to launch an app you can sell.</em></h1>
+            <h1>Everything you need <em className="serif">to launch<br className="ft-br"/> an app you can sell.</em></h1>
             <p>Every plan includes the full toolkit. You describe the app, and the platform handles the setup.</p>
           </Reveal>
           <Reveal delay={80}>

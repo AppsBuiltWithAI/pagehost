@@ -5,6 +5,7 @@ This is the public website, built from the marketing site in the app repository.
 - `src/site/part1.jsx`: the October 20-23 buildathon banner replaces the Import banner, and Import projects is removed from the Features menu.
 - `src/site/use-cases-page.jsx` and `../site/site-images/v2/use-cases/`: new screenshots for the six use cases, as 1400px WebP files, replace the original JPGs. The jump chips use 112px `-thumb.webp` versions.
 - `src/site/styles/use-cases.css`: the use case image frames match the screenshots' 1400x788 shape instead of cropping them to 5:4.
+- `src/site/features-page.jsx`: the hero headline breaks after "launch" on wider screens (`ft-br`, shown by `overrides.css`).
 - `src/site/part1.jsx`: the phone menu closes when one of its links is tapped. Pages share one header, so without this the open menu stayed over the next page.
 - `src/site/part1.jsx` and `src/site/part3.jsx`: the Resources dropdown, and the footer's Tutorials and Education links, are removed. Both pages remain at `/education` and `/resources`.
 - `src/site/legal-page.jsx`: the legal hub is rewritten to match how the product works (checked against the app repo), summarizes the app's binding Terms of Service, and follows the address so footer links and section links like `/legal#retention` open the right tab.
@@ -15,7 +16,7 @@ This is the public website, built from the marketing site in the app repository.
 - `src/site/waitlist-flow.jsx`: the demo video opens in a native `<dialog>`, which handles focus, Escape and the backdrop. `../site/demo-video.html` is unchanged and still loads the Voomly player inside the sandboxed frame.
 - `../site/`: every PNG and JPG is replaced by a compressed WebP of the same name (photos and screenshots at 1400px wide). The build points image paths in the source at the WebP files and fails if any `.png` or `.jpg` reference remains.
 
-`overrides.css` holds pagehost's own style changes and loads after the upstream styles. It gives every light-background hero headline the homepage's gradient accent, and makes the pricing page's Enterprise box one full-width column.
+`overrides.css` holds pagehost's own style changes and loads after the upstream styles. It gives every light-background hero headline the homepage's gradient accent, makes the pricing page's Enterprise box one full-width column, keeps the features hero accent bold like the other heroes and centers that hero, and fits every page to phone widths from 320px up.
 
 The generated pages load the Google Fonts stylesheet in their HTML, so fonts download alongside `website.js` instead of after it.
 
