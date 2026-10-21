@@ -18,7 +18,7 @@
     "public/site/site-images/v2/use-cases/usecase-sellers.jpg": "Replaced by usecase-sellers.webp (compressed WebP).",
     "public/site/site-images/v2/use-cases/usecase-studios.jpg": "Replaced by usecase-studios.webp (compressed WebP).",
     "src/site/styles/use-cases.css": "Use case image frames match the 1400x788 screenshots instead of cropping them to 5:4.",
-    "src/site/part3.jsx": "Footer drops the Tutorials, Education, Status, Roadmap and Change log links (Support sits under Help), and the unconnected newsletter form is commented out.",
+    "src/site/part3.jsx": "Footer drops the Tutorials, Education, Status, Roadmap and Change log links (Support sits under Help), the unconnected newsletter form is commented out, and the language switcher is removed.",
     "public/site/assets/avatars/devon.png": "Replaced by devon.webp (compressed WebP).",
     "public/site/assets/avatars/marcus.png": "Replaced by marcus.webp (compressed WebP).",
     "public/site/assets/avatars/mei.png": "Replaced by mei.webp (compressed WebP).",

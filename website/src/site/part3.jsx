@@ -1,5 +1,5 @@
 import React from 'react';
-import { Reveal, Check, Plus, ArrowRight, PromptBox, Logo, LangSwitcher } from './part1.jsx';
+import { Reveal, Check, Plus, ArrowRight, PromptBox, Logo } from './part1.jsx';
 /* ============= PRICING ============= */
 function Pricing() {
   const [billing, setBilling] = React.useState("annual");
@@ -357,7 +357,6 @@ function Footer({ lean, onStart }) {
 
         <div className={"footer-bar" + (lean ? " footer-bar-lean" : "")}>
           <div className="footer-bar-left">
-            {!lean && <LangSwitcher variant="footer" drop="up" />}
             {!lean && <span>© 2026 AppsBuiltWithAI</span>}
           </div>
           <div className="links footer-socials">
