@@ -5,6 +5,7 @@ This is the public website, built from the marketing site in the app repository.
 - `src/site/part1.jsx`: the October 20-23 buildathon banner replaces the Import banner, and Import projects is removed from the Features menu.
 - `src/site/use-cases-page.jsx` and `../site/site-images/v2/use-cases/`: new screenshots for the six use cases, as 1400px WebP files, replace the original JPGs. The jump chips use 112px `-thumb.webp` versions.
 - `src/site/styles/use-cases.css`: the use case image frames match the screenshots' 1400x788 shape instead of cropping them to 5:4.
+- `src/site/part1.jsx`: the phone menu closes when one of its links is tapped. Pages share one header, so without this the open menu stayed over the next page.
 - `src/site/part1.jsx` and `src/site/part3.jsx`: the Resources dropdown, and the footer's Tutorials and Education links, are removed. Both pages remain at `/education` and `/resources`.
 - `src/site/legal-page.jsx`: the legal hub is rewritten to match how the product works (checked against the app repo), summarizes the app's binding Terms of Service, and follows the address so footer links and section links like `/legal#retention` open the right tab.
 - `src/site/security-page.jsx`: only practices verified in the app repo remain; the bug bounty is replaced by a plain vulnerability-report box.

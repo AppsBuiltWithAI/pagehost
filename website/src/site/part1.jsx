@@ -212,7 +212,7 @@ function Nav({ ctaLabel, onCta, hidePricing, hideSignIn, hideCta, bare }) {
         </div>
       </div>
       {mobOpen && !bare && (
-        <div className="nav-mob">
+        <div className="nav-mob" onClick={(e) => { if (e.target.closest("a")) setMobOpen(false); }}>
           <div className="nav-mob-sec">Features</div>
           {FEATURES.map((r) => <a key={r.label} className="nav-mob-link nav-mob-ic" href={r.href}><span className={"nav-dd-ic tone-" + r.tone}><NavIc n={r.ic}/></span>{r.label}</a>)}
           <div className="nav-mob-sec">More</div>
