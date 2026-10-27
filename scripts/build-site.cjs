@@ -36,6 +36,8 @@ const pageRoutes = siteRoutes.filter(route => !redirectRoutes.has(route));
 const authPages = { signin: '/signin', login: '/signin', signup: '/signup', forgot: '/forgot' };
 
 const BRAND = 'AppsBuiltWithAI';
+const SITE_URL = 'https://pages.appsbuiltwithai.com';
+const DEFAULT_DESCRIPTION = 'Build websites and apps with AI. AppsBuiltWithAI lets you create, launch, and grow your online presence — no coding required.';
 const titles = {
   '/': `${BRAND}: Build websites & apps with AI`,
   '/full-site': `${BRAND}: Build websites & apps with AI`,
@@ -44,9 +46,45 @@ const titles = {
   '/compare': `${BRAND} vs. the alternatives`, '/embed': '"Built with" badge',
   '/how-it-works': 'How it works', '/summit': 'Summit 2026', '/use-cases': 'Use cases',
 };
+const descriptions = {
+  '/': DEFAULT_DESCRIPTION,
+  '/full-site': DEFAULT_DESCRIPTION,
+  '/about': 'Learn about AppsBuiltWithAI — our story, mission, and the team building the future of AI-powered app creation.',
+  '/affiliate': 'Join the AppsBuiltWithAI affiliate program. Earn commissions by referring new users to our AI-powered website and app builder.',
+  '/ambassador': 'Become an AppsBuiltWithAI ambassador. Represent our community and help others build with AI.',
+  '/careers': 'Join the AppsBuiltWithAI team. Explore open roles and help us shape the future of AI-powered app building.',
+  '/catalysts': 'Meet the AppsBuiltWithAI catalysts — community leaders driving adoption and innovation.',
+  '/certified-builders': 'Find certified AppsBuiltWithAI builders for hire. Experts who can create custom websites and apps with AI.',
+  '/community': 'Join the AppsBuiltWithAI community. Connect with fellow builders, share ideas, and grow together.',
+  '/compare': 'See how AppsBuiltWithAI compares to other website and app builders. Features, pricing, and capabilities side by side.',
+  '/connectors': 'Connect AppsBuiltWithAI to your favorite tools. Explore integrations and connectors for payments, CRM, email, and more.',
+  '/contact': 'Get in touch with the AppsBuiltWithAI team. We\'re here to help with questions, partnerships, and support.',
+  '/education': 'Learn to build with AI. Free courses, tutorials, and resources to master AppsBuiltWithAI.',
+  '/embed': 'Add a "Built with AppsBuiltWithAI" badge to your site. Show the world what powers your app.',
+  '/events': 'Upcoming AppsBuiltWithAI events, meetups, and webinars. Learn, connect, and build with our community.',
+  '/features': 'Explore AppsBuiltWithAI features — AI-powered design, hosting, payments, connectors, and everything you need to launch.',
+  '/how-it-works': 'See how AppsBuiltWithAI works. From prompt to published app in minutes — no coding required.',
+  '/import': 'Import your existing website or project into AppsBuiltWithAI. Migrate seamlessly and start building with AI.',
+  '/legal': 'AppsBuiltWithAI legal information — terms of service, privacy policy, and usage guidelines.',
+  '/meetups': 'Find AppsBuiltWithAI meetups near you. Connect with local builders and learn in person.',
+  '/partners': 'Partner with AppsBuiltWithAI. Explore partnership opportunities for agencies, educators, and developers.',
+  '/press': 'AppsBuiltWithAI press resources. Logos, brand assets, and company information for media coverage.',
+  '/pricing': 'AppsBuiltWithAI pricing plans. Find the right plan for your needs — from free to professional.',
+  '/resources': 'AppsBuiltWithAI resources — guides, tutorials, and documentation to help you build better with AI.',
+  '/security': 'AppsBuiltWithAI security practices. How we protect your data and keep your apps safe.',
+  '/summit': 'AppsBuiltWithAI Summit 2026. The annual gathering of AI builders, creators, and innovators.',
+  '/support': 'Get help with AppsBuiltWithAI. Support articles, FAQs, and ways to reach our team.',
+  '/templates': 'Browse AppsBuiltWithAI templates. Start from a professionally designed template and customize with AI.',
+  '/use-cases': 'See how people use AppsBuiltWithAI — from founders and freelancers to agencies and local businesses.',
+  '/vision': 'The AppsBuiltWithAI vision. Where we\'re headed and how AI will transform app building.',
+  '/waitlist': 'Join the AppsBuiltWithAI waitlist. Be first in line for new features and early access.',
+};
 function titleFor(route) {
   const title = titles[route] || route.slice(1).replace(/-/g, ' ').replace(/^./, c => c.toUpperCase());
   return title.includes(BRAND) ? title : `${title} — ${BRAND}`;
+}
+function descriptionFor(route) {
+  return descriptions[route] || DEFAULT_DESCRIPTION;
 }
 
 // Account links go straight to the app so they work without the client router.
@@ -136,13 +174,15 @@ const sourcePlugin = {
   },
 };
 
+function esc(s) { return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;'); }
+
 function page(title, head, body) {
   return `<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>${title.replace(/&/g, '&amp;').replace(/</g, '&lt;')}</title>
+  <title>${esc(title)}</title>
 ${head}
 </head>
 <body>
@@ -180,14 +220,34 @@ async function main() {
   const version = sha256(Buffer.concat([Buffer.from(javascript), Buffer.from(css)])).slice(0, 12);
   // Load SiteLayout's fonts from the HTML so they download alongside the bundle; SiteLayout skips its own copy.
   const fontHref = layout.match(/const FONT_HREF =\s*'([^']+)'/)[1].replace(/&/g, '&amp;');
-  const head = `  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  const ogImage = `${SITE_URL}/site/assets/og-image.png`;
+  function seoHead(route) {
+    const title = titleFor(route);
+    const description = descriptionFor(route);
+    const url = route === '/' ? SITE_URL + '/' : `${SITE_URL}${route}`;
+    return `  <meta name="description" content="${esc(description)}" />
+  <link rel="canonical" href="${esc(url)}" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="${esc(BRAND)}" />
+  <meta property="og:title" content="${esc(title)}" />
+  <meta property="og:description" content="${esc(description)}" />
+  <meta property="og:url" content="${esc(url)}" />
+  <meta property="og:image" content="${esc(ogImage)}" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="${esc(title)}" />
+  <meta name="twitter:description" content="${esc(description)}" />
+  <meta name="twitter:image" content="${esc(ogImage)}" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link id="abw-site-fonts" rel="stylesheet" href="${fontHref}" />
   <link rel="stylesheet" href="/website.css?v=${version}" />
   <script src="/website.js?v=${version}" defer></script>`;
+  }
   for (const route of pageRoutes) {
     const file = route === '/' ? 'index.html' : route.slice(1) + '.html';
-    fs.writeFileSync(path.join(root, file), page(titleFor(route), head, '  <div id="root"></div>'));
+    fs.writeFileSync(path.join(root, file), page(titleFor(route), seoHead(route), '  <div id="root"></div>'));
   }
 
   // Account pages live in the app.
@@ -204,13 +264,23 @@ async function main() {
       `  <p><a href="${target}" target="_top">Continue to ${BRAND}</a></p>`));
   }
 
+  // Generate sitemap.xml for search engines.
+  const today = new Date().toISOString().slice(0, 10);
+  const sitemapEntries = pageRoutes.map(route => {
+    const loc = route === '/' ? SITE_URL + '/' : `${SITE_URL}${route}`;
+    const priority = route === '/' ? '1.0' : route === '/features' || route === '/pricing' ? '0.8' : '0.5';
+    return `  <url>\n    <loc>${esc(loc)}</loc>\n    <lastmod>${today}</lastmod>\n    <priority>${priority}</priority>\n  </url>`;
+  }).join('\n');
+  fs.writeFileSync(path.join(root, 'sitemap.xml'),
+    `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${sitemapEntries}\n</urlset>\n`);
+
   // Every root-relative link must reach a site route, an app page, or a static file.
   const missing = [...linkTargets].map(target => target.match(/^([^?#]*)/)[1]).filter(pathname =>
     !siteRoutes.includes(pathname) && !authPages[pathname.slice(1)] &&
     !fs.existsSync(path.join(root, pathname)) && !fs.existsSync(path.join(root, pathname + '.html')));
   if (missing.length) throw new Error(`Links without a destination: ${[...new Set(missing)].join(', ')}`);
 
-  console.log(`Built ${pageRoutes.length} pages and ${Object.keys(authPages).length} app redirects (${version}).`);
+  console.log(`Built ${pageRoutes.length} pages, ${Object.keys(authPages).length} app redirects, and sitemap.xml (${version}).`);
 }
 
 main().catch(error => { console.error(error); process.exit(1); });
