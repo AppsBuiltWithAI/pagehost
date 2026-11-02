@@ -44,8 +44,8 @@ function WaitHero({ onStart }) {
   return (
     <section className="hero hero-b" data-screen-label="hero">
       <div className="hero-b-inner">
-        <h1 className="hero-b-h">Build websites &amp; apps <em>with AI.</em></h1>
-        <p className="hero-b-sub">Type what you want in a sentence: we build the whole thing and put it online. No code, no designer, no waiting on a developer. Tell us your idea to start free.</p>
+        <h1 className="hero-b-h"><em>Build it.</em> Launch it. Sell it.</h1>
+        <p className="hero-b-sub">Other AI tools stop at the code. We build your app, put it online, and help you get your first customers. No code needed. Start free.</p>
         <div className="prompt-glow"><IdeaBox value={text} onChange={setText} pulse={pulse} onSubmit={onStart}/></div>
         <p className="chips-label">or start with</p>
         <div className="chips">{chips.map(c => <button key={c} className="chip" onClick={() => pick(c)}>{c}</button>)}</div>
