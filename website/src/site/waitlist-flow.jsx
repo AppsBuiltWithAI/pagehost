@@ -251,7 +251,7 @@ function SignupFlow({ idea, onClose }) {
             <ul className="wl-aside-list">
               <li><span className="wl-aside-check" aria-hidden="true">✓</span><b>Saved to your account</b><small>Ready the moment you verify your email.</small></li>
               <li><span className="wl-aside-check" aria-hidden="true">✓</span><b>First thing we build</b><small>Your first build starts from this idea.</small></li>
-              <li><span className="wl-aside-check" aria-hidden="true">✓</span><b>50 credits a month, plus 100 bonus credits in month one</b><small>50 free every month, plus a 100 credit welcome bonus.</small></li>
+              <li><span className="wl-aside-check" aria-hidden="true">✓</span><b>50 credits to start</b><small>Available when you verify your email.</small></li>
             </ul>
             <div className="wl-aside-foot">
               <span className="wl-aside-foot-dot" aria-hidden="true"></span>
@@ -284,7 +284,7 @@ function SignupFlow({ idea, onClose }) {
               {idea && <div className="wl-idea-card">
                 <div className="wl-idea-tag">First thing we'll build for you</div>
                 <p className="wl-idea-quote">“{idea}”</p>
-                <div className="wl-idea-foot"><span>✦</span> Saved to your account · 100 bonus credits waiting</div>
+                <div className="wl-idea-foot"><span>✦</span> Saved to your account</div>
               </div>}
               <ol className="wl-steps">
                 <li><b>Your invite lands</b>Weekly, in order: no queue-jumping.</li>

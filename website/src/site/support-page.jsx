@@ -21,11 +21,11 @@ const SUP_TICKET_TOPICS = [
 ];
 
 const SUP_FAQ = [
-  ["Do I need to know how to code?", "No. You describe what you want in plain English, the builder does the code. You can always export the source on Pro and above."],
-  ["Can I cancel anytime?", "Yes. Two clicks, immediate. Apps stay live on Free until they exceed limits."],
-  ["How long do replies take?", "Pro and above get answered first, Free tickets are worked in order. We post live status when something's degraded."],
+  ["Do I need to know how to code?", "No. Describe what you want in plain English and the builder writes the code. GitHub sync and source code export are available on Starter and above."],
+  ["Can I cancel anytime?", "Yes. Cancel in Settings under Plan & credits. Your paid plan stays active through the end of the current billing period, then your account moves to Free. Your published apps stay live when your account moves to Free."],
+  ["How long do replies take?", "Growth and above get answered first, Free tickets are worked in order. We post live status when something's degraded."],
   ["What if my idea is too complicated?", "Try Plan mode: it walks you through the brief. If it's genuinely beyond what we can build, we'll tell you up front."],
-  ["Is my data used to train AI?", "No. Your data isn't used to train models. Full whitepaper on the Security page."],
+  ["Can I request a model-training opt-out?", <>Yes. Email <a href="mailto:support@appsbuiltwithai.com">support@appsbuiltwithai.com</a> to request a model-training opt-out at no cost on any plan. See the <a href="/legal#ai-training">Privacy Policy</a> for details.</>],
 ];
 
 const SUP_MAILTO = "support@appsbuiltwithai.com";

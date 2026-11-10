@@ -29,3 +29,14 @@ Run `npm run preview` to review locally at http://127.0.0.1:4175/. It resolves `
 Run `node --test tests/demo-video.test.mjs` to check player loading, direct-navigation handling and Escape messaging.
 
 To update from the app repository, copy the same folders from the new revision, re-apply the modifications above, and regenerate `upstream.json` with the new revision and hashes.
+
+## Full Terms publication
+
+`legal/terms-2026-09-03.txt` is the exact Terms section of `server/legal/terms-2026-09-03.txt` in `funnelactive/appsbuiltwithaiapp` at revision `8a05d3ac3d6a387d8b5a59626614eb67351ba926`. It starts at `# Terms of Service` and ends immediately before `# Privacy Policy`, preserving all bytes, including the trailing blank line. The source snapshot includes both policies and is fingerprinted by the app's consent records. This publication does not change that snapshot, its consent version, or the Privacy Policy.
+
+- Combined source snapshot SHA-256: `572d6ebc3f5ae237a82b68c6f5a8aaba536270ad8dd281232feacb42be44331e`.
+- Copied Terms section SHA-256: `ab572d4f16fcfa140c2e0f0ed5a809cce03fbd6f0092350a6a5158eed4e1ae59`.
+
+The build checks the Terms section hash, renders its headings, paragraphs and lists into `../terms.html`, and includes `/terms` in the sitemap. The complete agreement is readable without JavaScript. The legal summary links directly to `/terms`. The app's existing `/terms` redirect, consent links and consent records keep their original URL, which opens the summary and its working full-Terms link.
+
+Publish the generated `terms.html` together with the updated legal summary. A future material change to the agreement needs a new version and the corresponding app consent update; do not silently replace this versioned source. The legal hub describes model-training opt-out as a free request by email on every plan. Requests go to support; actual fulfillment, an in-app toggle and an automated fulfillment workflow were not verified in the app repository.

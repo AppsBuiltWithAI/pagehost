@@ -223,8 +223,8 @@ const STEPS = [
     n: "04",
     eyebrow: "Step four",
     title: "Ship it. Today.",
-    body: "Hit publish. Get a real URL with a real SSL certificate, hosted on infrastructure that just-works. Connect your own domain if you've got one. Edit forever: no rebuilds, no \"deployments,\" no waiting.",
-    bullets: ["Free hosting on appsbuiltwithai.com subdomain", "Custom domain in two clicks", "Edits go live instantly"],
+    body: "Hit publish. Get a real URL with a real SSL certificate, hosted on infrastructure that just-works. On Starter and above, you can connect your own domain. Edit forever: no rebuilds, no \"deployments,\" no waiting.",
+    bullets: ["Free hosting on an AppsBuiltWithAI subdomain", "Custom domains from Starter", "Edits go live instantly"],
     mock: <MockPublish/>,
   },
 ];
