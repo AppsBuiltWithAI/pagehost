@@ -372,7 +372,7 @@ function Trust() {
       n: "02",
       kicker: "Yours to keep",
       title: "Your code. Your data. Your call.",
-      body: "Your app is your app. Export the full source code anytime on Pro. Take it elsewhere, hand it to a developer, or keep it here: never anyone else's decision but yours.",
+      body: "Your app is your app. Export the full source code on Starter and above. Take it elsewhere, hand it to a developer, or keep it here: never anyone else's decision but yours.",
       spec: "MIT",
       specLabel: "Open export license",
       facts: ["Full source export", "Postgres dumps", "Walk away anytime"],
@@ -400,11 +400,11 @@ function Trust() {
     {
       n: "03",
       kicker: "Honest pricing",
-      title: "Start free. Cancel in two clicks.",
-      body: "Free forever to build, prototype, and ship your first apps. Pay only when something's working, and walk away in 30 seconds if it isn't. No \"talk to sales,\" no retention dance.",
+      title: "Start free. Cancel anytime.",
+      body: "Publish up to three public apps on Free. If you upgrade, you can cancel in Settings and keep your paid plan through the end of the billing period.",
       spec: "$0",
       specLabel: "Free, forever",
-      facts: ["No card to start", "Cancel · 2 clicks", "Refund · always"],
+      facts: ["No card to start", "Cancel in Settings"],
       art: (
         <svg viewBox="0 0 200 140" className="trust-art trust-art-receipt" preserveAspectRatio="xMidYMid meet">
           <defs>

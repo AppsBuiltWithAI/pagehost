@@ -19,13 +19,13 @@ const FT_GROUPS = [
     { ic: "phone", t: "Mobile first", d: "Every app is designed for phones first: thumb-sized buttons, fast loads, and installable to the home screen." },
   ]},
   { n: "02", t: "Launch", d: "Put it online and connect your tools.", tone: "sky", items: [
-    { ic: "globe", t: "Custom domains", d: "Put your app on your own domain. SSL is set up for you. Connect one you own, or register one in the app." },
+    { ic: "globe", t: "Custom domains", d: "Connect your own domain on Starter and above. SSL is set up for you." },
     { ic: "plug", t: "Connectors", d: "Gmail, Google Sheets, Slack, Notion and more. Your app works with the tools you already use.", link: ["See all connectors", "/connectors"] },
     { ic: "card", t: "Take payments with Stripe", d: "Connect your own Stripe account and ask for checkout or a subscription in plain English. Customers pay you directly through Stripe.", note: "Needs a Stripe account" },
   ]},
   { n: "03", t: "Grow", d: "Know what's working and catch what's broken.", tone: "mint", items: [
     { ic: "chart", t: "Analytics", d: "Visitors, signups and conversion on one screen, with a daily summary of what changed." },
-    { ic: "check", t: "Testing agent", d: "An agent walks through your app every morning and flags anything broken before your customers find it." },
+    { ic: "check", t: "Testing agent", d: "Run tests that walk through your app and flag problems. Available on Starter and above." },
   ]},
 ];
 
@@ -37,7 +37,7 @@ function FeaturesPage() {
           <Reveal className="ft-head">
             <div className="eyebrow">Features</div>
             <h1>Everything you need <em className="serif">to launch<br className="ft-br"/> an app you can sell.</em></h1>
-            <p>Every plan includes the full toolkit. You describe the app, and the platform handles the setup.</p>
+            <p>Describe your app and the platform handles the setup. Start free and upgrade when you need more features.</p>
           </Reveal>
           <Reveal delay={80}>
             <nav className="ft-jump" aria-label="Feature groups">

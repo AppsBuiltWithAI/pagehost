@@ -20,14 +20,6 @@ const SUPPORT_TOPICS = [
   { ic: "🤖", title: "AI builder", desc: "Prompts, edits, scenarios that aren't working.", count: 31 },
 ];
 
-const FAQ_QUICK = [
-  ["Do I need to know how to code?", "No. The whole point is: you describe what you want in plain English, the builder does the code."],
-  ["Can I cancel anytime?", "Yes. Two clicks, takes effect immediately. We keep your apps live on Free until they exceed limits."],
-  ["What if my idea is too complicated?", "Try Plan mode: it walks you through the brief. If your idea is genuinely beyond what we can build, we'll tell you up front."],
-  ["Can I export the code?", "Yes, on Pro and above. You own it: host it anywhere."],
-  ["Is my data private?", "Yes. Your data isn't used to train models. Full whitepaper on the Security page."],
-];
-
 const TUT_COURSE = {"first-app":"foundations","prompting":"prompting","plan-mode":"foundations","stripe":"connectors","shop":"landing","domains":"landing"};
 const TUT_STEP = { "first-app": "Start here", prompting: "Building", "plan-mode": "Planning", stripe: "Payments", shop: "Selling", domains: "Publishing" };
 

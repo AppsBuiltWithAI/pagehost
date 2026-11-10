@@ -8,6 +8,12 @@ const root = path.resolve(__dirname, '..');
 const APP_URL = 'https://app.appsbuiltwithai.com';
 const upstream = JSON.parse(fs.readFileSync(path.join(root, 'website/upstream.json'), 'utf8'));
 const sha256 = bytes => createHash('sha256').update(bytes).digest('hex');
+// The binding Terms are copied verbatim from the app's consent snapshot.
+// See website/README.md for the source revision and extraction boundary.
+const termsSource = fs.readFileSync(path.join(root, 'website/legal/terms-2026-09-03.txt'));
+if (sha256(termsSource) !== 'ab572d4f16fcfa140c2e0f0ed5a809cce03fbd6f0092350a6a5158eed4e1ae59') {
+  throw new Error('The published Terms differ from the 2026-09-03 consent snapshot');
+}
 
 // The snapshot must match the recorded upstream revision, apart from the documented modifications.
 function localPath(name) {
@@ -44,6 +50,7 @@ const titles = {
   '/affiliate': 'Affiliate program', '/affiliate-thanks': 'Thanks for applying',
   '/certified-builders': 'Certified builders', '/changelog': 'Change log',
   '/compare': `${BRAND} vs. the alternatives`, '/embed': '"Built with" badge',
+  '/terms': 'Terms of Service',
   '/how-it-works': 'How it works', '/summit': 'Summit 2026', '/use-cases': 'Use cases',
 };
 const descriptions = {
@@ -66,6 +73,7 @@ const descriptions = {
   '/how-it-works': 'See how AppsBuiltWithAI works. From prompt to published app in minutes — no coding required.',
   '/import': 'Import your existing website or project into AppsBuiltWithAI. Migrate seamlessly and start building with AI.',
   '/legal': 'AppsBuiltWithAI legal information — terms of service, privacy policy, and usage guidelines.',
+  '/terms': 'The full AppsBuiltWithAI Terms of Service, effective September 3, 2026.',
   '/meetups': 'Find AppsBuiltWithAI meetups near you. Connect with local builders and learn in person.',
   '/partners': 'Partner with AppsBuiltWithAI. Explore partnership opportunities for agencies, educators, and developers.',
   '/press': 'AppsBuiltWithAI press resources. Logos, brand assets, and company information for media coverage.',
@@ -176,6 +184,22 @@ const sourcePlugin = {
 
 function esc(s) { return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;'); }
 
+// This fixed snapshot uses only headings, paragraphs and flat bullet lists.
+// Escape every word, and add structure without changing the agreement's text.
+function renderTerms(source) {
+  return source.trim().split(/\n\n+/).map(block => {
+    const heading = block.match(/^(#{1,3}) (.+)$/);
+    if (heading) {
+      const level = heading[1].length;
+      return `<h${level}>${esc(heading[2])}</h${level}>`;
+    }
+    if (block.startsWith('- ')) {
+      return '<ul>\n' + block.split('\n').map(line => `<li>${esc(line.slice(2))}</li>`).join('\n') + '\n</ul>';
+    }
+    return `<p>${esc(block)}</p>`;
+  }).join('\n');
+}
+
 function page(title, head, body) {
   return `<!doctype html>
 <html lang="en">
@@ -221,7 +245,7 @@ async function main() {
   // Load SiteLayout's fonts from the HTML so they download alongside the bundle; SiteLayout skips its own copy.
   const fontHref = layout.match(/const FONT_HREF =\s*'([^']+)'/)[1].replace(/&/g, '&amp;');
   const ogImage = `${SITE_URL}/site/assets/og-image.png`;
-  function seoHead(route) {
+  function seoHead(route, loadApp = true) {
     const title = titleFor(route);
     const description = descriptionFor(route);
     const url = route === '/' ? SITE_URL + '/' : `${SITE_URL}${route}`;
@@ -242,13 +266,26 @@ async function main() {
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link id="abw-site-fonts" rel="stylesheet" href="${fontHref}" />
-  <link rel="stylesheet" href="/website.css?v=${version}" />
-  <script src="/website.js?v=${version}" defer></script>`;
+  <link rel="stylesheet" href="/website.css?v=${version}" />${loadApp ? `
+  <script src="/website.js?v=${version}" defer></script>` : ''}`;
   }
   for (const route of pageRoutes) {
     const file = route === '/' ? 'index.html' : route.slice(1) + '.html';
     fs.writeFileSync(path.join(root, file), page(titleFor(route), seoHead(route), '  <div id="root"></div>'));
   }
+
+  // Separate static document: the complete agreement is readable without JavaScript.
+  fs.writeFileSync(path.join(root, 'terms.html'), page(titleFor('/terms'), seoHead('/terms', false),
+    `  <div class="abw-site">
+    <main class="pad">
+      <div class="wrap-tight">
+        <nav aria-label="Legal navigation"><a href="/">AppsBuiltWithAI</a> · <a href="/legal#terms">Legal summary</a> · <a href="/legal#privacy">Privacy Policy</a></nav>
+        <article class="legal-body">
+${renderTerms(termsSource.toString('utf8'))}
+        </article>
+      </div>
+    </main>
+  </div>`));
 
   // Account pages live in the app.
   for (const [name, route] of Object.entries(authPages)) {
@@ -266,7 +303,7 @@ async function main() {
 
   // Generate sitemap.xml for search engines.
   const today = new Date().toISOString().slice(0, 10);
-  const sitemapEntries = pageRoutes.map(route => {
+  const sitemapEntries = [...pageRoutes, '/terms'].map(route => {
     const loc = route === '/' ? SITE_URL + '/' : `${SITE_URL}${route}`;
     const priority = route === '/' ? '1.0' : route === '/features' || route === '/pricing' ? '0.8' : '0.5';
     return `  <url>\n    <loc>${esc(loc)}</loc>\n    <lastmod>${today}</lastmod>\n    <priority>${priority}</priority>\n  </url>`;
@@ -280,7 +317,7 @@ async function main() {
     !fs.existsSync(path.join(root, pathname)) && !fs.existsSync(path.join(root, pathname + '.html')));
   if (missing.length) throw new Error(`Links without a destination: ${[...new Set(missing)].join(', ')}`);
 
-  console.log(`Built ${pageRoutes.length} pages, ${Object.keys(authPages).length} app redirects, and sitemap.xml (${version}).`);
+  console.log(`Built ${pageRoutes.length + 1} pages, ${Object.keys(authPages).length} app redirects, and sitemap.xml (${version}).`);
 }
 
 main().catch(error => { console.error(error); process.exit(1); });

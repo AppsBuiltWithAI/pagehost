@@ -3,8 +3,6 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { Reveal } from './part1.jsx';
 /* ============= LEGAL HUB: Privacy / Cookie / Concerns / Terms ============= */
 
-const FULL_TERMS = "https://app.appsbuiltwithai.com/terms";
-
 const LEGAL_TABS = [
   { id: "privacy", label: "Privacy Policy", updated: "October 20, 2026", href: "/legal#privacy", h: "Privacy Policy", em: "Your data stays yours." },
   { id: "cookie", label: "Cookie Policy", updated: "October 20, 2026", href: "/legal#cookie", h: "Cookie Policy", em: "What runs, and your choices." },
@@ -161,7 +159,7 @@ function PrivacyBody() {
       <H2 id="ai-training">4. AI and your data</H2>
       <p>To build and check your app, the builder sends relevant prompts, conversation history, attached content and app code to its configured AI provider. Anthropic is the default provider. Its commercial API does not use inputs and outputs for model training by default; different terms can apply if data use is explicitly enabled.</p>
       <p>If image or video generation is available and you use it, prompts are also sent through KIE.ai to the selected image or video model. Other configured AI services may have different data-handling terms. Contact us if you need to confirm which providers will receive your content before using a feature.</p>
-      <p>We may use anonymized or aggregated data to improve AI features. Identifiable customer content is not used for general model training without permission. You can request an account-level model-training opt-out at <a href="mailto:support@appsbuiltwithai.com">support@appsbuiltwithai.com</a>, free on every plan. Processing a prompt to produce a response is different from training a model.</p>
+      <p>We may use anonymized or aggregated data to improve AI features. Identifiable customer content is not used for general model training without permission. You can request an account-level model-training opt-out by emailing <a href="mailto:support@appsbuiltwithai.com">support@appsbuiltwithai.com</a>, free on every plan. Requests are handled through support. Processing a prompt to produce a response is different from training a model.</p>
       <p>Please don't put sensitive data into the builder, such as health records, government ID numbers or payment card numbers.</p>
 
       <H2 id="how-we-use">5. Purposes and legal bases</H2>
@@ -316,7 +314,7 @@ function ConcernsBody() {
 function TermsBody() {
   return (
     <>
-      <p>This is a plain-English summary of our <a href={FULL_TERMS}>Terms of Service</a>. The full Terms are the binding agreement, and they apply if anything here differs, except the automatic credit return in section 7, which we apply in addition to them.</p>
+      <p>This is a plain-English summary of our Terms of Service. The full Terms are the binding agreement, and they apply if anything here differs, except the automatic credit return in section 7, which we apply in addition to them. <a href="/terms">Read the full Terms of Service</a>.</p>
 
       <H2 id="agreement">1. The agreement</H2>
       <p>The agreement is between you and Miestro, Inc., d/b/a AppsBuiltWithAI. By creating an account or using AppsBuiltWithAI, you agree to the Terms. If we make a material change, we'll give you at least 30 days' notice by email or in the app before it takes effect, unless the law or an urgent security issue needs a shorter period.</p>
@@ -331,7 +329,7 @@ function TermsBody() {
 
       <H2 id="ownership">3. Who owns what</H2>
       <p>You own what you put in and what the builder makes for you: your prompts, your files, your apps and the AI output, subject to any rights that third parties have in them. We own the AppsBuiltWithAI platform and the usage data it generates.</p>
-      <p>The full Terms grant permission to host, copy, process and display content to operate and improve the service, including AI features. Identifiable customer content is not used for general model training without permission, while anonymized or aggregated data may be used for improvement. You can request a model-training opt-out at any time, free on every plan, by emailing <a href="mailto:support@appsbuiltwithai.com">support@appsbuiltwithai.com</a>. Processing your prompt to build an app is different from model training.</p>
+      <p>The full Terms grant permission to host, copy, process and display content to operate and improve the service, including AI features. Identifiable customer content is not used for general model training without permission, while anonymized or aggregated data may be used for improvement. You can request a model-training opt-out at any time, free on every plan, by emailing <a href="mailto:support@appsbuiltwithai.com">support@appsbuiltwithai.com</a>. Requests are handled through support. Processing your prompt to build an app is different from model training.</p>
 
       <H2 id="ai-output">4. AI output</H2>
       <p>AI can make mistakes. Review and test what the builder makes before you rely on it, especially for anything medical, legal, financial or otherwise high-risk. Output may look like what other people get from similar prompts, and we don't guarantee it's accurate, unique or free of other people's rights.</p>
