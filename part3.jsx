@@ -111,10 +111,10 @@ function Pricing() {
 /* ============= FAQ ============= */
 function FAQ() {
   const items = [
-    { q: "Do I really not need to know any code?", a: "Truly. If you can describe what you want in a sentence, AppsBuiltWithAI can build it. You'll never see, write, or read code unless you want to (and on Pro, you can — full export, your code)." },
+    { q: "Do I really not need to know any code?", a: "Truly. If you can describe what you want in a sentence, AppsBuiltWithAI can build it. You'll never see, write, or read code unless you want to. Starter and above include full source code export." },
     { q: "What if it builds the wrong thing?", a: "Just tell it. \"Move the form to the top.\" \"Use my brand pink.\" \"Add a confirmation email.\" The editor agent edits live while you watch." },
     { q: "How long does it actually take?", a: "First working version: usually 1–3 minutes. Polished and shareable: typically under 10 minutes. We measure it. The median is 9." },
-    { q: "Is my app really mine?", a: "100% yours. On Pro, export the full source code anytime — yours to host, modify, or hand to a developer. No lock-in." },
+    { q: "Is my app really mine?", a: "100% yours. On Starter and above, export the full source code and host it, modify it, or hand it to a developer. No lock-in." },
     { q: "What if I get stuck?", a: "Ask in plain words, read our friendly guides, or chat with a real human (yes, even on Free)." },
     { q: "How is this different from Lovable, Replit, Bolt?", a: "They're built for developers who want AI help. AppsBuiltWithAI is built for everyone else — small businesses, freelancers, side-project people. No \"prompt engineering,\" no dev jargon, no IDE." },
   ];

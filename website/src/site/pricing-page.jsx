@@ -3,10 +3,7 @@ import { Reveal, ArrowRight, Check } from './part1.jsx';
 import { FAQ, FinalCTA } from './part3.jsx';
 /* PRICING, standalone page. Source of truth: dashboard Settings, Plan and credits. */
 
-/* Prices and ladders mirror server/config/plans.js exactly (KAN-466). The
-   opening step is the headline price; every step above keeps that price per
-   credit, up to the plan's ceiling. Credits get cheaper from plan to plan,
-   19 cents on Starter down to about 14 on Scale. */
+/* Prices and credit tiers mirror the app's billing catalog in server/config/plans.js. */
 const PLAN_OPTIONS = {
   starter: {
     name: "Starter",
@@ -16,6 +13,7 @@ const PLAN_OPTIONS = {
       "Custom domain with SSL, no badge",
       "Security scan on publish",
       "GitHub sync and code export",
+      "Testing agent",
       "Credits roll over 1 month",
       "Email support",
     ],
@@ -23,14 +21,7 @@ const PLAN_OPTIONS = {
       { credits: 100, monthly: 19, annual: 15 },
       { credits: 200, monthly: 38, annual: 30 },
       { credits: 400, monthly: 76, annual: 61 },
-      { credits: 800, monthly: 152, annual: 122 },
-      { credits: 1200, monthly: 223, annual: 178, save: 2 },
-      { credits: 2000, monthly: 365, annual: 292, save: 4 },
-      { credits: 3000, monthly: 536, annual: 429, save: 6 },
-      { credits: 4000, monthly: 699, annual: 559, save: 8 },
-      { credits: 5000, monthly: 855, annual: 684, save: 10 },
-      { credits: 7500, monthly: 1283, annual: 1026, save: 10 },
-      { credits: 10000, monthly: 1710, annual: 1368, save: 10 },
+      { credits: 1000, monthly: 190, annual: 152 },
     ],
   },
   growth: {
@@ -42,19 +33,14 @@ const PLAN_OPTIONS = {
       "Everything in Starter, plus",
       "Work board, backlog and epics",
       "Feature planning with generated tickets",
-      "Testing agent on acceptance criteria",
       "Priority build queue",
       "Priority chat support",
     ],
     credits: [
-      { credits: 250, monthly: 49, annual: 39 },
-      { credits: 500, monthly: 98, annual: 78 },
-      { credits: 1000, monthly: 196, annual: 157 },
-      { credits: 2000, monthly: 392, annual: 314 },
-      { credits: 3000, monthly: 576, annual: 461, save: 2 },
-      { credits: 5000, monthly: 941, annual: 753, save: 4 },
-      { credits: 7500, monthly: 1382, annual: 1106, save: 6 },
-      { credits: 10000, monthly: 1803, annual: 1442, save: 8 },
+      { credits: 300, monthly: 49, annual: 39 },
+      { credits: 600, monthly: 98, annual: 78 },
+      { credits: 1200, monthly: 196, annual: 157 },
+      { credits: 2500, monthly: 408, annual: 327 },
     ],
   },
   pro: {
@@ -66,15 +52,13 @@ const PLAN_OPTIONS = {
       "Knowledge base for your style",
       "Design systems and theming",
       "Team roles and per-seat credit caps",
-      "Business hosting option",
     ],
     credits: [
-      { credits: 500, monthly: 99, annual: 79 },
-      { credits: 1000, monthly: 198, annual: 158 },
-      { credits: 2000, monthly: 396, annual: 317 },
-      { credits: 4000, monthly: 792, annual: 634 },
-      { credits: 6000, monthly: 1164, annual: 931, save: 2 },
-      { credits: 10000, monthly: 1901, annual: 1521, save: 4 },
+      { credits: 650, monthly: 99, annual: 79 },
+      { credits: 1300, monthly: 198, annual: 158 },
+      { credits: 2600, monthly: 396, annual: 317 },
+      { credits: 5200, monthly: 792, annual: 634 },
+      { credits: 10000, monthly: 1523, annual: 1218 },
     ],
   },
   scale: {
@@ -85,15 +69,13 @@ const PLAN_OPTIONS = {
       "The biggest credit ladder",
       "Credits roll over 2 months",
       "Unlimited workspaces",
-      "Business hosting included",
       "Priority support",
     ],
     credits: [
-      { credits: 1000, monthly: 199, annual: 159 },
-      { credits: 2000, monthly: 398, annual: 318 },
-      { credits: 4000, monthly: 796, annual: 637 },
-      { credits: 8000, monthly: 1592, annual: 1274 },
-      { credits: 10000, monthly: 1950, annual: 1560, save: 2 },
+      { credits: 1400, monthly: 199, annual: 159 },
+      { credits: 2800, monthly: 398, annual: 318 },
+      { credits: 5600, monthly: 796, annual: 637 },
+      { credits: 10000, monthly: 1421, annual: 1137 },
     ],
   },
 };
@@ -101,8 +83,8 @@ const PLAN_OPTIONS = {
 const ROLLOVER = { starter: "1 month", growth: "1 month", pro: "2 months", scale: "2 months" };
 
 const PAID = ["starter", "growth", "pro", "scale"];
-const FREE_PERKS = ["Planning agent to plan out your project", "Data feasibility check", "1 live app on appsbuiltwithai.com", "Auth, database and analytics", "Community support"];
-const ENT_PERKS = ["Unlimited seats, pooled credits", "SSO, SAML and SCIM", "Custom DPA", "Self-host or VPC option", "24/7 support, 99.99% SLA", "Dedicated account team"];
+const FREE_PERKS = ["Planning agent to plan out your project", "Data feasibility check", "Up to 3 public apps", "Auth, database and analytics", "Community support"];
+const ENT_PERKS = ["Unlimited seats, pooled credits", "SSO, SAML and SCIM", "Custom DPA", "Self-host or VPC option", "Contractual SLA", "Dedicated account team"];
 
 function BillingToggle({ annual, setAnnual }) {
   return (
@@ -120,12 +102,12 @@ function PricingHero({ annual, setAnnual }) {
         <Reveal>
           <div className="eyebrow">Pricing</div>
           <h1 className="pp-h">Start free. <em>Pay when it works.</em></h1>
-          <p className="pp-lead">Pick your plan, then pick your credits. Volume moves on a dropdown inside the plan, so growing never means a new contract. Credits roll over, and the hard spending cap is on by default.</p>
+          <p className="pp-lead">Pick a plan and choose how many credits you need. Paid plans renew automatically on your selected billing schedule until you cancel in Settings.</p>
         </Reveal>
         <Reveal delay={100}>
           <div className="pp-hero-row">
             <BillingToggle annual={annual} setAnnual={setAnnual}/>
-            <div className="pp-meta"><span>No card to start</span><span>Cancel in two clicks</span><span>Never auto-charged</span></div>
+            <div className="pp-meta"><span>No card to start</span><span>Cancel anytime</span></div>
           </div>
         </Reveal>
       </div>
@@ -145,11 +127,14 @@ function PlanCard({ id, annual, delay }) {
         <div className="pp-name">{o.name}</div>
         <div className="pp-blurb">{o.blurb}</div>
         <div className="pp-price"><span className="pp-cur">$</span>{price.toLocaleString()}<span className="pp-per">/mo</span></div>
-        <div className="pp-billed">{annual ? "Billed annually" : "Billed monthly"}</div>
+        <div className="pp-billed">
+          {annual ? "Billed annually" : "Billed monthly"}<br/>
+          {annual ? `$${tier.monthly.toLocaleString()}/mo billed monthly` : `$${tier.annual.toLocaleString()}/mo billed annually`}
+        </div>
         <label className="pp-sel">
           <span className="pp-sel-l">Credits per month</span>
           <select value={ti} onChange={(e) => setTi(parseInt(e.target.value, 10))} aria-label={o.name + " credits per month"}>
-            {o.credits.map((c, i) => <option key={i} value={i}>{c.credits.toLocaleString()} credits{c.save ? " · save " + c.save + "%" : ""}</option>)}
+            {o.credits.map((c, i) => <option key={i} value={i}>{c.credits.toLocaleString()} credits</option>)}
           </select>
         </label>
         <a className={"btn btn-block " + (o.featured ? "btn-coral" : "btn-ink")} href={`/signup?plan=${id}&credits=${tier.credits}&billing=${annual ? "annual" : "monthly"}`}>Choose {o.name}</a>
@@ -172,7 +157,7 @@ function PlanGrid({ annual }) {
               <div className="pp-blurb">See if the idea works</div>
               <div className="pp-price"><span className="pp-cur">$</span>0<span className="pp-per">/mo</span></div>
               <div className="pp-billed">Free forever, no card</div>
-              <div className="pp-sel pp-sel-static"><span className="pp-sel-l">Credits per month</span><b>50 <small>+100 bonus in month one</small></b></div>
+              <div className="pp-sel pp-sel-static"><span className="pp-sel-l">Credits to start</span><b>50</b></div>
               <a className="btn btn-block btn-outline" href="/signup?plan=free">Start free</a>
               <ul className="pp-perks">{FREE_PERKS.map((x) => <li key={x}><Check/>{x}</li>)}</ul>
             </div>
@@ -214,11 +199,15 @@ const COL_HREF = {
 
 const ROWS = [
   { section: "Plans and credits" },
-  { feat: "Credits included", free: "50 + 100 bonus", starter: "100", growth: "250", pro: "500", scale: "1,000", enterprise: "Pooled" },
-  { feat: "Credit steps in plan", free: <N/>, starter: "11 steps, up to 10,000", growth: "8 steps, up to 10,000", pro: "6 steps, up to 10,000", scale: "5 steps, up to 10,000", enterprise: "Custom" },
+  { feat: "Credits included", free: "50 to start", enterprise: "Pooled",
+    ...Object.fromEntries(PAID.map((id) => [id, `${PLAN_OPTIONS[id].credits[0].credits.toLocaleString()}/mo`])) },
+  { feat: "Credit steps in plan", free: <N/>, enterprise: "Custom",
+    ...Object.fromEntries(PAID.map((id) => {
+      const tiers = PLAN_OPTIONS[id].credits;
+      return [id, `${tiers.length} steps, up to ${tiers[tiers.length - 1].credits.toLocaleString()}`];
+    })) },
   { feat: "Credit rollover", free: <N/>, starter: "1 month", growth: "1 month", pro: "2 months", scale: "2 months", enterprise: "Custom" },
-  { feat: "Hard spending cap", free: <Y/>, starter: <Y/>, growth: <Y/>, pro: <Y/>, scale: <Y/>, enterprise: "Custom" },
-  { feat: "Never auto-charged", free: <Y/>, starter: <Y/>, growth: <Y/>, pro: <Y/>, scale: <Y/>, enterprise: <Y/> },
+  { feat: "Automatic subscription renewal", free: <N/>, starter: <Y/>, growth: <Y/>, pro: <Y/>, scale: <Y/>, enterprise: "Custom" },
 
   { section: "Plan before you build" },
   { feat: "Planning agent", free: <Y/>, starter: <Y/>, growth: <Y/>, pro: <Y/>, scale: <Y/>, enterprise: <Y/> },
@@ -235,17 +224,16 @@ const ROWS = [
   { feat: "Knowledge base for your style", free: <N/>, starter: <N/>, growth: <N/>, pro: <Y/>, scale: <Y/>, enterprise: <Y/> },
 
   { section: "Shipping safely" },
-  { feat: "Testing agent", free: <N/>, starter: <N/>, growth: <Y/>, pro: <Y/>, scale: <Y/>, enterprise: <Y/> },
+  { feat: "Testing agent", free: <N/>, starter: <Y/>, growth: <Y/>, pro: <Y/>, scale: <Y/>, enterprise: <Y/> },
   { feat: "Security scan on publish", free: <N/>, starter: <Y/>, growth: <Y/>, pro: <Y/>, scale: <Y/>, enterprise: <Y/> },
   { feat: "Publish visibility controls", free: <N/>, starter: <Y/>, growth: <Y/>, pro: <Y/>, scale: <Y/>, enterprise: <Y/> },
   { feat: "Version history and rollback", free: <Y/>, starter: <Y/>, growth: <Y/>, pro: <Y/>, scale: <Y/>, enterprise: <Y/> },
 
   { section: "Publishing" },
-  { feat: "Live apps", free: "1", starter: "Unlimited", growth: "Unlimited", pro: "Unlimited", scale: "Unlimited", enterprise: "Unlimited" },
-  { feat: "appsbuiltwithai.com subdomain", free: <Y/>, starter: <Y/>, growth: <Y/>, pro: <Y/>, scale: <Y/>, enterprise: <Y/> },
+  { feat: "Live apps", free: "3", starter: "Unlimited", growth: "Unlimited", pro: "Unlimited", scale: "Unlimited", enterprise: "Unlimited" },
+  { feat: "AppsBuiltWithAI subdomain", free: <Y/>, starter: <Y/>, growth: <Y/>, pro: <Y/>, scale: <Y/>, enterprise: <Y/> },
   { feat: "Custom domain with SSL", free: <N/>, starter: <Y/>, growth: <Y/>, pro: <Y/>, scale: <Y/>, enterprise: <Y/> },
   { feat: "Remove the badge", free: <N/>, starter: <Y/>, growth: <Y/>, pro: <Y/>, scale: <Y/>, enterprise: <Y/> },
-  { feat: "Hosting", free: "Standard", starter: "Standard", growth: "Pro", pro: "Business", scale: "Business", enterprise: "99.99% SLA" },
 
   { section: "Connectors" },
   { feat: "Stripe, Gmail, Drive", free: <Y/>, starter: <Y/>, growth: <Y/>, pro: <Y/>, scale: <Y/>, enterprise: <Y/> },
@@ -264,7 +252,7 @@ const ROWS = [
   { feat: "Multiple workspaces", free: <N/>, starter: <N/>, growth: <N/>, pro: "3", scale: "Unlimited", enterprise: "Unlimited" },
 
   { section: "Security and admin" },
-  { feat: "Data opt-out, no AI training", free: <N/>, starter: <N/>, growth: <N/>, pro: <Y/>, scale: <Y/>, enterprise: <Y/> },
+  { feat: "Model-training opt-out by email", free: <Y/>, starter: <Y/>, growth: <Y/>, pro: <Y/>, scale: <Y/>, enterprise: <Y/> },
   { feat: "SSO, SAML, SCIM", free: <N/>, starter: <N/>, growth: <N/>, pro: <N/>, scale: <N/>, enterprise: <Y/> },
   { feat: "Custom DPA", free: <N/>, starter: <N/>, growth: <N/>, pro: <N/>, scale: <Y/>, enterprise: <Y/> },
 
@@ -273,10 +261,18 @@ const ROWS = [
   { feat: "Human support", free: <N/>, starter: "Email", growth: "Priority chat", pro: "Priority chat", scale: "Priority", enterprise: "Dedicated" },
   { feat: "Early access to beta", free: <N/>, starter: <N/>, growth: <N/>, pro: <Y/>, scale: <Y/>, enterprise: <Y/> },
   { feat: "Onboarding session", free: <N/>, starter: <N/>, growth: <N/>, pro: <N/>, scale: <Y/>, enterprise: <Y/> },
-  { feat: "24/7 with SLA", free: <N/>, starter: <N/>, growth: <N/>, pro: <N/>, scale: <N/>, enterprise: <Y/> },
+  { feat: "Contractual SLA", free: <N/>, starter: <N/>, growth: <N/>, pro: <N/>, scale: <N/>, enterprise: <Y/> },
 ];
 
-const COL_PRICE = { free: "$0", starter: "From $19", growth: "From $49", pro: "From $99", scale: "From $199", enterprise: "Custom" };
+function ComparePrice({ id }) {
+  const tier = PLAN_OPTIONS[id]?.credits[0];
+  return (
+    <span className="pp-th-p">
+      {tier ? <>From ${tier.monthly}/mo billed monthly<br/>From ${tier.annual}/mo billed annually</>
+        : id === "free" ? "$0" : "Custom"}
+    </span>
+  );
+}
 
 function FullCompare() {
   const [all, setAll] = usePrState(false);
@@ -300,7 +296,7 @@ function FullCompare() {
                       <span className="pp-th">
                         {c === "growth" && <span className="pp-th-tag">Popular</span>}
                         <b>{COL_LABEL[c].replace(" ★", "")}</b>
-                        <span className="pp-th-p">{COL_PRICE[c]}</span>
+                        <ComparePrice id={c}/>
                         <a className={"pp-th-btn" + (c === "growth" ? " on" : "")} href={COL_HREF[c]}>{c === "free" ? "Start free" : c === "enterprise" ? "Contact" : "Choose"}</a>
                       </span>
                     </th>
@@ -328,10 +324,10 @@ function FullCompare() {
 /* ============= promises ============= */
 function PriceGuarantee() {
   const items = [
-    { t: "Spending cap by default", s: "On for every paid plan, and we never auto-charge. Adjust or disable it in Settings." },
+    { t: "Cancel in Settings", s: "You can cancel anytime. Your paid plan stays active through the end of your billing period." },
     { t: "Credits roll over", s: "One month on Starter and Growth, two on Pro and Scale. Unused work is not lost." },
     { t: "Your code is yours", s: "Export the full source and sync to GitHub from Starter. No lock-in." },
-    { t: "Price-locked forever", s: "If we raise prices, your rate stays the same. Period." },
+    { t: "One-time credit packs", s: "On a paid plan, buy extra credits in Plan & credits." },
   ];
   return (
     <section className="pp-promise" data-screen-label="guarantee">
@@ -361,9 +357,10 @@ function PricingPage() {
       <FullCompare/>
       <PriceGuarantee/>
       <FAQ extra={[
-        { q: "Do unused credits roll over?", a: "Yes, on every paid plan. Unused credits carry over for one month on Starter and Growth, and two months on Pro and Scale. Free plan credits reset each month." },
+        { q: "Do unused credits roll over?", a: "Yes, on every paid plan. Unused credits carry over for one month on Starter and Growth, and two months on Pro and Scale. Free comes with 50 credits to start." },
+        { q: "Can I request a model-training opt-out?", a: <>Yes. Email <a href="mailto:support@appsbuiltwithai.com">support@appsbuiltwithai.com</a> to request a model-training opt-out at no cost on any plan. See the <a href="/legal#ai-training">Privacy Policy</a> for details.</> },
         { q: "Can I publish to the App Store or Google Play?", a: "Not yet. Every app works on phones as a mobile-friendly web app people can add to their home screen. Native app store publishing is on the roadmap." },
-        { q: "What happens if I run out of credits?", a: "Building pauses until your credits refresh or you add more. Your published apps stay live, and your customers can keep using them. Spending caps are on by default, so you're never charged by surprise." },
+        { q: "What happens if I run out of credits?", a: "Building pauses when you run out of credits. On a paid plan, buy more credits or wait for your next allowance. Your published apps stay live." },
       ]}/>
       <FinalCTA/>
     </div>

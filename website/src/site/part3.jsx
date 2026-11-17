@@ -9,22 +9,22 @@ function Pricing() {
     {
       name: "Free", sub: "Try it on for size",
       monthly: 0, annual: 0,
-      eyebrow: "50 credits / mo · +100 bonus month one",
-      features: ["Up to 3 public apps", "Planning agent to plan out your project", "Data feasibility check", "appsbuiltwithai.com subdomain", "Community support"],
+      eyebrow: "50 credits to start",
+      features: ["Up to 3 public apps", "Planning agent to plan out your project", "Data feasibility check", "AppsBuiltWithAI subdomain", "Community support"],
       cta: "Start free", btn: "btn-outline", featured: false,
     },
     {
       name: "Starter", sub: "Your first real product",
       monthly: 19, annual: 15,
       eyebrow: "100 credits / month",
-      features: ["Unlimited live apps", "Custom domain, no badge", "Security scan on publish", "Credits roll over 1 month", "GitHub sync and code export", "Email support"],
+      features: ["Unlimited live apps", "Custom domain, no badge", "Security scan on publish", "Credits roll over 1 month", "GitHub sync and code export", "Testing agent", "Email support"],
       cta: "Get Starter", btn: "btn-outline", featured: false, from: true,
     },
     {
       name: "Growth", sub: "Shipping regularly",
       monthly: 49, annual: 39,
       eyebrow: "300 credits / month",
-      features: ["Everything in Starter, plus", "Work board, backlog and epics", "Feature planning with tickets", "Testing agent", "Priority build queue", "Priority chat support"],
+      features: ["Everything in Starter, plus", "Work board, backlog and epics", "Feature planning with tickets", "Priority build queue", "Priority chat support"],
       cta: "Go Growth", btn: "btn-coral", featured: true, tag: "MOST POPULAR", from: true,
     },
     {
@@ -38,7 +38,7 @@ function Pricing() {
       name: "Scale", sub: "Heavy building, the biggest ladder",
       monthly: 199, annual: 159,
       eyebrow: "1,400 credits / mo, up to 10,000",
-      features: ["Everything in Pro, plus", "The biggest credit ladder", "Audit log and access review", "Business hosting", "Priority support"],
+      features: ["Everything in Pro, plus", "The biggest credit ladder", "Audit log and access review", "Priority support"],
       cta: "Choose credits", btn: "btn-outline", featured: false, from: true,
     },
   ];
@@ -48,7 +48,7 @@ function Pricing() {
       <div className="wrap">
         <Reveal className="sec-head">
           <h2>Start free.<br/> <em>Upgrade only when it's working.</em></h2>
-          <p>Predictable bills. Credits roll over. Hard spending cap on by default: no Replit-style surprise invoices.</p>
+          <p>Choose how many credits you need. Paid plans renew automatically until you cancel.</p>
           <div style={{ marginTop: 28, display: "flex", justifyContent: "center" }}>
             <div className="price-toggle">
               <button className={!annual ? "active" : ""} onClick={() => setBilling("monthly")}>Monthly</button>
@@ -74,7 +74,10 @@ function Pricing() {
                     {!isFree && <small> / mo</small>}
                   </div>
                   <div className="price-billed">
-                    {isFree ? "Free forever · no card required" : annual ? "Billed annually · save 20%" : "Billed monthly"}
+                    {isFree ? "Free forever, no card required" : <>
+                      {annual ? "Billed annually" : "Billed monthly"}<br/>
+                      {annual ? `$${t.monthly}/mo billed monthly` : `$${t.annual}/mo billed annually`}
+                    </>}
                   </div>
                   {t.eyebrow && <div className="price-credit-eyebrow">{t.eyebrow}</div>}
                   <ul className="price-feat">
@@ -91,7 +94,7 @@ function Pricing() {
 
         <Reveal>
           <div className="price-compare-cta">
-            <span><strong>Around 19 to 20 cents a credit</strong> at entry on every plan, improving as you climb the ladder inside it. Thirty credit steps in total, all on a dropdown.</span>
+            <span><strong>Choose how many credits you need</strong> on any paid plan.</span>
             <a className="btn btn-outline" href="/pricing">Compare every plan <ArrowRight/></a>
           </div>
         </Reveal>
@@ -99,12 +102,12 @@ function Pricing() {
         <Reveal>
           <div className="price-payg">
             <div className="price-payg-left">
-              <div className="price-payg-eyebrow">Or pay as you go</div>
-              <h3>Just need a few builds? <em>Top up with credits.</em></h3>
-              <p>Buy build credits, no subscription. 100 credits for $25 · 500 for $115 · 1,000 for $220. <strong>Valid for 12 months.</strong> Roughly: <strong>1 small edit ≈ 1 credit</strong>, <strong>a new feature ≈ 25</strong>, <strong>a full app ≈ 100</strong>.</p>
+              <div className="price-payg-eyebrow">One-time credit packs</div>
+              <h3>Need more credits? <em>Top up.</em></h3>
+              <p>On a paid plan, you can buy one-time credit packs in Plan &amp; credits. Get 100 credits for $25, 500 for $115, or 1,000 for $220.</p>
             </div>
             <div className="price-payg-right">
-              <a className="btn btn-outline" href="/signup?plan=payg">Buy credits →</a>
+              <a className="btn btn-outline" href="https://app.appsbuiltwithai.com/dashboard/settings/plan">Buy credits →</a>
               <div className="price-payg-edu">🎓 Students &amp; teachers: <a href="mailto:support@appsbuiltwithai.com?subject=Student%20or%20teacher%20discount">50% off any plan</a></div>
             </div>
           </div>
@@ -122,7 +125,7 @@ function FAQ({ extra = [] } = {}) {
     { q: "How long does it actually take?", a: "First working version: usually 1 to 3 minutes. Polished and shareable: typically under 10 minutes. We measure it. The median is 9." },
     { q: "Is my app really mine?", a: "100% yours. From Starter, export the full source code anytime and sync it to GitHub. Yours to host, modify, or hand to a developer. No lock-in." },
     { q: "What if I get stuck?", a: "Ask in plain words, read our friendly guides, or chat with a real human (yes, even on Free)." },
-    { q: "How is this different from Base44, Lovable, Replit?", a: "They start at the prompt. We start at the plan: a brief you approve, a check that the data your idea needs can actually be sourced, and a flag if it lands somewhere regulated. Then a testing agent and a security scan before it ships. That's the difference between a demo and something you can sell." },
+    { q: "How is this different from Base44, Lovable, Replit?", a: "They start at the prompt. We start at the plan: a brief you approve, a check that the data your idea needs can actually be sourced, and a flag if it lands somewhere regulated. Starter and above also include the testing agent and a security scan on publish. That's the difference between a demo and something you can sell." },
   ];
   const items = [...base, ...extra];
   const [open, setOpen] = React.useState(0);

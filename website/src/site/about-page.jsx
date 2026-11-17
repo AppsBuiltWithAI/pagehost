@@ -4,13 +4,13 @@ const AB_BELIEFS = [
   { t: "Plain English is a programming language", d: "If you can describe it, you should be able to build it. The gap between an idea and working software should not be a computer science degree." },
   { t: "Built with our community", d: "We build in the open and listen closely to the people using the platform every day." },
   { t: "Technology for the many", d: "Bakers, coaches, consultants, organizers. The next million apps will not come from engineers. They will come from the people who know their problem best." },
-  { t: "No surprises, ever", d: "Honest pricing, spending caps by default, and your data stays yours. Democratizing technology means being worthy of the trust that comes with it." },
+  { t: "Clear pricing", d: "Choose a monthly or annual plan and see what it costs before you subscribe. Your data stays yours." },
 ];
 
 const AB_MILESTONES = [
   { y: "2025", t: "AppsBuiltWithAI begins", d: "We set out to let anyone describe an app in plain English and get a working product they can sell." },
   { y: "2026", t: "Apps go live", d: "Bakeries, studios, consultancies and community groups run on apps their owners described themselves." },
-  { y: "Next", t: "More ways to build and sell", d: "Code export, developer handoff and a marketplace so builders can sell what they make.", next: true },
+  { y: "Next", t: "More ways to build and sell", d: "A marketplace so builders can sell what they make.", next: true },
 ];
 
 const AB_NUMS_UNUSED = [

@@ -8,8 +8,13 @@
     "public/site": "site"
   },
   "modified": {
+    "src/site/about-page.jsx": "The launch roadmap no longer lists shipped source export as upcoming, and the pricing value describes the labeled billing periods.",
+    "src/site/compare-page.jsx": "Testing and source export copy identifies Starter as the first eligible plan. The unverified spending-cap claim is removed.",
+    "src/site/how-it-works-page.jsx": "Publishing copy identifies Starter as the first plan with custom domains.",
+    "src/site/part2.jsx": "Plan and FAQ copy identifies Starter source export and end-of-period cancellation.",
+    "src/site/pricing-page.jsx": "Prices, credit tiers, Free public app allowance, Starter testing, hosting copy, and model-training opt-out follow the app and its published policy.",
     "src/site/part1.jsx": "The top announcement banner is removed, Import projects is removed from the Features menu, the Resources dropdown (Education, Tutorials) is removed, and the phone menu closes when one of its links is tapped.",
-    "src/site/features-page.jsx": "The hero headline has a line break after \"launch\" (class ft-br, shown on wider screens by website/overrides.css).",
+    "src/site/features-page.jsx": "The hero headline has a line break after \"launch\" (class ft-br, shown on wider screens by website/overrides.css). The custom domain and testing copy names Starter.",
     "src/site/use-cases-page.jsx": "Use case images point to the new WebP screenshots (thumbnails for the jump chips, fixed dimensions), and the bakery quote reads \"We take\".",
     "public/site/site-images/v2/use-cases/usecase-consultants.jpg": "Replaced by usecase-consultants.webp (compressed WebP).",
     "public/site/site-images/v2/use-cases/usecase-creators.jpg": "Replaced by usecase-creators.webp (compressed WebP).",
@@ -18,7 +23,7 @@
     "public/site/site-images/v2/use-cases/usecase-sellers.jpg": "Replaced by usecase-sellers.webp (compressed WebP).",
     "public/site/site-images/v2/use-cases/usecase-studios.jpg": "Replaced by usecase-studios.webp (compressed WebP).",
     "src/site/styles/use-cases.css": "Use case image frames match the 1400x788 screenshots instead of cropping them to 5:4.",
-    "src/site/part3.jsx": "Footer drops the Tutorials, Education, Status, Roadmap and Change log links (Support sits under Help), the unconnected newsletter form is commented out, and the language switcher is removed.",
+    "src/site/part3.jsx": "Footer drops the Tutorials, Education, Status, Roadmap and Change log links (Support sits under Help), the unconnected newsletter form is commented out, and the language switcher is removed. Landing plan cards and FAQ reflect current billing, Free credits, and Starter testing.",
     "public/site/assets/avatars/devon.png": "Replaced by devon.webp (compressed WebP).",
     "public/site/assets/avatars/marcus.png": "Replaced by marcus.webp (compressed WebP).",
     "public/site/assets/avatars/mei.png": "Replaced by mei.webp (compressed WebP).",
@@ -65,11 +70,12 @@
     "public/site/site-images/v2/resources/prompting.png": "Replaced by prompting.webp (compressed WebP).",
     "public/site/site-images/v2/resources/shop.png": "Replaced by shop.webp (compressed WebP).",
     "public/site/site-images/v2/resources/stripe.png": "Replaced by stripe.webp (compressed WebP).",
-    "src/site/legal-page.jsx": "Legal hub rewritten to match how the product works (checked against the app repo), summarizing the app Terms of Service; tabs follow the address hash.",
-    "src/site/waitlist-flow.jsx": "Demo video opens in a native dialog with focus, Escape and backdrop handling.",
+    "src/site/legal-page.jsx": "Legal hub summarizes the app agreement, follows the address hash, links to the complete versioned Terms at /terms, and explains the free model-training opt-out request by email.",
+    "src/site/waitlist-flow.jsx": "Demo video opens in a native dialog with focus, Escape and backdrop handling. Free signup copy states the current one-time credit grant.",
     "src/site/security-page.jsx": "Only verified security practices remain: no compliance badges, uptime, encryption-at-rest, pen test, background check, hardware key, whitepaper or bounty claims, and no status link.",
-    "src/site/support-page.jsx": "Status indicators and links to the status page are removed (there is no status page).",
-    "src/site/connectors-marketing-page.jsx": "Connector logos load from /site/connector-logos instead of Google favicons and the Simple Icons CDN."
+    "src/site/support-page.jsx": "Status indicators and links are removed. The FAQs reflect Starter export, end-of-period cancellation, and model-training opt-out requests by email on every plan.",
+    "src/site/connectors-marketing-page.jsx": "Connector logos load from /site/connector-logos instead of Google favicons and the Simple Icons CDN.",
+    "src/site/resources-page.jsx": "The unused FAQ_QUICK list is removed. It was never rendered and carried outdated plan, export and cancellation claims."
   },
   "files": {
     "src/site/SiteApp.jsx": "2fb96dfc53b4685ad49da61a263eec172219f0c1eb9de979cb5323a120035dd1",

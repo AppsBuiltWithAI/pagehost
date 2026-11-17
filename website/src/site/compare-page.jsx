@@ -25,14 +25,12 @@ const ROWS = [
     cells: { us: "yes", lovable: "yes", base44: "yes", replit: "yes", bolt: "yes" } },
   { label: "Stripe / payments wired",
     cells: { us: "yes", lovable: "partial", base44: "partial", replit: "partial", bolt: "partial" } },
-  { label: "Export code & own it",
+  { label: "Export code & own it", sub: "Starts on AppsBuiltWithAI Starter",
     cells: { us: "yes", lovable: "yes", base44: "partial", replit: "yes", bolt: "yes" } },
-  { label: "QA agent click-tests every flow",
+  { label: "QA agent tests app flows", sub: "Starts on AppsBuiltWithAI Starter",
     cells: { us: "yes", lovable: "no", base44: "no", replit: "partial", bolt: "no" } },
   { label: "Marketing agent ships your launch",
     cells: { us: "yes", lovable: "no", base44: "no", replit: "no", bolt: "no" } },
-  { label: "Hard spending cap on by default",
-    cells: { us: "yes", lovable: "partial", base44: "partial", replit: "no", bolt: "partial" } },
   { label: "Unused credits roll over",
     cells: { us: "yes", lovable: "yes", base44: "no", replit: "partial", bolt: "yes" } },
   { label: "Starting price", sub: "First paid plan",
@@ -168,7 +166,7 @@ function ComparePage() {
             </details>
             <details>
               <summary>Can I migrate off later?</summary>
-              <p>Yes. Export the source code anytime, host wherever. We don't keep your app hostage. (Most folks stay (we host on the same infrastructure as Vercel) but the door is open.)</p>
+              <p>Yes. On Starter and above, export the source code and host it wherever you choose.</p>
             </details>
             <details>
               <summary>What if I need something genuinely custom?</summary>
