@@ -22,6 +22,8 @@ The generated pages load the Google Fonts stylesheet in their HTML, so fonts dow
 
 `entry.jsx` runs the upstream `SiteApp` on static hosting. Sign in, sign up and password reset go to https://app.appsbuiltwithai.com. appsbuiltwithai.com (GHL) shows this site in an iframe, so every link to another site, the app included, opens in the full window, and the waitlist's redirect to app sign-up does the same. Paths that are not site routes load as separate pages, so `waitlist-landing.html` keeps its own pagehost version with tracking and the live counter.
 
+App sign-up links and redirects carry any available `fbc` and `fbp` as URL fragment parameters (for example, `/signup#fbc=...&fbp=...`). `meta-attribution.js` keeps the first-seen timestamp for a forwarded Meta click in the current tab and reads the browser ID from the Pixel's cookie when visible. The app can parse the fragment with `new URLSearchParams(window.location.hash.slice(1))`.
+
 Run `npm ci` and `npm run build` after changing the source. The build creates `website.js`, `website.css`, one HTML file per site route (so GitHub Pages serves `/education`, `/about` and the rest), and redirect pages for `signin`, `login`, `signup` and `forgot`. Commit the generated files with the source.
 
 Run `npm run preview` to review locally at http://127.0.0.1:4175/. It resolves `/pricing` to `pricing.html` the way GitHub Pages does.
