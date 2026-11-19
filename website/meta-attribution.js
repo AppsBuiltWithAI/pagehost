@@ -1,3 +1,7 @@
+import utm from '../utm-capture.js';
+
+export const captureUtm = () => utm.capture();
+
 const SESSION_KEY = 'abw_meta_fbc';
 const CLICK_ID = /^[A-Za-z0-9_-]{1,1024}$/;
 const FBC = /^fb\.\d+\.(\d{13})\.([A-Za-z0-9_-]{1,1024})$/;
@@ -50,6 +54,8 @@ export function withSignupAttribution(destination, appOrigin, fbc) {
   const fbp = readCookie('_fbp');
   if (FBC.test(click)) attribution.set('fbc', click);
   if (FBP.test(fbp)) attribution.set('fbp', fbp);
+  // The six UTMs kept since the first page of this visit (KAN-1135), as received.
+  for (const [name, value] of Object.entries(utm.capture())) attribution.set(name, value);
   const fragment = attribution.toString();
   if (!fragment) return destination;
 

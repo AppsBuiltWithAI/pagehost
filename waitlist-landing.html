@@ -46,6 +46,10 @@
     })();
   </script>
 
+  <!-- UTM parameters (KAN-1135): read on load and kept for the tab until sign-up -->
+  <script src="utm-capture.js"></script>
+  <script>window.abwUtm && window.abwUtm.capture();</script>
+
   <!-- Vaudit -->
   <script async src="https://pixel.vaudit.com/static/js/pixel.js"></script>
   <script>window.vauditTracker = window.vauditTracker ||

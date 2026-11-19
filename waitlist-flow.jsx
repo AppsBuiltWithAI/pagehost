@@ -386,6 +386,8 @@ function SignupFlow({ idea, onClose }) {
     /* ---- Customer.io Forms API ---- */
     const em = f.email.trim().toLowerCase();
     const phone = f.phone ? (country.dial + " " + f.phone) : "";
+    /* UTMs kept since page load (KAN-1135): only the ones present, as received */
+    const utm = window.abwUtm ? window.abwUtm.capture() : {};
     try {
       fetch("https://track.customer.io/api/v1/forms/waitlist-form/submit", {
         method: "POST",
@@ -400,6 +402,7 @@ function SignupFlow({ idea, onClose }) {
             phone: phone,
             waitlist_position: String(n),
             source: "waitlist_investfest",
+            ...utm,
           },
         }),
       });
