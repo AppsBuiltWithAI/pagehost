@@ -58,6 +58,8 @@ function ExitPopup() {
         window._cio[fn](...args);
       }
     };
+    // UTMs kept since page load (KAN-1135): only the ones present, as received.
+    const utm = window.abwUtm ? window.abwUtm.capture() : {};
     try {
       cio("identify", {
         id: em,
@@ -67,11 +69,13 @@ function ExitPopup() {
         credit_bonus: 100,
         waitlist_position: position,
         referral_link: refLink,
+        ...utm,
       });
       cio("track", "joined_waitlist", {
         email: em,
         position: position,
         source: "exit_intent",
+        ...utm,
       });
     } catch (err) {}
     setDone(true);

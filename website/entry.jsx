@@ -2,12 +2,14 @@ import { useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter, useLocation } from 'react-router-dom';
 import SiteApp from './src/site/SiteApp.jsx';
-import { captureMetaClick, withSignupAttribution } from './meta-attribution.js';
+import { captureMetaClick, captureUtm, withSignupAttribution } from './meta-attribution.js';
 
 // Static hosting for the upstream SiteApp. SITE_ROUTES and APP_URL are injected by scripts/build-site.cjs.
 const routes = new Set(SITE_ROUTES);
 const appRoutes = { '/signin': '/signin', '/login': '/signin', '/signup': '/signup', '/forgot': '/forgot' };
 const metaClick = captureMetaClick();
+// The UTMs in this page's URL are kept for the tab, so they reach the app's sign-up (KAN-1135).
+captureUtm();
 
 // GitHub Pages serves /pricing and /pricing.html alike; the router expects the clean path.
 const clean = window.location.pathname.replace(/(index)?\.html$/, '').replace(/(.)\/$/, '$1') || '/';
